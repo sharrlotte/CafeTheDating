@@ -1,0 +1,14 @@
+{
+	"configurations": [
+		{
+			"type": "java",
+			"name": "Spring Boot-CoffeTheDatingApplication<CoffeTheDating>",
+			"request": "launch",
+			"cwd": "${workspaceFolder}",
+			"mainClass": "com.CoffeTheDating.CoffeTheDatingApplication",
+			"projectName": "CoffeTheDating",
+			"args": "",
+			"envFile": "${workspaceFolder}/.env"
+		}
+	]
+}

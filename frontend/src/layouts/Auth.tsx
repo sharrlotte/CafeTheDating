@@ -1,10 +1,10 @@
-import { Role } from '@/type/Role';
-import React from 'react';
+import { Role } from "../type/Role";
+import React from "react";
 
 type AuthProps = {
-	roles: Role[];
+  roles: Role[];
 };
 
 export default function Auth({ roles }: AuthProps) {
-	return <div>Auth</div>;
+  return <div>Auth</div>;
 }

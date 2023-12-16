@@ -34,6 +34,13 @@ class AuthService {
               req.user = newUser
               return done(null, newUser)
             }
+
+            await databaseService.users.updateOne(
+              { _id: user._id },
+              {
+                $set: { ...user }
+              }
+            )
             req.user = user
             return done(null, user)
           } catch (error) {
@@ -65,6 +72,13 @@ class AuthService {
               req.user = newUser
               return done(null, newUser)
             }
+          
+            await databaseService.users.updateOne(
+              { _id: user._id },
+              {
+                $set: { ...user, avatar: profile.photos ? profile.photos[0] : '' }
+              }
+            )
             req.user = user
             return done(null, user)
           } catch (error) {

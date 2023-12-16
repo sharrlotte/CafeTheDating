@@ -5,6 +5,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import LoginPage from "./login/LoginPage";
 import Footer from "../components/Footer/Footer";
 import Nav from "../components/Nav/Nav";
+import MenuPage from "./menu/MenuPage";
 
 type RouteProps = {
   path: string;
@@ -20,6 +21,10 @@ const routes: RouteProps[] = [
     path: paths.login,
     element: <LoginPage />,
   },
+  {
+    path: paths.menu,
+    element: <MenuPage/>
+  }
 ];
 
 export default function Router() {

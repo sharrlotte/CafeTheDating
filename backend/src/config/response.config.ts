@@ -3,24 +3,6 @@ import moment from 'moment'
 import { StatusCodes } from 'http-status-codes'
 
 export const sendResponse = {
-  success: (res: Response, data: any, message: string, note?: null) => {
-    res.status(StatusCodes.OK).json({
-      statusCode: StatusCodes.OK,
-      message,
-      data,
-      dateTime: moment(new Date()).format('DD-MM-YYYY\\tHH:mm:ssSSS'),
-      messageConstants: note
-    })
-  },
-  created: (res: Response, data: any, message: string, note?: null) => {
-    res.status(StatusCodes.CREATED).json({
-      statusCode: StatusCodes.CREATED,
-      message,
-      data,
-      dateTime: moment(new Date()).format('DD-MM-YYYY\\tHH:mm:ssSSS'),
-      messageConstants: note
-    })
-  },
   noContent: (res: Response, data: any, message: string, note?: null) => {
     res.status(StatusCodes.NO_CONTENT).json({
       statusCode: StatusCodes.NO_CONTENT,

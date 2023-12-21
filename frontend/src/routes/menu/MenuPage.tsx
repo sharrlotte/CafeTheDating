@@ -1,10 +1,20 @@
 import { Button } from "../../components/ui/button";
 import React, { useEffect, useState } from "react";
 import Icons from "../../constants/icon";
+import {
+  Tabs,
+  TabsContent,
+  TabsList,
+  TabsTrigger,
+} from "../../components/ui/tabs";
+import { useQuery } from "react-query";
+import { getProducts } from "../../query/products";
+import ProductCard from "../../components/Product/ProductCard";
 
 const endTime = new Date("2023-12-12 18:47:00");
 
 export default function MenuPage() {
+  const query = useQuery("todos", getProducts);
   const [time, setTime] = useState("");
 
   useEffect(() => {
@@ -86,6 +96,35 @@ export default function MenuPage() {
             <div className="bg-[hsla(32,98%,51%,1)] bottom-[-16px] left-0 rounded-sm py-2 px-20 absolute">
               {time}
             </div>
+          </div>
+        </div>
+      </div>
+      <div className="w-full h-full flex">
+        <div className="w-full h-full">
+          <Tabs defaultValue="account" className="w-full h-full">
+            <TabsList className="w-full  flex justify-around">
+              <TabsTrigger value="coffe">Cà Phê</TabsTrigger>
+              <TabsTrigger value="milk">Trà Sữa</TabsTrigger>
+              <TabsTrigger value="cake">Bánh</TabsTrigger>
+              <TabsTrigger value="cream">Kem</TabsTrigger>
+            </TabsList>
+            <TabsContent
+              value="coffe"
+              className="w-full h-full grid min-h-full grid-cols-[repeat(auto-fill,var(--preview-size))] items-center justify-center gap-2 pad-2"
+            >
+              {query.data?.map((item) => (
+                <ProductCard product={item}></ProductCard>
+              ))}
+            </TabsContent>
+
+            <TabsContent value="milk" className="w-full h-full">
+              Change your password here.
+            </TabsContent>
+          </Tabs>
+        </div>
+        <div>
+          <div className="w-[300px] bg-red-600 text-center h-20 justify-center items-center flex">
+            Giỏ Hàng
           </div>
         </div>
       </div>

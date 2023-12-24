@@ -1,5 +1,5 @@
 import { signToken, verifyToken } from '~/utils/jwt'
-import { databaseService } from './connectDB.service'
+import { databaseService } from './database.service'
 import { TokenType, UserRole } from '~/constants/enums'
 import { env } from '~/config/environment.config'
 import { RefreshTokenBody } from '~/models/requests/User.requests'

@@ -3,7 +3,7 @@ import { checkSchema } from 'express-validator'
 import validate from '~/utils/validate'
 import { ErrorWithStatus } from '~/models/errors/Errors.schema'
 import { StatusCodes } from 'http-status-codes'
-import { databaseService } from '~/services/connectDB.service'
+import { databaseService } from '~/services/database.service'
 import { JsonWebTokenError } from 'jsonwebtoken'
 import { capitalize } from 'lodash'
 

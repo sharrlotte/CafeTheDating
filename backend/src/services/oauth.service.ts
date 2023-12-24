@@ -1,6 +1,6 @@
 import passport from 'passport'
 import { env } from '~/config/environment.config'
-import { databaseService } from '~/services/connectDB.service'
+import { databaseService } from '~/services/database.service'
 import User from '~/models/schemas/Users.schema'
 import userServices from '~/services/users.service'
 import RefreshToken from '~/models/schemas/RefreshToken.schema'
@@ -72,7 +72,7 @@ class AuthService {
               req.user = newUser
               return done(null, newUser)
             }
-          
+
             await databaseService.users.updateOne(
               { _id: user._id },
               {

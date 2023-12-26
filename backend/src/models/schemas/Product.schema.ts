@@ -10,6 +10,7 @@ interface ProductT {
   description: string
   created_at?: Date
   updated_at?: Date
+  image: string
 }
 
 export default class Product {
@@ -21,6 +22,7 @@ export default class Product {
   description: string
   created_at?: Date
   updated_at?: Date
+  image: string
 
   constructor(product: ProductT) {
     this._id = product._id
@@ -31,5 +33,6 @@ export default class Product {
     this.productType = product.productType
     this.created_at = product.created_at || new Date()
     this.updated_at = product.updated_at || null
+    this.image = product.image
   }
 }

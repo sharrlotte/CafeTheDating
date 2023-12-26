@@ -1,7 +1,7 @@
 interface Product {
-  tag: string;
+  tags: string;
   id: string;
-  category: string;
+  productType: string;
   price: number;
   name: string;
   image: string;

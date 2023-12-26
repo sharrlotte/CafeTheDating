@@ -12,7 +12,7 @@ export type CreateProductBody = {
   price: number
   tags: string[]
   productType: ProductType
+  image: string
 }
-
 
 export type UpdateProductBody = CreateProductBody

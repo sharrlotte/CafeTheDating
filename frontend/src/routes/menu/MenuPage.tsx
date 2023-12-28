@@ -11,9 +11,13 @@ import { useQuery } from "react-query";
 import { getProducts } from "../../query/products";
 import ProductCard from "../../components/Product/ProductCard";
 
-const endTime = new Date("2023-12-21 18:47:00");
+import CardItems from "../../components/Cart/CardItems";
+import useCart from "../../zustand/useCart";
+
+const endTime = new Date("2023-12-26 21:47:00");
 
 export default function MenuPage() {
+  const { products } = useCart();
   const [time, setTime] = useState("");
   useEffect(() => {
     const interval = setInterval(() => {
@@ -109,11 +113,17 @@ export default function MenuPage() {
               <TabsTrigger value="cream">Kem</TabsTrigger>
             </TabsList>
             <TabsContent value="coffe">
-              <MenuItems />
+              <MenuItems type="cafe" />
             </TabsContent>
 
-            <TabsContent value="milk" className="w-full h-full">
-              Change your password here.
+            <TabsContent value="milk">
+              <MenuItems type="milk" />
+            </TabsContent>
+            <TabsContent value="cake">
+              <MenuItems type="cake" />
+            </TabsContent>
+            <TabsContent value="cream">
+              <MenuItems type="cream" />
             </TabsContent>
           </Tabs>
         </div>
@@ -122,7 +132,10 @@ export default function MenuPage() {
             <Icons.Cart />
             Giỏ Hàng
           </div>
-          <div className="rounded-sm border-2  divide-y text-center max-h-[50%] overflow-auto"></div>
+          <div className="rounded-sm border-2  divide-y text-center max-h-[50%] overflow-auto">
+            <CardItems></CardItems>
+          </div>
+
           <div className="flex flex-col p-2 gap-4  rounded-lg border-2 ">
             <div className="flex  justify-evenly">
               <Button className="rounded-[30px] bg-[hsla(0,0%,93%,1)] text-black hover:bg-[hsla(26,87%,51%,1)] flex flex-col  h-24">
@@ -137,11 +150,27 @@ export default function MenuPage() {
               </Button>
             </div>
             <div className="border"></div>
-            <div className="flex flex-col ">
-              <span className=" font-bold">Thành tiền</span>
+            <div className="flex flex-col text-lg">
+              <div className="flex justify-between">
+                <span className=" font-bold">Thành tiền</span>
+                <span>
+                  {products
+                    .map((item) => item.count * item.price)
+                    .reduce((prev, curr) => prev + curr, 0)}
+                </span>
+              </div>
+
               <span className=" font-bold">Giảm giá</span>
               <span className=" font-bold">Phí vận chuyển</span>
-              <span className=" font-bold"> Tổng :</span>
+              <div className="flex justify-between text-lg">
+                <span className=" font-bold"> Tổng :</span>
+                <span>
+                  {products
+                    .map((item) => item.count * item.price)
+                    .reduce((prev, curr) => prev + curr, 0)}{" "}
+                  vnd
+                </span>
+              </div>
             </div>
             <div className="border"> </div>
             <div className="flex justify-center">
@@ -163,8 +192,14 @@ export default function MenuPage() {
   );
 }
 
-function MenuItems() {
-  const { data, isLoading, isError } = useQuery("products", getProducts);
+type MenuItemProps = {
+  type: string;
+};
+
+function MenuItems({ type }: MenuItemProps) {
+  const { data, isLoading, isError } = useQuery("products", () =>
+    getProducts(type)
+  );
 
   if (isLoading) return <span>Loading</span>;
 
@@ -173,7 +208,7 @@ function MenuItems() {
   return (
     <div className="flex flex-wrap gap-2">
       {data.map((item) => (
-        <ProductCard product={item} key={item.id} />
+        <ProductCard product={item} key={item._id} />
       ))}
     </div>
   );

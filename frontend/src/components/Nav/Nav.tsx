@@ -29,14 +29,14 @@ const paths = [
 
 export default function Nav() {
   const me = useMe((state) => state.user);
-  console.log(me);
+
   return (
     <nav className="flex items-center justify-center w-full p-10">
       <a className="w-28 absolute top-4 left-10" href="/">
         <img src="/img/Logo.svg" alt="TheDating"></img>
       </a>
       <div className="font-[600] bg-white p-5 gap-8 text-xl flex border-2 rounded-full shadow-gray-200 shadow-md">
-        {paths.map((item,index) => (
+        {paths.map((item, index) => (
           <Link
             key={index}
             className=" group hover:text-[hsla(29,90%,58%,1)]"
@@ -54,7 +54,7 @@ export default function Nav() {
           <img
             src={me.avatar?.value}
             alt="User Avatar"
-            className="w-20 h-20 rounded-full absolute top-12 right-14" 
+            className="w-20 h-20 rounded-full absolute top-12 right-14"
           />
         ) : (
           <Button

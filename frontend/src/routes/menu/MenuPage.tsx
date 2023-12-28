@@ -11,34 +11,36 @@ import { useQuery } from "react-query";
 import { getProducts } from "../../query/products";
 import ProductCard from "../../components/Product/ProductCard";
 
-const endTime = new Date('2023-12-21 18:47:00');
+const endTime = new Date("2023-12-21 18:47:00");
 
 export default function MenuPage() {
-  const query = useQuery("todos", getProducts);
   const [time, setTime] = useState("");
+  useEffect(() => {
+    const interval = setInterval(() => {
+      const currentTime = new Date();
 
-	useEffect(() => {
-		const interval = setInterval(() => {
-			const currentTime = new Date();
+      const secLeft = endTime.getSeconds() - currentTime.getSeconds();
+      const minuteLeft = endTime.getMinutes() - currentTime.getMinutes();
+      const hourLeft = endTime.getHours() - currentTime.getHours();
+      const dateLeft = endTime.getDate() - currentTime.getDate();
 
-			const secLeft = endTime.getSeconds() - currentTime.getSeconds();
-			const minuteLeft = endTime.getMinutes() - currentTime.getMinutes();
-			const hourLeft = endTime.getHours() - currentTime.getHours();
-			const dateLeft = endTime.getDate() - currentTime.getDate();
+      const timeLeft = `${dateLeft ? dateLeft : ""}${
+        hourLeft ? hourLeft : ""
+      }:${minuteLeft > 0 ? minuteLeft : 60 + minuteLeft}:${
+        secLeft > 0 ? secLeft : 60 + secLeft
+      }`;
 
-			const timeLeft = `${dateLeft ? dateLeft : ''}${hourLeft ? hourLeft : ''}:${minuteLeft > 0 ? minuteLeft : 60 + minuteLeft}:${secLeft > 0 ? secLeft : 60 + secLeft}`;
+      setTime(timeLeft);
+    }, 1000);
 
-			setTime(timeLeft);
-		}, 1000);
+    return () => clearInterval(interval);
+  }, []);
 
-		return () => clearInterval(interval);
-	}, []);
-
-	return (
-		<div className='w-full'>
-			<div className='p-4 flex w-full gap-10'>
-				<div className='flex border-2 p-1.5 gap-2 rounded-xl shadow-gray-200 shadow-md  w-full'>
-					<Icons.Search />
+  return (
+    <div className="w-full">
+      <div className="p-4 flex w-full gap-10">
+        <div className="flex border-2 p-1.5 gap-2 rounded-xl shadow-gray-200 shadow-md  w-full">
+          <Icons.Search />
 
           <input
             className=" border-none outline-none text-2xl"
@@ -97,7 +99,7 @@ export default function MenuPage() {
           </div>
         </div>
       </div>
-      <div className="w-full h-full flex">
+      <div className="w-full h-full flex p-2">
         <div className="w-full h-full">
           <Tabs defaultValue="account" className="w-full h-full">
             <TabsList className="w-full  flex justify-around">
@@ -106,13 +108,8 @@ export default function MenuPage() {
               <TabsTrigger value="cake">Bánh</TabsTrigger>
               <TabsTrigger value="cream">Kem</TabsTrigger>
             </TabsList>
-            <TabsContent
-              value="coffe"
-              className="w-full h-full grid min-h-full grid-cols-[repeat(auto-fill,var(--preview-size))] items-center justify-center gap-2 pad-2"
-            >
-              {query.data?.map((item) => (
-                <ProductCard product={item}></ProductCard>
-              ))}
+            <TabsContent value="coffe">
+              <MenuItems />
             </TabsContent>
 
             <TabsContent value="milk" className="w-full h-full">
@@ -120,12 +117,64 @@ export default function MenuPage() {
             </TabsContent>
           </Tabs>
         </div>
-        <div>
-          <div className="w-[300px] bg-red-600 text-center h-20 justify-center items-center flex">
+        <div className="w-[300px] ">
+          <div className=" bg-[hsla(26,87%,51%,1)] text-center h-24 justify-center items-center flex text-white text-3xl">
+            <Icons.Cart />
             Giỏ Hàng
+          </div>
+          <div className="rounded-sm border-2  divide-y text-center max-h-[50%] overflow-auto"></div>
+          <div className="flex flex-col p-2 gap-4  rounded-lg border-2 ">
+            <div className="flex  justify-evenly">
+              <Button className="rounded-[30px] bg-[hsla(0,0%,93%,1)] text-black hover:bg-[hsla(26,87%,51%,1)] flex flex-col  h-24">
+                <img src="/img/DeliveryScooter.svg" alt="DeliveryScooter"></img>
+                Đặt Về
+              </Button>
+
+              <div className="border"></div>
+              <Button className="rounded-[30px] bg-[hsla(0,0%,93%,1)] text-black  hover:bg-[hsla(26,87%,51%,1)] flex flex-col h-24">
+                <img src="/img/NewStore.svg" alt="NewStore"></img>
+                Đặt Bàn
+              </Button>
+            </div>
+            <div className="border"></div>
+            <div className="flex flex-col ">
+              <span className=" font-bold">Thành tiền</span>
+              <span className=" font-bold">Giảm giá</span>
+              <span className=" font-bold">Phí vận chuyển</span>
+              <span className=" font-bold"> Tổng :</span>
+            </div>
+            <div className="border"> </div>
+            <div className="flex justify-center">
+              <Button className="border-2 rounded-3xl bg-[hsla(0,0%,97%,1)] text-black hover:bg-[hsla(26,87%,51%,1)] w-60 flex justify-between">
+                Mã giảm giá
+                <Icons.ArrowRight></Icons.ArrowRight>
+              </Button>
+            </div>
+            <div>
+              <Button className=" text-xl border-2 rounded-3xl bg-[#5ec7e4] text-black hover:bg-[#5ec7e4] w-60 h-16  flex justify-between">
+                Thanh toán
+              </Button>
+            </div>
+            <div className="border "> </div>
           </div>
         </div>
       </div>
+    </div>
+  );
+}
+
+function MenuItems() {
+  const { data, isLoading, isError } = useQuery("products", getProducts);
+
+  if (isLoading) return <span>Loading</span>;
+
+  if (isError || !data) return <span>Error</span>;
+
+  return (
+    <div className="flex flex-wrap gap-2">
+      {data.map((item) => (
+        <ProductCard product={item} key={item.id} />
+      ))}
     </div>
   );
 }

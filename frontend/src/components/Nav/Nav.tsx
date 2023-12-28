@@ -36,8 +36,9 @@ export default function Nav() {
         <img src="/img/Logo.svg" alt="TheDating"></img>
       </a>
       <div className="font-[600] bg-white p-5 gap-8 text-xl flex border-2 rounded-full shadow-gray-200 shadow-md">
-        {paths.map((item) => (
+        {paths.map((item,index) => (
           <Link
+            key={index}
             className=" group hover:text-[hsla(29,90%,58%,1)]"
             to={item.path}
           >

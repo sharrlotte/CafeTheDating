@@ -1,6 +1,7 @@
 interface Product {
+  count: number;
   tags: string;
-  id: string;
+  _id: string;
   productType: string;
   price: number;
   name: string;

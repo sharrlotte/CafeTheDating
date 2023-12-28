@@ -98,7 +98,7 @@ export const createProductValidator = validate(
         }
       },
 
-      productType: {
+      product_type: {
         trim: true,
         isEmpty: {
           errorMessage: 'Product type can not be empty'
@@ -193,7 +193,7 @@ export const updateProductValidator = validate(
         }
       },
 
-      productType: {
+      product_type: {
         trim: true,
         isEmpty: {
           errorMessage: 'Product type can not be empty'

@@ -2,6 +2,7 @@ import { Db, MongoClient, ServerApiVersion, Collection } from 'mongodb'
 import { env } from '~/config/environment.config'
 import Product from '~/models/schemas/Product.schema'
 import RefreshToken from '~/models/schemas/RefreshToken.schema'
+import Star from '~/models/schemas/Star.schema'
 import User from '~/models/schemas/Users.schema'
 class DatabaseServices {
   private client: MongoClient | undefined
@@ -43,6 +44,10 @@ class DatabaseServices {
 
   get products(): Collection<Product> {
     return this.db.collection(env.database.main.collection.product as string)
+  }
+
+  get stars(): Collection<Star> {
+    return this.db.collection(env.database.main.collection.star as string)
   }
 }
 

@@ -11,8 +11,12 @@ export type CreateProductBody = {
   description: string
   price: number
   tags: string[]
-  productType: ProductType
+  product_type: ProductType
 }
 
-
 export type UpdateProductBody = CreateProductBody
+
+export type CreateStarBody = {
+  user_id: string
+  product_id: string
+}

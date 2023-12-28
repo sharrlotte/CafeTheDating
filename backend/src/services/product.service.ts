@@ -7,8 +7,8 @@ import { databaseService } from '~/services/database.service'
 
 class ProductService {
   async getAllProduct(query: ParsedUrlQuery) {
-    const productType: ProductType = query.type as ProductType
-    return await databaseService.products.find({ productType: productType }).toArray()
+    const product_type: ProductType = query.type as ProductType
+    return await databaseService.products.find({ product_type: product_type }).toArray()
   }
 
   async createProduct(payload: CreateProductBody) {

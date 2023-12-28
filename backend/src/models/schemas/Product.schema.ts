@@ -5,7 +5,7 @@ interface ProductT {
   _id?: ObjectId
   price: number
   name: string
-  productType: ProductType
+  product_type: ProductType
   tags: string[]
   description: string
   created_at?: Date
@@ -16,7 +16,7 @@ export default class Product {
   _id?: ObjectId
   price: number
   name: string
-  productType: ProductType
+  product_type: ProductType
   tags: string[]
   description: string
   created_at?: Date
@@ -28,7 +28,7 @@ export default class Product {
     this.description = product.description
     this.price = product.price
     this.tags = product.tags
-    this.productType = product.productType
+    this.product_type = product.product_type
     this.created_at = product.created_at || new Date()
     this.updated_at = product.updated_at || null
   }

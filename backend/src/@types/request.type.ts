@@ -11,7 +11,6 @@ export type CreateProductBody = {
   description: string
   price: number
   tags: string[]
-  product_type: ProductType
   productType: ProductType
   image: string
 }

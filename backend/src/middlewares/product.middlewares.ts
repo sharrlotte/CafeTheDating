@@ -23,6 +23,25 @@ export const getAllProductValidator = validate(
             return true
           }
         }
+      },
+      sort: {
+        trim: true,
+        isString: {
+          errorMessage: 'Sort must be a string'
+        },
+        optional: true,
+        custom: {
+          options: (value) => {
+            if (!['discount', 'best-choice'].includes(value)) {
+              throw new ErrorWithStatus({
+                message: 'Invalid sort string',
+                statusCode: StatusCodes.BAD_REQUEST
+              })
+            }
+
+            return true
+          }
+        }
       }
     },
     ['query']
@@ -98,7 +117,7 @@ export const createProductValidator = validate(
         }
       },
 
-      product_type: {
+      productType: {
         trim: true,
         isEmpty: {
           errorMessage: 'Product type can not be empty'
@@ -193,7 +212,7 @@ export const updateProductValidator = validate(
         }
       },
 
-      product_type: {
+      productType: {
         trim: true,
         isEmpty: {
           errorMessage: 'Product type can not be empty'

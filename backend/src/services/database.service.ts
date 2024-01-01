@@ -1,5 +1,6 @@
 import { Db, MongoClient, ServerApiVersion, Collection } from 'mongodb'
 import { env } from '~/config/environment.config'
+import Like from '~/models/schemas/Like.shema'
 import Product from '~/models/schemas/Product.schema'
 import RefreshToken from '~/models/schemas/RefreshToken.schema'
 import Star from '~/models/schemas/Star.schema'
@@ -48,6 +49,10 @@ class DatabaseServices {
 
   get stars(): Collection<Star> {
     return this.db.collection(env.database.main.collection.star as string)
+  }
+
+  get likes(): Collection<Like> {
+    return this.db.collection(env.database.main.collection.like as string)
   }
 }
 

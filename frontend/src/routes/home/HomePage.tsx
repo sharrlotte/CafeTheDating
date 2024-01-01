@@ -27,5 +27,9 @@ export default function HomePage() {
       })
       .catch((err) => {});
   }, []);
-  return <div></div>;
+  return (
+    <div>
+      <img src="/img/Logo.svg" alt="Login"></img>
+    </div>
+  );
 }

@@ -1,3 +1,4 @@
+import { pricy } from "../../lib/util";
 import Product from "../../type/Product";
 import useCart from "../../zustand/useCart";
 import React from "react";
@@ -18,7 +19,7 @@ export default function ProductCard({ product }: ProductCardProps) {
       </span>
       <div className="grid absolute left-4 bottom-4">
         <span className="text-white text-2xl font-bold drop-shadow-[0_1.2px_1.2px_rgba(0,0,0,0.8)]">
-          {product.price}{" "}
+          {pricy(product.price)}
         </span>
         <span className="text-orange-500 text-xl font-bold drop-shadow-[0_1.2px_1.2px_rgba(0,0,0,0.8)]">
           {translate(product.productType)}

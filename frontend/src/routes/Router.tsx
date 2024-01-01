@@ -6,6 +6,8 @@ import LoginPage from "./login/LoginPage";
 import Footer from "../components/Footer/Footer";
 import Nav from "../components/Nav/Nav";
 import MenuPage from "./menu/MenuPage";
+import MenuNew from "./menu/MenuNew";
+import About from "../components/About/About";
 
 type RouteProps = {
   path: string;
@@ -13,6 +15,10 @@ type RouteProps = {
 };
 
 const routes: RouteProps[] = [
+  {
+    path: '/',
+    element: <HomePage />,
+  },
   {
     path: paths.home,
     element: <HomePage />,
@@ -23,14 +29,22 @@ const routes: RouteProps[] = [
   },
   {
     path: paths.menu,
-    element: <MenuPage/>
-  }
+    element: <MenuPage />,
+  },
+  {
+    path: paths.news,
+    element: <MenuNew />,
+  },
+  {
+    path: paths.about,
+    element: <About />,
+  },
 ];
 
 export default function Router() {
   return (
     <BrowserRouter>
-      <Nav />
+      <Nav /> 
       <Routes>
         {routes.map((item) => (
           <Route key={item.path} path={item.path} element={item.element} />

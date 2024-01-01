@@ -1,7 +1,9 @@
 const routes = {
-  home: "/",
+  home: "/home",
   login: "/login",
-  menu: "/menu"
+  menu: "/menu",
+  news: "/news",
+  about: "/about",
 } as const;
 
 export default routes;

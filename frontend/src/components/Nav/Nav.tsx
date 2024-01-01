@@ -32,7 +32,7 @@ export default function Nav() {
 
   return (
     <nav className="flex items-center justify-center w-full p-10">
-      <a className="w-28 absolute top-4 left-10" href="/">
+      <a className="w-28 absolute top-4 left-10" href="/home">
         <img src="/img/Logo.svg" alt="TheDating"></img>
       </a>
       <div className="font-[600] bg-white p-5 gap-8 text-xl flex border-2 rounded-full shadow-gray-200 shadow-md">

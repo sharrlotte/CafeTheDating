@@ -20,14 +20,16 @@ export default function HomePage() {
 
 				api.defaults.headers['Authorization'] = 'Bearer ' + result.data.access_token;
 
-				navigate('/');
-
-				api.get('/users/@me/profile').then((result) => {
-					const user: User = result.data;
-					setMe(user);
-				});
-			})
-			.catch((err) => {});
-	}, [searchParams, setMe, navigate]);
-	return <div></div>;
+        api.get("/users/@me/profile").then((result) => {
+          const user: User = result.data;
+          setMe(user);
+        });
+      })
+      .catch((err) => {});
+  }, []);
+  return (
+    <div>
+      <img src="/img/Logo.svg" alt="Login"></img>
+    </div>
+  );
 }

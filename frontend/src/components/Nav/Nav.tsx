@@ -28,32 +28,26 @@ const paths = [
 ];
 
 export default function Nav() {
-	const me = useMe((state) => state.user);
-	console.log(me);
-	return (
-		<nav className='flex items-center justify-center w-full p-10'>
-			<a
-				className='w-28 absolute top-4 left-10'
-				href='/'
-			>
-				<img
-					src='/img/Logo.svg'
-					alt='TheDating'
-				></img>
-			</a>
-			<div className='font-[600] bg-white p-5 gap-8 text-xl flex border-2 rounded-full shadow-gray-200 shadow-md'>
-				{paths.map((item, index) => (
-					<Link
-						key={index}
-						className=' group hover:text-[hsla(29,90%,58%,1)]'
-						to={item.path}
-					>
-						{item.name}
-						<Icons.Arrow className='opacity-0 group-hover:opacity-100 absolute w-4 translate-x-1/2 transition-opacity duration-200' />
-						<div className='top-12  right-12 absolute '></div>
-					</Link>
-				))}
-			</div>
+  const me = useMe((state) => state.user);
+
+  return (
+    <nav className="flex items-center justify-center w-full p-10">
+      <a className="w-28 absolute top-4 left-10" href="/home">
+        <img src="/img/Logo.svg" alt="TheDating"></img>
+      </a>
+      <div className="font-[600] bg-white p-5 gap-8 text-xl flex border-2 rounded-full shadow-gray-200 shadow-md">
+        {paths.map((item, index) => (
+          <Link
+            key={index}
+            className=" group hover:text-[hsla(29,90%,58%,1)]"
+            to={item.path}
+          >
+            {item.name}
+            <Icons.Arrow className="opacity-0 group-hover:opacity-100 absolute w-4 translate-x-1/2 transition-opacity duration-200" />
+            <div className="top-12  right-12 absolute "></div>
+          </Link>
+        ))}
+      </div>
 
 			<div>
 				{me ? (

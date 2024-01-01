@@ -7,7 +7,7 @@ export default function Footer() {
       <div className="border-[1px] border-blue-600"></div>
       <div className="p-24 flex justify-between flex-wrap gap-6">
         <div className="flex  items-center">
-          <a href="/">
+          <a href="/home">
             <img src="/img/Logo.svg" alt="TheDating"></img>
           </a>
         </div>

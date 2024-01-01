@@ -55,7 +55,7 @@ export default function About() {
                   ></img>
                 </span>
                 <span className="text-[hsla(0,0%,0%,1)] text-lg text-center h-60 w-60">
-                  Nhanh gọn và dễ sử dụng
+                  Nhanh gọn và dễ sử dụng.
                 </span>
               </div>
             </div>

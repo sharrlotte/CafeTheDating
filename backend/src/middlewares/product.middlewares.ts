@@ -23,6 +23,25 @@ export const getAllProductValidator = validate(
             return true
           }
         }
+      },
+      sort: {
+        trim: true,
+        isString: {
+          errorMessage: 'Sort must be a string'
+        },
+        optional: true,
+        custom: {
+          options: (value) => {
+            if (!['discount', 'best-choice'].includes(value)) {
+              throw new ErrorWithStatus({
+                message: 'Invalid sort string',
+                statusCode: StatusCodes.BAD_REQUEST
+              })
+            }
+
+            return true
+          }
+        }
       }
     },
     ['query']

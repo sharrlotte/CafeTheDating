@@ -1,30 +1,30 @@
-import useMe from "../../zustand/useMe";
-import Icons from "../../constants/icon";
-import React from "react";
-import { Button } from "../ui/button";
-import { Link } from "react-router-dom";
+import useMe from '../../zustand/useMe';
+import Icons from '../../constants/icon';
+import React from 'react';
+import { Button } from '../ui/button';
+import { Link } from 'react-router-dom';
 
 const paths = [
-  {
-    name: "Home",
-    path: "/home",
-  },
-  {
-    name: "Menu",
-    path: "/menu",
-  },
-  {
-    name: "News",
-    path: "/news",
-  },
-  {
-    name: "About",
-    path: "/about",
-  },
-  {
-    name: "Order",
-    path: "/order",
-  },
+	{
+		name: 'Home',
+		path: '/home',
+	},
+	{
+		name: 'Menu',
+		path: '/menu',
+	},
+	{
+		name: 'News',
+		path: '/news',
+	},
+	{
+		name: 'About',
+		path: '/about',
+	},
+	{
+		name: 'Order',
+		path: '/order',
+	},
 ];
 
 export default function Nav() {
@@ -49,27 +49,27 @@ export default function Nav() {
         ))}
       </div>
 
-      <div>
-        {me ? (
-          <img
-            src={me.avatar?.value}
-            alt="User Avatar"
-            className="w-20 h-20 rounded-full absolute top-12 right-14"
-          />
-        ) : (
-          <Button
-            className="bg-[hsla(126,100%,24%,1)] border-2 rounded-full text-white w-24 h-14 top-12 right-14 absolute"
-            asChild
-          >
-            <Link
-              className=" group hover:text-[hsla(29,90%,58%,1)]"
-              to={"/login"}
-            >
-              {"Login"}
-            </Link>
-          </Button>
-        )}
-      </div>
-    </nav>
-  );
+			<div>
+				{me ? (
+					<img
+						src={me.avatar?.value}
+						alt='User Avatar'
+						className='w-12 h-12 rounded-full absolute top-12 right-14'
+					/>
+				) : (
+					<Button
+						className='bg-[hsla(126,100%,24%,1)] border-2 rounded-full text-white w-24 h-14 top-12 right-14 absolute'
+						asChild
+					>
+						<Link
+							className=' group hover:text-[hsla(29,90%,58%,1)]'
+							to={'/login'}
+						>
+							{'Login'}
+						</Link>
+					</Button>
+				)}
+			</div>
+		</nav>
+	);
 }

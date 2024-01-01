@@ -16,3 +16,8 @@ export type CreateProductBody = {
 }
 
 export type UpdateProductBody = CreateProductBody
+
+export type CreateStarBody = {
+  user_id: string
+  product_id: string
+}

@@ -7,6 +7,8 @@ interface ProductT {
   name: string
   productType: ProductType
   tags: string[]
+  
+  discount?: number
   description: string
   created_at?: Date
   updated_at?: Date
@@ -20,6 +22,7 @@ export default class Product {
   productType: ProductType
   tags: string[]
   description: string
+  discount?: number
   created_at?: Date
   updated_at?: Date
   image: string
@@ -28,6 +31,7 @@ export default class Product {
     this._id = product._id
     this.name = product.name
     this.description = product.description
+    this.discount = product.discount || 0
     this.price = product.price
     this.tags = product.tags
     this.productType = product.productType

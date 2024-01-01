@@ -11,6 +11,8 @@ const envSchema = Joi.object({
   DB_NAME: Joi.string().required(),
   DB_REFRESH_TOKEN_COLLECTION: Joi.string().required(),
   DB_PRODUCT_COLLECTION: Joi.string().required(),
+  DB_STAR_COLLECTION: Joi.string().required(),
+  DB_LIKE_COLLECTION: Joi.string().required(),
   MAIN_DATABASE_USERNAME: Joi.string().required(),
   MAIN_DATABASE_PASSWORD: Joi.string().required(),
   RATE_POINT: Joi.number().required(),
@@ -66,7 +68,9 @@ export const env = {
       collection: {
         users: envVars.DB_USER_COLLECTION,
         refresh_tokens: envVars.DB_REFRESH_TOKEN_COLLECTION,
-        product: envVars.DB_PRODUCT_COLLECTION
+        product: envVars.DB_PRODUCT_COLLECTION,
+        star: envVars.DB_STAR_COLLECTION,
+        like: envVars.DB_LIKE_COLLECTION
       }
     }
   },

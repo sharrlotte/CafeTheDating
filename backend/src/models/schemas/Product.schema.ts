@@ -6,7 +6,7 @@ interface ProductT {
   price: number
   name: string
   product_type: ProductType
-  tags: string[]
+  tags: ProductTag[]
   image: string
   discount?: number
   description: string
@@ -14,12 +14,14 @@ interface ProductT {
   updated_at?: Date
 }
 
+export type ProductTag = 'best-choice' | 'new'
+
 export default class Product {
   _id?: ObjectId
   price: number
   name: string
   product_type: ProductType
-  tags: string[]
+  tags: ProductTag[]
   image: string
   description: string
   discount?: number

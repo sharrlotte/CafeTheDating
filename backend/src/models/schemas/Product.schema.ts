@@ -5,27 +5,26 @@ interface ProductT {
   _id?: ObjectId
   price: number
   name: string
-  productType: ProductType
+  product_type: ProductType
   tags: string[]
-  
+  image: string
   discount?: number
   description: string
   created_at?: Date
   updated_at?: Date
-  image: string
 }
 
 export default class Product {
   _id?: ObjectId
   price: number
   name: string
-  productType: ProductType
+  product_type: ProductType
   tags: string[]
+  image: string
   description: string
   discount?: number
   created_at?: Date
   updated_at?: Date
-  image: string
 
   constructor(product: ProductT) {
     this._id = product._id
@@ -34,7 +33,7 @@ export default class Product {
     this.discount = product.discount || 0
     this.price = product.price
     this.tags = product.tags
-    this.productType = product.productType
+    this.product_type = product.product_type
     this.created_at = product.created_at || new Date()
     this.updated_at = product.updated_at || null
     this.image = product.image

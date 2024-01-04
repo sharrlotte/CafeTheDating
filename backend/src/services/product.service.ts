@@ -1,5 +1,6 @@
 import { StatusCodes } from 'http-status-codes'
 import { ObjectId } from 'mongodb'
+import { Multer } from 'multer'
 import { ParsedUrlQuery } from 'querystring'
 import { AuthUser } from '~/@types/auth.type'
 import { CreateProductBody, ProductSort, UpdateProductBody } from '~/@types/request.type'
@@ -7,6 +8,7 @@ import { ErrorWithStatus } from '~/models/errors/Errors.schema'
 import Like from '~/models/schemas/Like.shema'
 import Product from '~/models/schemas/Product.schema'
 import ProductType from '~/models/schemas/ProductType.schema'
+import cloudinaryService from '~/services/cloudinary.service'
 import { databaseService } from '~/services/database.service'
 
 class ProductService {
@@ -57,14 +59,14 @@ class ProductService {
   }
 
   async getAllProduct(query: ParsedUrlQuery) {
-    const productType: ProductType = query.type as ProductType
+    const product_type: ProductType = query.type as ProductType
     const sort = query.sort as ProductSort
 
     switch (sort) {
       case 'discount':
         return await databaseService.products
           .find({
-            productType: productType,
+            product_type: product_type,
             discount: {
               $gt: 0
             }
@@ -75,7 +77,7 @@ class ProductService {
       case 'best-choice':
         return await databaseService.products
           .find({
-            productType: productType,
+            product_type: product_type,
             tags: {
               $in: ['best-choice']
             }
@@ -85,7 +87,7 @@ class ProductService {
       case 'new':
         return await databaseService.products
           .find({
-            productType: productType,
+            product_type: product_type,
             tags: {
               $in: ['new']
             }
@@ -95,7 +97,7 @@ class ProductService {
       default:
         return await databaseService.products
           .find({
-            productType: productType
+            product_type: product_type
           })
           .toArray()
     }
@@ -115,8 +117,15 @@ class ProductService {
       }
     )
   }
+
   async deleteProduct(id: string) {
     await databaseService.products.deleteOne({ _id: new ObjectId(id) })
+  }
+
+  async uploadImage(id: string, image: Express.Multer.File) {
+    const result = await cloudinaryService.uploadImage('products', image.buffer)
+
+    return result.url
   }
 }
 

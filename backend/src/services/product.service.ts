@@ -63,7 +63,10 @@ class ProductService {
     if (sort === 'discount') {
       return await databaseService.products
         .find({
-          productType: productType
+          productType: productType,
+          discount: {
+            $gt: 0
+          }
         })
         .sort({ discount: 'desc' })
         .toArray()

@@ -116,7 +116,7 @@ export default function MenuPage() {
         </div>
       </div>
       <Button
-        className="bg-[hsla(26,87%,51%,1)] hover:bg-[hsla(26,87%,51%,1)] fixed bottom-1 right-1/2 translate-x-1/2 "
+        className="bg-[hsla(26,87%,51%,1)] hover:bg-[hsla(26,87%,51%,1)] fixed bottom-1 right-1/2 translate-x-1/2 md:hidden "
         asChild
       >
         <a href="#cart">Xem giỏ hàng</a>

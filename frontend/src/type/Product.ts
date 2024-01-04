@@ -1,11 +1,12 @@
 interface Product {
-	count: number;
-	tags: ProductTag[];
-	_id: string;
-	product_type: ProductType;
-	price: number;
-	name: string;
-	image: string;
+  _id?: string;
+  price: number;
+  name: string;
+  product_type: ProductType;
+  tags: ProductTag[];
+  image: string;
+  description: string;
+  discount: number;
 }
 
 export const productTypes = ['drink', 'icescream', 'food', 'cafe', 'milk', 'cake', 'cream'] as const;

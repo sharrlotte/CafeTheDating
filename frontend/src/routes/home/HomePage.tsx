@@ -21,7 +21,7 @@ export default function HomePage() {
 
 					api.defaults.headers['Authorization'] = 'Bearer ' + result.data.access_token;
 
-					api.get('/users/@me/profile').then((result) => {
+					return api.get('/users/@me/profile').then((result) => {
 						const user: User = result.data;
 						setMe(user);
 					});

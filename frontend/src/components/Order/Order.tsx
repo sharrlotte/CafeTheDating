@@ -2,15 +2,17 @@ import React from "react";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "../ui/tabs";
 import Search from "../Search/Search";
 import OrderItem from "./OrderItem";
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@radix-ui/react-select";
+
 
 export default function Order() {
   return (
     <>
       <div className="w-full">
         <Search></Search>
-        <div className="p-10  flex">
+        <div className="p-4 flex">
           <Tabs defaultValue="all" className="w-full h-full ">
-            <TabsList className="w-full  flex justify-around bg-[hsla(18,93%,59%,0.82)] h-20  ">
+            <TabsList className="w-full  flex flex-wrap flex-row bg-[hsla(18,93%,59%,0.82)] h-36 md:h-20  md:justify-around ">
               <TabsTrigger
                 className="font-bold text-black text-2xl hover:bg-white"
                 value="all"
@@ -60,6 +62,16 @@ export default function Order() {
           </Tabs>
         </div>
       </div>
+      <Select>
+        <SelectTrigger className="w-[180px]">
+          <SelectValue placeholder="Theme" />
+        </SelectTrigger>
+        <SelectContent>
+          <SelectItem value="light">Light</SelectItem>
+          <SelectItem value="dark">Dark</SelectItem>
+          <SelectItem value="system">System</SelectItem>
+        </SelectContent>
+      </Select>
     </>
   );
 }

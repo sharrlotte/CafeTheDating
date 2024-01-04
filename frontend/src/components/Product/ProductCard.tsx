@@ -14,7 +14,7 @@ export default function ProductCard({ product }: ProductCardProps) {
         src={product.image}
         alt="Cà phê"
       ></img>
-      <span className="right-5 top-2 absolute text-red-500 bg-black p-2 rounded-lg">
+      <span className="right-5 top-2 absolute text-lg text-red-500 bg-white p-2 rounded-lg drop-shadow-[0_1.2px_1.2px_rgba(0,0,0,0.8)]">
         {product.tags.map((tag) => translate(tag))}
       </span>
       <div className="grid absolute left-4 bottom-4">

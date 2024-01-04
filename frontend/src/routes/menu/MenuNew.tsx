@@ -43,7 +43,7 @@ export default function MenuNew() {
           <TabsContent value="cake">
             <MenuItems type="cake" sort="best-choice" />
           </TabsContent>
-          <TabsContent value="cream">
+          <TabsContent value="cream" >
             <MenuItems type="cream" sort="best-choice" />
           </TabsContent>
         </Tabs>
@@ -72,7 +72,6 @@ export default function MenuNew() {
           <TabsContent value="coffe">
             <MenuItems type="cafe" sort="discount" />
           </TabsContent>
-
           <TabsContent value="milk">
             <MenuItems type="milk" sort="discount" />
           </TabsContent>

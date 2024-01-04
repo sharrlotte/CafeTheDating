@@ -21,3 +21,5 @@ export type CreateStarBody = {
   user_id: string
   product_id: string
 }
+
+export type ProductSort = 'discount' | 'best-choice' | 'new'

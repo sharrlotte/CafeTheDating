@@ -2,7 +2,7 @@ import { StatusCodes } from 'http-status-codes'
 import { ObjectId } from 'mongodb'
 import { ParsedUrlQuery } from 'querystring'
 import { AuthUser } from '~/@types/auth.type'
-import { CreateProductBody, UpdateProductBody } from '~/@types/request.type'
+import { CreateProductBody, ProductSort, UpdateProductBody } from '~/@types/request.type'
 import { ErrorWithStatus } from '~/models/errors/Errors.schema'
 import Like from '~/models/schemas/Like.shema'
 import Product from '~/models/schemas/Product.schema'
@@ -58,33 +58,47 @@ class ProductService {
 
   async getAllProduct(query: ParsedUrlQuery) {
     const productType: ProductType = query.type as ProductType
-    const sort = query.sort as 'discount' | 'best-choice'
+    const sort = query.sort as ProductSort
 
-    if (sort === 'discount') {
-      return await databaseService.products
-        .find({
-          productType: productType,
-          discount: {
-            $gt: 0
-          }
-        })
-        .sort({ discount: 'desc' })
-        .toArray()
-    } else if (sort === 'best-choice') {
-      return await databaseService.products
-        .find({
-          productType: productType,
-          tags: {
-            $in: ['best-choice']
-          }
-        })
-        .toArray()
+    switch (sort) {
+      case 'discount':
+        return await databaseService.products
+          .find({
+            productType: productType,
+            discount: {
+              $gt: 0
+            }
+          })
+          .sort({ discount: 'desc' })
+          .toArray()
+
+      case 'best-choice':
+        return await databaseService.products
+          .find({
+            productType: productType,
+            tags: {
+              $in: ['best-choice']
+            }
+          })
+          .toArray()
+
+      case 'new':
+        return await databaseService.products
+          .find({
+            productType: productType,
+            tags: {
+              $in: ['new']
+            }
+          })
+          .toArray()
+
+      default:
+        return await databaseService.products
+          .find({
+            productType: productType
+          })
+          .toArray()
     }
-    return await databaseService.products
-      .find({
-        productType: productType
-      })
-      .toArray()
   }
 
   async createProduct(payload: CreateProductBody) {

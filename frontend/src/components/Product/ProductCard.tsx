@@ -45,6 +45,5 @@ function translate(productType: string) {
       return "Đề cử";
     case "new":
       return "Mới";
-    
   }
 }

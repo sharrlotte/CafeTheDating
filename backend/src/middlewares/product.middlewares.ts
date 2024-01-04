@@ -1,8 +1,9 @@
 import { checkSchema } from 'express-validator'
 import { StatusCodes } from 'http-status-codes'
-import { ErrorWithStatus } from '~/models/errors/Errors.schema'
-import { productTypes } from '~/models/schemas/ProductType.schema'
-import validate from '~/utils/validate'
+import { ErrorWithStatus } from '@/models/errors/Errors.schema'
+import { productSorts } from '@/models/schemas/Product.schema'
+import { productTypes } from '@/models/schemas/ProductType.schema'
+import validate from '@/utils/validate'
 
 export const getAllProductValidator = validate(
   checkSchema(
@@ -32,7 +33,7 @@ export const getAllProductValidator = validate(
         optional: true,
         custom: {
           options: (value) => {
-            if (!['discount', 'best-choice'].includes(value)) {
+            if (!productSorts.includes(value)) {
               throw new ErrorWithStatus({
                 message: 'Invalid sort string',
                 statusCode: StatusCodes.BAD_REQUEST

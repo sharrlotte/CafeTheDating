@@ -1,9 +1,9 @@
-import { VALIDATION_MESSAGES } from '~/constants/message'
+import { VALIDATION_MESSAGES } from '@/constants/message'
 import { checkSchema } from 'express-validator'
-import validate from '~/utils/validate'
-import { ErrorWithStatus } from '~/models/errors/Errors.schema'
+import validate from '@/utils/validate'
+import { ErrorWithStatus } from '@/models/errors/Errors.schema'
 import { StatusCodes } from 'http-status-codes'
-import { databaseService } from '~/services/database.service'
+import { databaseService } from '@/services/database.service'
 import { JsonWebTokenError } from 'jsonwebtoken'
 import { capitalize } from 'lodash'
 

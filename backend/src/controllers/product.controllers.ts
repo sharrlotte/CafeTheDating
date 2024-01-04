@@ -2,8 +2,8 @@ import { NextFunction, Request, Response } from 'express'
 import { ParamsDictionary } from 'express-serve-static-core'
 import { StatusCodes } from 'http-status-codes'
 import { ParsedUrlQuery } from 'querystring'
-import { CreateProductBody } from '~/@types/request.type'
-import productService from '~/services/product.service'
+import { CreateProductBody } from '@/@types/request.type'
+import productService from '@/services/product.service'
 
 const productController = {
   getAllProduct: async (req: Request<ParamsDictionary, any, any, ParsedUrlQuery>, res: Response, next: NextFunction) => {

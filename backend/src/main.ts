@@ -43,7 +43,7 @@ app.use(express.static('.'))
 if (env.node_env === 'production') {
   app.use('/api', rateLimiterMiddleware)
 }
-app.use('/api', rootRouter)
+app.use('/api/v1', rootRouter)
 app.use((req: Request, res: Response, next: NextFunction) => {
   res.header('Access-Control-Allow-Origin', '*')
   res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept, Authorization')

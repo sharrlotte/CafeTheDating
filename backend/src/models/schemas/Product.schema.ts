@@ -1,5 +1,5 @@
 import { ObjectId } from 'mongodb'
-import ProductType from '~/models/schemas/ProductType.schema'
+import ProductType from '@/models/schemas/ProductType.schema'
 
 interface ProductT {
   _id?: ObjectId
@@ -13,7 +13,8 @@ interface ProductT {
   created_at?: Date
   updated_at?: Date
 }
-
+export const productSorts = ['discount', 'best-choice', 'new']
+export type ProductSort = (typeof productSorts)[number]
 export type ProductTag = 'best-choice' | 'new'
 
 export default class Product {

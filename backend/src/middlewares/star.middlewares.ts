@@ -1,10 +1,10 @@
 import { checkSchema } from 'express-validator'
 import { StatusCodes } from 'http-status-codes'
 import { ObjectId } from 'mongodb'
-import { VALIDATION_MESSAGES } from '~/constants/message'
-import { ErrorWithStatus } from '~/models/errors/Errors.schema'
-import { databaseService } from '~/services/database.service'
-import validate from '~/utils/validate'
+import { VALIDATION_MESSAGES } from '@/constants/message'
+import { ErrorWithStatus } from '@/models/errors/Errors.schema'
+import { databaseService } from '@/services/database.service'
+import validate from '@/utils/validate'
 
 export const createStarValidator = validate(
   checkSchema(

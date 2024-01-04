@@ -1,8 +1,8 @@
 import { Router } from 'express'
 import passport from 'passport'
-import authController from '~/controllers/auth.controllers'
-import authService from '~/services/oauth.service'
-import { wrapRequestHandler } from '~/utils/handler'
+import authController from '@/controllers/auth.controllers'
+import authService from '@/services/oauth.service'
+import { wrapRequestHandler } from '@/utils/handler'
 
 authService.init()
 const authRouter = Router()

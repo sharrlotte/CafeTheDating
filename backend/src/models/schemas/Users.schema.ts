@@ -1,6 +1,6 @@
 import { ObjectId } from 'mongodb'
-import { AuthProvider } from '~/@types/auth.type'
-import { UserRole } from '~/constants/enums'
+import { AuthProvider } from '@/@types/auth.type'
+import { UserRole } from '@/constants/enums'
 
 // var number = moment().year()
 //  - Number(moment('2000-02-22T00:00:00.000Z').format('YYYY'))

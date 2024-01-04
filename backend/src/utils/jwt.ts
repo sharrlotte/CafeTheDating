@@ -1,5 +1,5 @@
 import jwt from 'jsonwebtoken'
-import { SignTokenType, VerifyTokenType } from '~/@types/tokenPayload.type'
+import { SignTokenType, VerifyTokenType } from '@/@types/tokenPayload.type'
 
 export const signToken = ({ payload, privateKey, options }: SignTokenType): Promise<string> => {
   return new Promise<string>((resolve, reject) => {

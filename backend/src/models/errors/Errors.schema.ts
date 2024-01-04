@@ -1,6 +1,6 @@
 import moment from 'moment'
 import { StatusCodes } from 'http-status-codes'
-import { ErrorEntityType, ErrorType } from '~/@types/errors.type'
+import { ErrorEntityType, ErrorType } from '@/@types/errors.type'
 
 type ErrorsType = Record<string, ErrorEntityType>
 
@@ -22,7 +22,7 @@ export class ErrorWithStatus {
 
 export class ErrorEnity extends ErrorWithStatus {
   errors: ErrorsType
-  constructor({ message = "Error", errors }: { message?: string; errors: ErrorsType }) {
+  constructor({ message = 'Error', errors }: { message?: string; errors: ErrorsType }) {
     super({ message, statusCode: StatusCodes.UNPROCESSABLE_ENTITY })
     this.errors = errors
   }

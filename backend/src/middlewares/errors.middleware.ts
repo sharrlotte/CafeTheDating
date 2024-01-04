@@ -1,7 +1,7 @@
 import { Request, Response, NextFunction } from 'express'
 import { omit } from 'lodash'
 import { StatusCodes } from 'http-status-codes'
-import { ErrorWithStatus } from '~/models/errors/Errors.schema'
+import { ErrorWithStatus } from '@/models/errors/Errors.schema'
 
 export const defaultErrorHandler = (err: any, req: Request, res: Response, next: NextFunction) => {
   try {
@@ -12,10 +12,7 @@ export const defaultErrorHandler = (err: any, req: Request, res: Response, next:
     console.error(err)
     const finalError: any = {}
     Object.getOwnPropertyNames(err).forEach((key) => {
-      if (
-        !Object.getOwnPropertyDescriptor(err, key)?.configurable ||
-        !Object.getOwnPropertyDescriptor(err, key)?.writable
-      ) {
+      if (!Object.getOwnPropertyDescriptor(err, key)?.configurable || !Object.getOwnPropertyDescriptor(err, key)?.writable) {
         return
       }
       finalError[key] = err[key]

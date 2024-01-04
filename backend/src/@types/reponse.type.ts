@@ -1,5 +1,5 @@
 import { ObjectId } from 'mongodb'
-import { UserRole } from '~/constants/enums'
+import { UserRole } from '@/constants/enums'
 
 export type ResultRefreshTokenType = {
   access_token: string

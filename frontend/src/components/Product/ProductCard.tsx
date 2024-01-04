@@ -15,7 +15,7 @@ export default function ProductCard({ product }: ProductCardProps) {
         alt="Cà phê"
       ></img>
       <span className="right-5 top-2 absolute text-red-500 bg-black p-2 rounded-lg">
-        {product.tags}
+        {product.tags.map((tag) => translate(tag))}
       </span>
       <div className="grid absolute left-4 bottom-4">
         <span className="text-white text-2xl font-bold drop-shadow-[0_1.2px_1.2px_rgba(0,0,0,0.8)]">
@@ -41,5 +41,10 @@ function translate(productType: string) {
       return "Bánh";
     case "cream":
       return "Kem";
+    case "best-choice":
+      return "Đề cử";
+    case "new":
+      return "Mới";
+    
   }
 }

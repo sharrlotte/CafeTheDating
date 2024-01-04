@@ -6,12 +6,13 @@ import { useQuery } from "react-query";
 
 type MenuItemProps = {
   type: string;
+  sort?: string
 };
 
-export default function MenuItems({ type }: MenuItemProps) {
+export default function MenuItems({ type, sort }: MenuItemProps) {
   const { data, isLoading, isError } = useQuery({
-    queryKey: ["products", type],
-    queryFn: () => getProducts(type),
+    queryKey: ["products", type, sort],
+    queryFn: () => getProducts(type, sort),
   });
     
   if (isLoading)

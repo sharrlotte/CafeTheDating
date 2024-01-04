@@ -29,7 +29,7 @@ export default function Banner() {
   return (
     <div className="p-4 flex w-full flex-row">
       <div className="bg-black h-1/4 rounded-lg w-full">
-        <div className="text-white flex flex-row  h-full p-8 gap-4 justify-between relative">
+        <div className="text-white flex flex-row  h-full p-4 md:p-8 gap-4 justify-between relative flex-wrap ">
           <div className="flex flex-col gap-4 justify-center">
             <span className="text-sm">Lần đầu tiên! </span>
             <span className="text-3xl">Bánh kẹp bơ thanh longlong</span>
@@ -47,19 +47,19 @@ export default function Banner() {
               </Button>
               <Button
                 variant="ghost"
-                className="border-[1px] rounded-3xl flex gap-2"
+                className="border-[1px] rounded-3xl flex gap-2 justify-center items-center "
               >
                 <img
                   src="/img/Delivery.svg"
                   alt="Delivery"
                   className="w-5 h-5"
                 ></img>
-                Đặt hàng ngay{" "}
+                Đặt hàng ngay
               </Button>
             </div>
           </div>
           <div className="relative">
-            <div className="bg-[hsla(126,100%,24%,0.69)] absolute left-[-30px] rounded-2xl py-2 px-4">
+            <div className="bg-[hsla(126,100%,24%,0.69)] absolute md:left-[-30px] top-2 left-2 md:top-[-2px] rounded-2xl py-2 px-4">
               Giảm 30%
             </div>
             <img

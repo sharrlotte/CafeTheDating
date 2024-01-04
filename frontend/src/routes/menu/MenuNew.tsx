@@ -14,12 +14,10 @@ export default function MenuNew() {
       <Search />
       <Banner />
       <div>
-        <Tabs defaultValue="coffe" className="w-full h-full p-4">
+        <div className="font-bold text-black text-2xl">Đề cử !!</div>
+        <Tabs defaultValue="coffe" className="w-full h-full">
           <TabsList className="w-full  flex justify-around bg-white ">
-            <div className="w-full h-full flex justify-between ">
-              <div className="font-bold text-black text-2xl">
-                Sale Up Now !!
-              </div>
+            <div className="w-full h-full flex justify-between">
               <div>
                 <TabsTrigger className="text-lg" value="coffe">
                   Cà Phê
@@ -37,25 +35,24 @@ export default function MenuNew() {
             </div>
           </TabsList>
           <TabsContent value="coffe">
-            <MenuItems type="cafe" />
+            <MenuItems type="cafe" sort="best-choice" />
           </TabsContent>
-
           <TabsContent value="milk">
-            <MenuItems type="milk" />
+            <MenuItems type="milk" sort="best-choice" />
           </TabsContent>
           <TabsContent value="cake">
-            <MenuItems type="cake" />
+            <MenuItems type="cake" sort="best-choice" />
           </TabsContent>
           <TabsContent value="cream">
-            <MenuItems type="cream" />
+            <MenuItems type="cream" sort="best-choice" />
           </TabsContent>
         </Tabs>
-        <Tabs defaultValue="cream" className="w-full h-full p-4">
+        <div className="font-bold text-[hsla(94,79%,35%,1)] text-2xl">
+          Giảm giá !!!
+        </div>
+        <Tabs defaultValue="cream" className="w-full h-full ">
           <TabsList className="w-full  flex justify-around bg-white ">
             <div className="w-full h-full flex justify-between ">
-              <div className="font-bold text-[hsla(94,79%,35%,1)] text-2xl">
-                Best Rating !!!
-              </div>
               <div>
                 <TabsTrigger className="text-lg" value="coffe">
                   Cà Phê
@@ -73,17 +70,17 @@ export default function MenuNew() {
             </div>
           </TabsList>
           <TabsContent value="coffe">
-            <MenuItems type="cafe" />
+            <MenuItems type="cafe" sort="discount" />
           </TabsContent>
 
           <TabsContent value="milk">
-            <MenuItems type="milk" />
+            <MenuItems type="milk" sort="discount" />
           </TabsContent>
           <TabsContent value="cake">
-            <MenuItems type="cake" />
+            <MenuItems type="cake" sort="discount" />
           </TabsContent>
           <TabsContent value="cream">
-            <MenuItems type="cream" />
+            <MenuItems type="cream" sort="discount" />
           </TabsContent>
         </Tabs>
       </div>

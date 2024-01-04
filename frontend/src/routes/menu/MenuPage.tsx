@@ -23,9 +23,9 @@ export default function MenuPage() {
       <Search />
       <Banner />
       <div className="p-4 flex w-full flex-row">
-        <div className="w-full h-full flex p-2">
+        <div className="w-full h-full flex p-2 md:flex-row flex-col gap-2">
           <div className="w-full h-full">
-            <Tabs defaultValue="coffe" className="w-full h-full" >
+            <Tabs defaultValue="coffe" className="w-full h-full">
               <TabsList className="w-full  flex justify-around">
                 <TabsTrigger value="coffe">Cà Phê</TabsTrigger>
                 <TabsTrigger value="milk">Trà Sữa</TabsTrigger>
@@ -47,8 +47,11 @@ export default function MenuPage() {
               </TabsContent>
             </Tabs>
           </div>
-          <div className="w-[300px] ">
-            <div className=" bg-[hsla(26,87%,51%,1)] text-center h-24 justify-center items-center flex text-white text-3xl">
+          <div className="min-w-[300px]">
+            <div
+              id="cart"
+              className=" bg-[hsla(26,87%,51%,1)] text-center h-24 justify-center items-center flex text-white text-3xl "
+            >
               <Icons.Cart />
               Giỏ Hàng
             </div>
@@ -103,7 +106,7 @@ export default function MenuPage() {
               <div className="flex justify-center">
                 <Button className="border-2 rounded-3xl bg-[hsla(0,0%,97%,1)] text-black hover:bg-[hsla(26,87%,51%,1)] w-60 flex justify-between">
                   Mã giảm giá
-                  <Icons.ArrowRight></Icons.ArrowRight>
+                  <Icons.ArrowRight />
                 </Button>
               </div>
               <div></div>
@@ -112,6 +115,12 @@ export default function MenuPage() {
           </div>
         </div>
       </div>
+      <Button
+        className="bg-[hsla(26,87%,51%,1)] hover:bg-[hsla(26,87%,51%,1)] fixed bottom-1 right-1/2 translate-x-1/2 "
+        asChild
+      >
+        <a href="#cart">Xem giỏ hàng</a>
+      </Button>
     </div>
   );
 }

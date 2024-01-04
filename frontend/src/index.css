@@ -81,4 +81,8 @@
   #root {
     @apply w-full h-full;
   }
+
+  html {
+    @apply overflow-y-auto;
+  }
 }

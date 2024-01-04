@@ -44,7 +44,7 @@ const envSchema = Joi.object({
 // Validate the environment variables
 const { error, value: envVars } = envSchema.prefs({ errors: { label: 'key' } }).validate(process.env)
 if (error) {
-  throw new Error(`Config validation error: ${error.message}`)
+  throw new Error(`Config validation error: ${error.message}`);
 }
 
 export const env = {

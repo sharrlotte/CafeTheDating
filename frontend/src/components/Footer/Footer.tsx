@@ -3,9 +3,9 @@ import React from "react";
 
 export default function Footer() {
   return (
-    <footer className="bg-white  p-4 w-full ">
+    <footer className="bg-white p-4 w-full ">
       <div className="border-[1px] border-blue-600"></div>
-      <div className="p-24 flex justify-between flex-wrap gap-6">
+      <div className="flex md:justify-between flex-wrap gap-6">
         <div className="flex  items-center">
           <a href="/home">
             <img src="/img/Logo.svg" alt="TheDating"></img>
@@ -37,7 +37,7 @@ export default function Footer() {
         </div>
       </div>
       <div className="border-[0.25px] border-blue-100 "></div>
-      <div className="text-xs gap-8 flex font-bold p-2">
+      <div className="text-xs justify-between gap-4 max-w-lg flex font-bold p-2 flex-wrap">
         <span>ABOUT US</span>
         <span>CONTACT US</span>
         <span>HELP</span>

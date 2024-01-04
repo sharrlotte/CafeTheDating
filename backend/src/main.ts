@@ -54,6 +54,7 @@ app.use((req: Request, res: Response, next: NextFunction) => {
   next()
 })
 
+app.disable('etag')
 databaseService.connect()
 app.use(defaultErrorHandler)
 httpServer.listen(env.server.port, env.server.host, () => {

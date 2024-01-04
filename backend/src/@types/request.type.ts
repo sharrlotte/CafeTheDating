@@ -1,4 +1,5 @@
 import { Request } from 'express'
+import { ProductTag } from '~/models/schemas/Product.schema'
 import ProductType from '~/models/schemas/ProductType.schema'
 import User from '~/models/schemas/Users.schema'
 
@@ -10,8 +11,8 @@ export type CreateProductBody = {
   name: string
   description: string
   price: number
-  tags: string[]
-  productType: ProductType
+  tags: ProductTag[]
+  product_type: ProductType
   image: string
 }
 

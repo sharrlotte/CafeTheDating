@@ -24,7 +24,7 @@ export default class Product {
   tags: ProductTag[]
   image: string
   description: string
-  discount?: number
+  discount: number
   created_at?: Date
   updated_at?: Date
 

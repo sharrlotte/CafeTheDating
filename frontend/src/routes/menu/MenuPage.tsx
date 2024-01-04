@@ -85,6 +85,7 @@ export default function MenuPage() {
                         .map((item) => item.count * item.price)
                         .reduce((prev, curr) => prev + curr, 0)
                     )}
+                    vnd
                   </span>
                 </div>
 

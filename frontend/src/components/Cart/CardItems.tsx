@@ -14,7 +14,7 @@ function CardItems() {
         >
           <div className="p-4 bg-white flex flex-col relative">
             {product.count > 1 && (
-              <span className="absolute top-4 left-1 bg-orange-400 text-white rounded-full  p-2">
+              <span className="absolute top-4 left-1 bg-orange-400 text-white rounded-full aspect-square  p-2">
                 {`${product.count}x`}
               </span>
             )}

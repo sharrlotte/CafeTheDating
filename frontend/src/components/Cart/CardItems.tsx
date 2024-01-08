@@ -38,7 +38,6 @@ function CardItems() {
                                 (product.price * (product.discount ?? 0)) / 100
                             : product.price
                         )}
-                        vnd
                       </span>
 
                       <span className="text-2xl font-bold mb-2">

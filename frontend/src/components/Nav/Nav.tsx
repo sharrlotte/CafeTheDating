@@ -41,13 +41,19 @@ export default function Nav() {
             <img
               src={user.avatar}
               alt="User Avatar"
-              className="w-12 h-12 rounded-full absolute top-12 right-14"
+              className="w-12 h-12 rounded-full absolute top-12 right-14 "
             />
-            <Button onClick={() => logout()}>Đăng xuất</Button>
+
+            <Button
+              className="absolute right-28 top-12 bg-[hsla(126,100%,24%,1)] hover:bg-gray-400 rounded-full text-black w-24 h-14 z-50"
+              onClick={() => logout()}
+            >
+              Đăng xuất
+            </Button>
           </div>
         ) : (
           <Button
-            className="bg-[hsla(126,100%,24%,1)] rounded-full text-white w-24 h-14 top-12 right-14 md:absolute"
+            className="bg-[hsla(126,100%,24%,1)] rounded-full text-white w-24 h-14 top-12 right-14 sm:absolute"
             asChild
           >
             <Link

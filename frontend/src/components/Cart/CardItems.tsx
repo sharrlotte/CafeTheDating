@@ -1,4 +1,4 @@
-import {  pricy } from "../../lib/util";
+import { pricy } from "../../lib/util";
 import Icons from "../../constants/icon";
 import useCart from "../../zustand/useCart";
 import { Button } from "../ui/button";
@@ -88,17 +88,16 @@ function CardItems() {
 
                         .reduce((prev, curr) => prev + curr, 0)
                     )}
-                    vnd
                   </span>
                 </div>
                 <div className="flex justify-between">
                   <span className=" font-bold">Giảm giá</span>
-                  <span>0vnd</span>
+                  <span>0 vnd</span>
                 </div>
 
                 <div className="flex justify-between ">
                   <span className=" font-bold">Phí vận chuyển</span>
-                  <span>0vnd</span>
+                  <span>0 vnd</span>
                 </div>
                 <div className="flex justify-between text-lg">
                   <span className=" font-bold"> Tổng :</span>
@@ -114,7 +113,6 @@ function CardItems() {
 
                         .reduce((prev, curr) => prev + curr, 0)
                     )}
-                    vnd
                   </span>
                 </div>
               </div>

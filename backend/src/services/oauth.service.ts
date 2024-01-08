@@ -22,15 +22,17 @@ class AuthService {
         },
         async function (req, accessToken, refreshToken, profile, done) {
           try {
-            let user = await databaseService.users.findOne({ provider: 'facebook', providerId: profile.id })
+            let user = await databaseService.users.findOne<User>({ provider: 'facebook', providerId: profile.id })
             if (!user) {
               const newUser = new User({
                 // @ts-ignore
                 email: profile.email,
                 username: profile.displayName,
                 provider: 'facebook',
+                avatar: profile.profileUrl,
                 providerId: profile.id
               })
+              user = newUser
               await databaseService.users.insertOne(newUser)
               req.user = { ...newUser, _id: newUser._id.toString() }
               return done(null, newUser)
@@ -61,24 +63,28 @@ class AuthService {
         },
         async function (req, accessToken, refreshToken, profile, done) {
           try {
-            let user = await databaseService.users.findOne({ provider: 'facebook', providerId: profile.id })
+            let user = await databaseService.users.findOne<User>({ provider: 'facebook', providerId: profile.id })
             if (!user) {
               const newUser = new User({
                 // @ts-ignore
                 email: profile.email,
                 username: profile.displayName,
+                avatar: profile.profileUrl,
                 provider: 'facebook',
                 providerId: profile.id
               })
+              user = newUser
               await databaseService.users.insertOne(newUser)
               req.user = { ...newUser, _id: newUser._id.toString() }
               return done(null, newUser)
             }
 
+            const avatar = profile.profileUrl
+
             await databaseService.users.updateOne(
               { _id: user._id },
               {
-                $set: { ...user }
+                $set: { ...user, avatar }
               }
             )
             req.user = { ...user, _id: user._id.toString() }

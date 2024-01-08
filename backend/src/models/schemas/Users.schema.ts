@@ -24,6 +24,7 @@ export default class User {
   username?: string
   email: string
   providerId?: string
+  avatar?: string
   provider?: AuthProvider
   role: UserRole
   address: string
@@ -37,6 +38,7 @@ export default class User {
     this.email = user.email
     this.provider = user.provider
     this.providerId = user.providerId
+    this.address = user.avatar
     this.role = user.role || UserRole.User
     this.address = user.address || ''
     this._destroy = user._destroy || false

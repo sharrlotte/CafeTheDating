@@ -1,7 +1,7 @@
 {
   "hosting": {
     "site": "thedatingcoffee",
-    "public": "./",
+    "public": "build",
     "ignore": [
       "firebase.json",
       "database-rules.json",

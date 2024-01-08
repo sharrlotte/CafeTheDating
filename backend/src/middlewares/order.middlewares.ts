@@ -96,6 +96,12 @@ export const adminUpdateOrder = validate(
 export const createOrderValidator = validate(
   checkSchema(
     {
+      address: {
+        notEmpty: {
+          errorMessage: 'Address is required'
+        },
+        isString: { errorMessage: 'Address must be a string' }
+      },
       orders: {
         isArray: {
           errorMessage: 'Orders must be an array'
@@ -105,6 +111,15 @@ export const createOrderValidator = validate(
         custom: {
           options: (value) => {
             validateObjectId(value)
+
+            var product = databaseService.products.findOne({ _id: new ObjectId(value) })
+
+            if (!product) {
+              throw new ErrorWithStatus({
+                message: 'Product not found for id: ' + value,
+                statusCode: StatusCodes.NOT_FOUND
+              })
+            }
             return true
           }
         }

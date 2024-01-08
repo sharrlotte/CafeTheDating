@@ -21,24 +21,30 @@ class OrderService {
       { _id: new ObjectId(id) },
       {
         $set: {
-          state: state
+          state: state,
+          updated_at: new Date()
         }
       },
       { upsert: false }
     )
   }
   async createOrder(user: AuthUser, payload: CreateOrderBody) {
-    const orders = payload.orders.map(
-      ({ amount, product_id }) =>
-        new Order({
-          amount,
-          product_id: new ObjectId(product_id),
-          user_id: new ObjectId(user._id),
-          state: 'pending'
-        })
-    )
+    const orders = payload.orders.map(async ({ size, amount, product_id }) => {
+      const { price, discount } = await databaseService.products.findOne({ _id: new ObjectId(product_id) })
 
-    return await databaseService.orders.insertMany(orders)
+      return new Order({
+        address: payload.address,
+        price,
+        discount,
+        amount,
+        product_id: new ObjectId(product_id),
+        user_id: new ObjectId(user._id),
+        state: 'pending',
+        size
+      })
+    })
+
+    return await databaseService.orders.insertMany(await Promise.all(orders))
   }
 }
 

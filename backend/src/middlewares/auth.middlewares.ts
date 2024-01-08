@@ -8,27 +8,31 @@ import { verifyToken } from '@/utils/jwt'
 import { AuthUser } from '@/@types/auth.type'
 
 export const authMiddleware = async (req: Request, res: Response, next: NextFunction) => {
-  const bearer = req.get('Authorization')
-  if (!bearer) {
-    return next()
-  }
+  try {
+    const bearer = req.get('Authorization')
+    if (!bearer) {
+      return next()
+    }
 
-  const tokens = bearer.split(' ')
-  if (tokens.length !== 2) {
-    throw new ErrorWithStatus({
-      message: VALIDATION_MESSAGES.TOKEN.INVALID_BEARER_TOKEN,
-      statusCode: StatusCodes.UNAUTHORIZED
+    const tokens = bearer.split(' ')
+    if (tokens.length !== 2) {
+      throw new ErrorWithStatus({
+        message: VALIDATION_MESSAGES.TOKEN.INVALID_BEARER_TOKEN,
+        statusCode: StatusCodes.UNAUTHORIZED
+      })
+    }
+
+    const access_token = tokens[1]
+    const user = await verifyToken({
+      token: access_token,
+      secretOrPublicKey: env.jwt.secret_key
     })
+
+    req.user = user as AuthUser
+    return next()
+  } catch (error) {
+    return next(error)
   }
-
-  const access_token = tokens[1]
-  const user = await verifyToken({
-    token: access_token,
-    secretOrPublicKey: env.jwt.secret_key
-  })
-
-  req.user = user as AuthUser
-  return next()
 }
 
 export const requireLoginMiddleware = () => {

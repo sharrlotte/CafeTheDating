@@ -1,9 +1,9 @@
-import { UserRole } from '~/constants/enums'
+import { UserRole } from '@/constants/enums'
 
 export type AuthUser = {
-  _id: string
-  role: UserRole
-  email: string
+    _id: string
+    role: UserRole
+    email: string
 }
 
 export const authProviders = ['facebook', 'google'] as const

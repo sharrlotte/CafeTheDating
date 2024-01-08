@@ -1,10 +1,11 @@
 import { Db, MongoClient, ServerApiVersion, Collection } from 'mongodb'
-import { env } from '~/config/environment.config'
-import Like from '~/models/schemas/Like.shema'
-import Product from '~/models/schemas/Product.schema'
-import RefreshToken from '~/models/schemas/RefreshToken.schema'
-import Star from '~/models/schemas/Star.schema'
-import User from '~/models/schemas/Users.schema'
+import { env } from '@/config/environment.config'
+import Like from '@/models/schemas/Like.shema'
+import Product from '@/models/schemas/Product.schema'
+import RefreshToken from '@/models/schemas/RefreshToken.schema'
+import Star from '@/models/schemas/Star.schema'
+import User from '@/models/schemas/Users.schema'
+import Order from '@/models/schemas/Order.schema'
 class DatabaseServices {
   private client: MongoClient | undefined
   private db: Db
@@ -53,6 +54,9 @@ class DatabaseServices {
 
   get likes(): Collection<Like> {
     return this.db.collection(env.database.main.collection.like as string)
+  }
+  get orders(): Collection<Order> {
+    return this.db.collection(env.database.main.collection.order as string)
   }
 }
 

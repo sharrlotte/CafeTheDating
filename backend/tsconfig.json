@@ -14,9 +14,7 @@
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
     "paths": {
-      "~/*": ["src/*"],
-      "@/utils/*": ["utils/*"],
-      "@/middlewares/*": ["middlewares/*"]
+      "@/*": ["src/*"]
     },
     "esModuleInterop": true
   },

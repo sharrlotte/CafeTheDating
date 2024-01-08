@@ -1,11 +1,6 @@
-import { Request } from 'express'
-import { ProductTag } from '~/models/schemas/Product.schema'
-import ProductType from '~/models/schemas/ProductType.schema'
-import User from '~/models/schemas/Users.schema'
-
-export interface RequestType extends Request {
-  user: User
-}
+import { ProductTag } from '@/models/schemas/Product.schema'
+import ProductType from '@/models/schemas/ProductType.schema'
+import { OrderState } from '@/models/schemas/Order.schema'
 
 export type CreateProductBody = {
   name: string
@@ -23,4 +18,15 @@ export type CreateStarBody = {
   product_id: string
 }
 
-export type ProductSort = 'discount' | 'best-choice' | 'new'
+export type UpdateOrderBody = {
+  state: OrderState
+}
+
+export type CreateOrderBody = {
+  orders: Array<{
+    product_id: string
+    amount: number
+    size: string
+  }>
+  address: string
+}

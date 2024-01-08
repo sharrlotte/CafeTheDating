@@ -2,14 +2,14 @@ import { StatusCodes } from 'http-status-codes'
 import { ObjectId } from 'mongodb'
 import { Multer } from 'multer'
 import { ParsedUrlQuery } from 'querystring'
-import { AuthUser } from '~/@types/auth.type'
-import { CreateProductBody, ProductSort, UpdateProductBody } from '~/@types/request.type'
-import { ErrorWithStatus } from '~/models/errors/Errors.schema'
-import Like from '~/models/schemas/Like.shema'
-import Product from '~/models/schemas/Product.schema'
-import ProductType from '~/models/schemas/ProductType.schema'
-import cloudinaryService from '~/services/cloudinary.service'
-import { databaseService } from '~/services/database.service'
+import { AuthUser } from '@/@types/auth.type'
+import { CreateProductBody, UpdateProductBody } from '@/@types/request.type'
+import { ErrorWithStatus } from '@/models/errors/Errors.schema'
+import Like from '@/models/schemas/Like.shema'
+import Product, { ProductSort } from '@/models/schemas/Product.schema'
+import ProductType from '@/models/schemas/ProductType.schema'
+import cloudinaryService from '@/services/cloudinary.service'
+import { databaseService } from '@/services/database.service'
 
 class ProductService {
   async like(user: AuthUser, id: string): Promise<void> {
@@ -103,10 +103,12 @@ class ProductService {
     }
   }
 
-  async createProduct(payload: CreateProductBody) {
-    await databaseService.products.insertOne(new Product(payload))
+  async createProduct(payload: CreateProductBody, file: Express.Multer.File) {
+    const { url } = await cloudinaryService.uploadImage('product', file.buffer)
+
+    await databaseService.products.insertOne(new Product({ ...payload, image: url }))
   }
-  async updateProduct(id: string, payload: UpdateProductBody) {
+async updateProduct(id: string, payload: UpdateProductBody) {
     await databaseService.products.updateOne(
       { _id: new ObjectId(id) },
       {

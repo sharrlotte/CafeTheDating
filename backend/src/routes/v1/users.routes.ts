@@ -1,10 +1,10 @@
 import { Router } from 'express'
-import { UserRole } from '~/constants/enums'
-import userController from '~/controllers/users.controllers'
-import { requireLoginMiddleware, requireRoleMiddleware } from '~/middlewares/auth.middlewares'
-import { paginationValidator } from '~/middlewares/commons.middleware'
-import { getAllUserValidator, refreshTokenValidator } from '~/middlewares/users.middlewares'
-import { wrapRequestHandler } from '~/utils/handler'
+import { UserRole } from '@/constants/enums'
+import userController from '@/controllers/users.controllers'
+import { requireLoginMiddleware, requireRoleMiddleware } from '@/middlewares/auth.middlewares'
+import { paginationValidator } from '@/middlewares/commons.middleware'
+import { getAllUserValidator, refreshTokenValidator } from '@/middlewares/users.middlewares'
+import { wrapRequestHandler } from '@/utils/handler'
 
 const userRouter = Router()
 
@@ -24,7 +24,7 @@ userRouter.post('/refresh-token', refreshTokenValidator, wrapRequestHandler(user
  * Params: { pageIndex: number, pageSize: number, query: string }
  */
 
-userRouter.get('/', wrapRequestHandler(requireRoleMiddleware(UserRole.Admin)), paginationValidator, getAllUserValidator, wrapRequestHandler(userController.getAllUser))
+userRouter.get('/', requireRoleMiddleware(UserRole.Admin), paginationValidator, getAllUserValidator, wrapRequestHandler(userController.getAllUser))
 
 /**
  * Description: Get my profile
@@ -33,6 +33,6 @@ userRouter.get('/', wrapRequestHandler(requireRoleMiddleware(UserRole.Admin)), p
  * Header: { Authorization: Bearer <access_token> }
  */
 
-userRouter.get('/@me/profile', wrapRequestHandler(requireLoginMiddleware), wrapRequestHandler(userController.getMe))
+userRouter.get('/@me/profile', requireLoginMiddleware, wrapRequestHandler(userController.getMe))
 
 export default userRouter

@@ -1,0 +1,169 @@
+import { checkSchema } from 'express-validator'
+import { StatusCodes } from 'http-status-codes'
+import { ErrorWithStatus } from '@/models/errors/Errors.schema'
+import { orderStates } from '@/models/schemas/Order.schema'
+import validate from '@/utils/validate'
+import { validateObjectId } from '@/middlewares/commons.middleware'
+import { databaseService } from '@/services/database.service'
+import { ObjectId } from 'mongodb'
+
+export const getAllOrderValidator = validate(
+  checkSchema(
+    {
+      state: {
+        trim: true,
+        isString: {
+          errorMessage: 'Order type must be a string'
+        },
+        optional: true,
+        custom: {
+          options: (value) => {
+            if (!orderStates.includes(value)) {
+              throw new ErrorWithStatus({
+                message: 'Invalid order state',
+                statusCode: StatusCodes.BAD_REQUEST
+              })
+            }
+            return true
+          }
+        }
+      },
+      user_id: {
+        trim: true,
+        isString: {
+          errorMessage: 'User id must be a string'
+        },
+        optional: true,
+        custom: {
+          options: (value) => {
+            validateObjectId(value)
+
+            const user = databaseService.users.findOne({ _id: new ObjectId(value) })
+            if (!Boolean(user)) {
+              throw new ErrorWithStatus({
+                message: 'Invalid user id, user not found',
+                statusCode: StatusCodes.BAD_REQUEST
+              })
+            }
+
+            return true
+          }
+        }
+      }
+    },
+    ['query']
+  )
+)
+
+export const adminUpdateOrder = validate(
+  checkSchema(
+    {
+      state: {
+        trim: true,
+        isString: {
+          errorMessage: 'Order type must be a string'
+        },
+        custom: {
+          options: (value) => {
+            if (!orderStates.includes(value)) {
+              throw new ErrorWithStatus({
+                message: 'Invalid order state',
+                statusCode: StatusCodes.BAD_REQUEST
+              })
+            }
+            return true
+          }
+        }
+      },
+      id: {
+        trim: true,
+        isString: {
+          errorMessage: 'Order id must be a string'
+        },
+        optional: true,
+        custom: {
+          options: (value) => {
+            validateObjectId(value)
+            return true
+          }
+        }
+      }
+    },
+    ['params', 'body']
+  )
+)
+
+export const createOrderValidator = validate(
+  checkSchema(
+    {
+      address: {
+        notEmpty: {
+          errorMessage: 'Address is required'
+        },
+        isString: { errorMessage: 'Address must be a string' }
+      },
+      orders: {
+        isArray: {
+          errorMessage: 'Orders must be an array'
+        }
+      },
+      'order_.product_id': {
+        custom: {
+          options: (value) => {
+            validateObjectId(value)
+
+            var product = databaseService.products.findOne({ _id: new ObjectId(value) })
+
+            if (!product) {
+              throw new ErrorWithStatus({
+                message: 'Product not found for id: ' + value,
+                statusCode: StatusCodes.NOT_FOUND
+              })
+            }
+            return true
+          }
+        }
+      },
+      'order_.amount': {
+        isInt: {
+          options: {
+            min: 1
+          },
+          errorMessage: 'Invalid amount'
+        }
+      }
+    },
+    ['params', 'body']
+  )
+)
+
+export const userCancelOrder = validate(
+  checkSchema(
+    {
+      id: {
+        trim: true,
+        isString: {
+          errorMessage: 'Sort must be a string'
+        },
+        optional: true,
+        custom: {
+          options: async (value, { req }) => {
+            validateObjectId(value)
+
+            const order = await databaseService.orders.findOne({ _id: value, user_id: new ObjectId(req.user._id) })
+
+            if (!order) {
+              throw new ErrorWithStatus({
+                message: 'Order is not exist or not belong to you',
+                statusCode: StatusCodes.BAD_REQUEST
+              })
+            }
+
+            return true
+          }
+        }
+      }
+    },
+    ['params', 'body']
+  )
+)

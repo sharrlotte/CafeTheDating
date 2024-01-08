@@ -1,10 +1,11 @@
 import { Request, Response, NextFunction } from 'express'
 import { StatusCodes } from 'http-status-codes'
-import { env } from '~/config/environment.config'
-import { UserRole } from '~/constants/enums'
-import { VALIDATION_MESSAGES } from '~/constants/message'
-import { ErrorWithStatus } from '~/models/errors/Errors.schema'
-import { verifyToken } from '~/utils/jwt'
+import { env } from '@/config/environment.config'
+import { UserRole } from '@/constants/enums'
+import { VALIDATION_MESSAGES } from '@/constants/message'
+import { ErrorWithStatus } from '@/models/errors/Errors.schema'
+import { verifyToken } from '@/utils/jwt'
+import { AuthUser } from '@/@types/auth.type'
 
 export const authMiddleware = async (req: Request, res: Response, next: NextFunction) => {
   const bearer = req.get('Authorization')
@@ -21,37 +22,47 @@ export const authMiddleware = async (req: Request, res: Response, next: NextFunc
   }
 
   const access_token = tokens[1]
-  const user = await verifyToken({
+  const user = (await verifyToken({
     token: access_token,
     secretOrPublicKey: env.jwt.secret_key
-  })
+  })) as AuthUser
 
   req.user = user
   return next()
 }
 
-export const requireLoginMiddleware = async (req: Request, res: Response, next: NextFunction) => {
-  await authMiddleware(req, res, async () => {
-    if (!req.user) {
-      throw new ErrorWithStatus({
-        statusCode: StatusCodes.UNAUTHORIZED,
-        message: VALIDATION_MESSAGES.USER.COMMONS.USER_NOT_LOGIN
+export const requireLoginMiddleware = () => {
+  return async (req: Request, res: Response, next: NextFunction) => {
+    try {
+      await authMiddleware(req, res, async () => {
+        if (!req.user) {
+          throw new ErrorWithStatus({
+            statusCode: StatusCodes.UNAUTHORIZED,
+            message: VALIDATION_MESSAGES.USER.COMMONS.USER_NOT_LOGIN
+          })
+        }
+        return next()
       })
+    } catch (error) {
+      next(error)
     }
-    return next()
-  })
+  }
 }
 
 export const requireRoleMiddleware = (...roles: UserRole[]) => {
   return async (req: Request, res: Response, next: NextFunction) => {
-    await requireLoginMiddleware(req, res, async () => {
-      if (!roles.includes(req.user.role)) {
-        throw new ErrorWithStatus({
-          statusCode: StatusCodes.UNAUTHORIZED,
-          message: VALIDATION_MESSAGES.USER.COMMONS.USER_NOT_ROLE_NOT_SATISFIED
-        })
-      }
-      return next()
-    })
+    try {
+      await authMiddleware(req, res, async () => {
+        if (!req.user || !roles.includes(req.user.role)) {
+          throw new ErrorWithStatus({
+            statusCode: StatusCodes.UNAUTHORIZED,
+            message: VALIDATION_MESSAGES.USER.COMMONS.USER_NOT_LOGIN
+          })
+        }
+        return next()
+      })
+    } catch (error) {
+      next(error)
+    }
   }
 }

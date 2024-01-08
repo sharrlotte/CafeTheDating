@@ -1,7 +1,7 @@
 import { ObjectId } from 'mongodb'
-import { CreateStarBody } from '~/@types/request.type'
-import Star from '~/models/schemas/Star.schema'
-import { databaseService } from '~/services/database.service'
+import { CreateStarBody } from '@/@types/request.type'
+import Star from '@/models/schemas/Star.schema'
+import { databaseService } from '@/services/database.service'
 
 class StarService {
   async createStar(payload: CreateStarBody) {

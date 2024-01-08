@@ -1,9 +1,9 @@
 import { checkSchema } from 'express-validator'
 import { StatusCodes } from 'http-status-codes'
 import { ObjectId } from 'mongodb'
-import { VALIDATION_MESSAGES } from '~/constants/message'
-import { ErrorWithStatus } from '~/models/errors/Errors.schema'
-import validate from '~/utils/validate'
+import { VALIDATION_MESSAGES } from '@/constants/message'
+import { ErrorWithStatus } from '@/models/errors/Errors.schema'
+import validate from '@/utils/validate'
 
 export const paginationValidator = validate(
   checkSchema({
@@ -51,3 +51,12 @@ export const objectIdValidator = validate(
     ['params']
   )
 )
+
+export const validateObjectId = (id: string) => {
+  if (!ObjectId.isValid(id)) {
+    throw new ErrorWithStatus({
+      message: VALIDATION_MESSAGES.USER.COMMONS.USER_ID_IS_INVALID,
+      statusCode: StatusCodes.NOT_FOUND
+    })
+  }
+}

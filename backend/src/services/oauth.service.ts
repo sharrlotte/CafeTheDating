@@ -1,13 +1,14 @@
 import passport from 'passport'
-import { env } from '~/config/environment.config'
-import { databaseService } from '~/services/database.service'
-import User from '~/models/schemas/Users.schema'
-import userServices from '~/services/users.service'
-import RefreshToken from '~/models/schemas/RefreshToken.schema'
+import { env } from '@/config/environment.config'
+import { databaseService } from '@/services/database.service'
+import User from '@/models/schemas/Users.schema'
+import userServices from '@/services/users.service'
+import RefreshToken from '@/models/schemas/RefreshToken.schema'
 import { Request, Response } from 'express'
-import { AuthProvider } from '~/@types/auth.type'
+import { AuthProvider } from '@/@types/auth.type'
 import { Strategy as FacebookStrategy } from 'passport-facebook'
 import { Strategy as GoogleStrategy } from 'passport-google-oauth20'
+import { ObjectId } from 'mongodb'
 
 class AuthService {
   init() {
@@ -31,7 +32,7 @@ class AuthService {
                 providerId: profile.id
               })
               await databaseService.users.insertOne(newUser)
-              req.user = newUser
+              req.user = { ...newUser, _id: newUser._id.toString() }
               return done(null, newUser)
             }
 
@@ -41,7 +42,7 @@ class AuthService {
                 $set: { ...user }
               }
             )
-            req.user = user
+            req.user = { ...user, _id: user._id.toString() }
             return done(null, user)
           } catch (error) {
             return done(error, null)
@@ -60,26 +61,27 @@ class AuthService {
         },
         async function (req, accessToken, refreshToken, profile, done) {
           try {
-            let user = await databaseService.users.findOne({ provider: 'google', providerId: profile.id })
+            let user = await databaseService.users.findOne({ provider: 'facebook', providerId: profile.id })
             if (!user) {
               const newUser = new User({
-                username: profile._json.name,
-                email: profile._json.email,
-                provider: 'google',
+                // @ts-ignore
+                email: profile.email,
+                username: profile.displayName,
+                provider: 'facebook',
                 providerId: profile.id
               })
               await databaseService.users.insertOne(newUser)
-              req.user = newUser
+              req.user = { ...newUser, _id: newUser._id.toString() }
               return done(null, newUser)
             }
 
             await databaseService.users.updateOne(
               { _id: user._id },
               {
-                $set: { ...user, avatar: profile.photos ? profile.photos[0] : '' }
+                $set: { ...user }
               }
             )
-            req.user = user
+            req.user = { ...user, _id: user._id.toString() }
             return done(null, user)
           } catch (error) {
             return done(error, null)
@@ -92,11 +94,11 @@ class AuthService {
     const { _id, role, email } = req.user
     const refresh_token = await userServices.signRefreshToken(_id.toString(), email, role)
     // if user is logged in but still login again
-    await databaseService.refreshTokens.deleteOne({ user_id: _id })
+    await databaseService.refreshTokens.deleteOne({ user_id: new ObjectId(_id) })
     await databaseService.refreshTokens.insertOne(
       new RefreshToken({
         token: refresh_token,
-        user_id: _id
+        user_id: new ObjectId(_id)
       })
     )
 

@@ -18,7 +18,6 @@ const useCart = create<UserState>((set) => ({
       const existingProduct = prev.products.find(
         (item) => item._id === product._id
       );
-      console.log(product);
       if (existingProduct) {
         return {
           products: prev.products.map((item) =>
@@ -33,7 +32,6 @@ const useCart = create<UserState>((set) => ({
       const existingProduct = prev.products.find(
         (item) => item._id === product._id
       );
-      console.log(product);
       if (existingProduct) {
         return {
           products: prev.products

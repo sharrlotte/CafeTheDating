@@ -1,7 +1,7 @@
-import { pricy } from '../../lib/util';
-import Icons from '../../constants/icon';
-import useCart from '../../zustand/useCart';
-import { Button } from '../ui/button';
+import { pricy } from "../../lib/util";
+import Icons from "../../constants/icon";
+import useCart from "../../zustand/useCart";
+import { Button } from "../ui/button";
 
 function CardItems() {
 	const { products, removeProduct } = useCart();
@@ -75,42 +75,43 @@ function CardItems() {
 													return item.discount > 0 ? ((item.price * (100 - item.discount)) / 100) * item.count : item.price * item.count;
 												})
 
-												.reduce((prev, curr) => prev + curr, 0)
-										)}
-										vnd
-									</span>
-								</div>
-								<div className='flex justify-between'>
-									<span className=' font-bold'>Giảm giá</span>
-									<span>0vnd</span>
-								</div>
+                        .reduce((prev, curr) => prev + curr, 0)
+                    )}
+                  </span>
+                </div>
+                <div className="flex justify-between">
+                  <span className=" font-bold">Giảm giá</span>
+                  <span>0 vnd</span>
+                </div>
 
-								<div className='flex justify-between '>
-									<span className=' font-bold'>Phí vận chuyển</span>
-									<span>0vnd</span>
-								</div>
-								<div className='flex justify-between text-lg'>
-									<span className=' font-bold'> Tổng :</span>
-									<span>
-										{pricy(
-											products
-												.map((item) => {
-													return item.discount > 0 ? ((item.price * (100 - item.discount)) / 100) * item.count : item.price * item.count;
-												})
+                <div className="flex justify-between ">
+                  <span className=" font-bold">Phí vận chuyển</span>
+                  <span>0 vnd</span>
+                </div>
+                <div className="flex justify-between text-lg">
+                  <span className=" font-bold"> Tổng :</span>
+                  <span>
+                    {pricy(
+                      products
+                        .map((item) => {
+                          return item.discount > 0
+                            ? ((item.price * (100 - item.discount)) / 100) *
+                                item.count
+                            : item.price * item.count;
+                        })
 
-												.reduce((prev, curr) => prev + curr, 0)
-										)}
-										vnd
-									</span>
-								</div>
-							</div>
-							<div className='border'> </div>
-							<div className='flex justify-center'>
-								<Button className='border-2 rounded-3xl bg-[hsla(0,0%,97%,1)] text-black hover:bg-[hsla(26,87%,51%,1)] w-60 flex justify-between'>
-									Mã giảm giá
-									<Icons.ArrowRight />
-								</Button>
-							</div>
+                        .reduce((prev, curr) => prev + curr, 0)
+                    )}
+                  </span>
+                </div>
+              </div>
+              <div className="border"> </div>
+              <div className="flex justify-center">
+                <Button className="border-2 rounded-3xl bg-[hsla(0,0%,97%,1)] text-black hover:bg-[hsla(26,87%,51%,1)] w-60 flex justify-between">
+                  Mã giảm giá
+                  <Icons.ArrowRight />
+                </Button>
+              </div>
 
 							<div className='border '> </div>
 						</div>

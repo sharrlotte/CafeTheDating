@@ -17,5 +17,5 @@ export function pricy(price: number) {
     }
   }
 
-  return result;
+  return result + " vnd";
 }

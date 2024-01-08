@@ -1,18 +1,24 @@
 import { env } from '../config/env';
 import axios from 'axios';
+import Lock from '@/lib/lock';
+
+const lock = new Lock();
 
 const api = axios.create({ baseURL: env.backend_url });
 function createAxiosResponseInterceptor() {
-	const interceptor = axios.interceptors.response.use(
+	const interceptor = api.interceptors.response.use(
 		(response) => response,
-		(error) => {
-			if (error.response.status !== 401) {
+		async (error) => {
+			if (error.response.status !== 401 || error.config.url === '/users/refresh_token') {
 				return Promise.reject(error);
 			}
 
-			axios.interceptors.response.eject(interceptor);
+			lock.acquire();
+			await lock.await();
 
-			return axios
+			api.interceptors.response.eject(interceptor);
+
+			return api
 				.post('/users/refresh_token', {
 					refresh_token: localStorage.getItem('refresh_token'),
 				})
@@ -22,7 +28,7 @@ function createAxiosResponseInterceptor() {
 
 					error.response.config.headers['Authorization'] = 'Bearer ' + response.data.access_token;
 
-					return axios(error.response.config);
+					return api(error.response.config);
 				})
 				.catch((error2) => {
 					localStorage.removeItem('access_token');
@@ -30,7 +36,10 @@ function createAxiosResponseInterceptor() {
 
 					return Promise.reject(error2);
 				})
-				.finally(createAxiosResponseInterceptor);
+				.finally(() => {
+					lock.release();
+					createAxiosResponseInterceptor();
+				});
 		}
 	);
 }

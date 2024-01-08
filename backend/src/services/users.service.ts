@@ -118,7 +118,8 @@ class UserService {
         message: VALIDATION_MESSAGES.USER.COMMONS.USER_WITH_ID_IS_NOT_EXIST
       })
     }
-    return _.omit(user, 'password')
+
+    return _.omit(user, ['updated_at', 'created_at'])
   }
 }
 

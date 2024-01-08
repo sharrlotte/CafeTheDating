@@ -11,7 +11,7 @@ const productController = {
     res.status(StatusCodes.OK).json(result)
   },
   createProduct: async (req: Request<ParamsDictionary, any, CreateProductBody, ParsedUrlQuery>, res: Response, next: NextFunction) => {
-    const result = await productService.createProduct(req.body)
+    const result = await productService.createProduct(req.body, req.file)
     res.status(StatusCodes.OK).json(result)
   },
   updateProduct: async (req: Request<ParamsDictionary, any, CreateProductBody, ParsedUrlQuery>, res: Response, next: NextFunction) => {

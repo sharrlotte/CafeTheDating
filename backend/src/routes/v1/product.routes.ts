@@ -13,7 +13,7 @@ productRouter.get('/', getAllProductValidator, wrapRequestHandler(productControl
 
 productRouter.post('/:id/image', requireRoleMiddleware(UserRole.Admin), singleImageUpload, wrapRequestHandler(productController.uploadImage))
 
-productRouter.post('/', requireRoleMiddleware(UserRole.Admin), createProductValidator, wrapRequestHandler(productController.createProduct))
+productRouter.post('/', requireRoleMiddleware(UserRole.Admin), createProductValidator, singleImageUpload, wrapRequestHandler(productController.createProduct))
 
 productRouter.put('/:id', requireRoleMiddleware(UserRole.Admin), objectIdValidator, wrapRequestHandler(productController.updateProduct))
 

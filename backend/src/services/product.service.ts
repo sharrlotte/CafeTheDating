@@ -103,8 +103,10 @@ class ProductService {
     }
   }
 
-  async createProduct(payload: CreateProductBody) {
-    await databaseService.products.insertOne(new Product(payload))
+  async createProduct(payload: CreateProductBody, file: Express.Multer.File) {
+    const { url } = await cloudinaryService.uploadImage('product', file.buffer)
+
+    await databaseService.products.insertOne(new Product({ ...payload, image: url }))
   }
   async updateProduct(id: string, payload: UpdateProductBody) {
     await databaseService.products.updateOne(

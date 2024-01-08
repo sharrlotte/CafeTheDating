@@ -26,4 +26,3 @@ export enum UserRole {
   User = "User",
 }
 export default User;
-

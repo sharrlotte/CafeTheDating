@@ -1,5 +1,5 @@
 import { SignOptions } from 'jsonwebtoken'
-import { TokenType, UserRole } from '~/constants/enums'
+import { TokenType, UserRole } from '@/constants/enums'
 
 export type TokenPayloadType = {
   _id: string

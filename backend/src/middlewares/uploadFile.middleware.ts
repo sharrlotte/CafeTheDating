@@ -2,8 +2,8 @@ import { NextFunction, Request, Response } from 'express'
 import { StatusCodes } from 'http-status-codes'
 import multer from 'multer'
 import path from 'path'
-import { VALIDATION_MESSAGES } from '~/constants/message'
-import { ErrorWithStatus } from '~/models/errors/Errors.schema'
+import { VALIDATION_MESSAGES } from '@/constants/message'
+import { ErrorWithStatus } from '@/models/errors/Errors.schema'
 
 const uploadFile = multer({
   limits: {

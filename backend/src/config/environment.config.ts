@@ -10,6 +10,10 @@ const envSchema = Joi.object({
   NODE_ENV: Joi.string().valid('development', 'production', 'test').default('development'),
   DB_NAME: Joi.string().required(),
   DB_REFRESH_TOKEN_COLLECTION: Joi.string().required(),
+  DB_PRODUCT_COLLECTION: Joi.string().required(),
+  DB_STAR_COLLECTION: Joi.string().required(),
+  DB_LIKE_COLLECTION: Joi.string().required(),
+  DB_ORDER_COLLECTION: Joi.string().required(),
   MAIN_DATABASE_USERNAME: Joi.string().required(),
   MAIN_DATABASE_PASSWORD: Joi.string().required(),
   RATE_POINT: Joi.number().required(),
@@ -26,9 +30,6 @@ const envSchema = Joi.object({
   CLOUDINARY_SECRET: Joi.string().required(),
   CLOUDINARY_NAME: Joi.string().required(),
   CLOUDINARY_IMAGE_FOLDER: Joi.string().required(),
-  FACEBOOK_AUTH_CLIENT_ID: Joi.string().required(),
-  FACEBOOK_AUTH_CLIENT_SECRET: Joi.string().required(),
-  FACEBOOK_AUTH_CALLBACK_URL: Joi.string().required(),
   GOOGLE_AUTH_CLIENT_ID: Joi.string().required(),
   GOOGLE_AUTH_CLIENT_SECRET: Joi.string().required(),
   GOOGLE_AUTH_CALLBACK_URL: Joi.string().required(),
@@ -64,7 +65,11 @@ export const env = {
       name: envVars.DB_NAME,
       collection: {
         users: envVars.DB_USER_COLLECTION,
-        refresh_tokens: envVars.DB_REFRESH_TOKEN_COLLECTION
+        refresh_tokens: envVars.DB_REFRESH_TOKEN_COLLECTION,
+        product: envVars.DB_PRODUCT_COLLECTION,
+        star: envVars.DB_STAR_COLLECTION,
+        like: envVars.DB_LIKE_COLLECTION,
+        order: envVars.DB_ORDER_COLLECTION
       }
     }
   },

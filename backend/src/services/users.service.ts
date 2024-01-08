@@ -1,17 +1,18 @@
-import { signToken, verifyToken } from '~/utils/jwt'
-import { databaseService } from './connectDB.service'
-import { TokenType, UserRole } from '~/constants/enums'
-import { env } from '~/config/environment.config'
-import { RefreshTokenBody } from '~/models/requests/User.requests'
-import RefreshToken from '~/models/schemas/RefreshToken.schema'
+import { databaseService } from './database.service'
+import { TokenType, UserRole } from '@/constants/enums'
+import { env } from '@/config/environment.config'
+import { RefreshTokenBody } from '@/models/requests/User.requests'
+import RefreshToken from '@/models/schemas/RefreshToken.schema'
 import { ObjectId } from 'mongodb'
-import { PaginationType, ResultRefreshTokenType } from '~/@types/reponse.type'
-import User from '~/models/schemas/Users.schema'
-import { ErrorWithStatus } from '~/models/errors/Errors.schema'
+import { PaginationType, ResultRefreshTokenType } from '@/@types/reponse.type'
+import User from '@/models/schemas/Users.schema'
+import { ErrorWithStatus } from '@/models/errors/Errors.schema'
 import { StatusCodes } from 'http-status-codes'
-import { VALIDATION_MESSAGES } from '~/constants/message'
+import { VALIDATION_MESSAGES } from '@/constants/message'
 import { ParsedUrlQuery } from 'querystring'
 import _ from 'lodash'
+import { signToken } from '@/utils/jwt'
+import { verifyToken } from '@/utils/jwt'
 
 class UserService {
   async validateRefreshToken(refresh_token: string) {
@@ -117,7 +118,8 @@ class UserService {
         message: VALIDATION_MESSAGES.USER.COMMONS.USER_WITH_ID_IS_NOT_EXIST
       })
     }
-    return _.omit(user, 'password')
+
+    return _.omit(user, ['updated_at', 'created_at'])
   }
 }
 

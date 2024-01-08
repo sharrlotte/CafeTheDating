@@ -39,19 +39,6 @@ export const CLIENT_MESSAGE = {
   SECRET_COOKIE_NAME: 'Cookies_name when user login and register success and save local'
 } as const
 
-export const RESULT_RESPONSE_MESSAGES = {
-  AUTH_SUCCESS: {
-    LOGIN: 'Login successfully!',
-    LOGIN_GOOGLE: 'Login google successfully!',
-    LOGIN_FACEBOOK: 'Login facebook successfully!'
-  },
-  USER_SUCCESS: {
-    REFRESH_TOKEN: 'User refresh_token successfully!',
-    GET_ALL_USER: 'Get all users successfully!',
-    GET_USER: 'Get user successfully!'
-  }
-} as const
-
 export const VALIDATION_MESSAGES = {
   TITLE: 'Validation Error',
   PAGINATION: {

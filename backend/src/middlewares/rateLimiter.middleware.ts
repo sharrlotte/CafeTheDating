@@ -1,7 +1,7 @@
 import { Request, Response, NextFunction } from 'express'
 import { RateLimiterMemory } from 'rate-limiter-flexible'
-import { sendResponse } from '~/config/response.config'
-import { env } from '~/config/environment.config'
+import { sendResponse } from '@/config/response.config'
+import { env } from '@/config/environment.config'
 
 const rateLimiter = new RateLimiterMemory({
   keyPrefix: 'middleware',

@@ -1,8 +1,8 @@
 import { UploadApiResponse, v2 as cloudinary } from 'cloudinary'
 import { extractPublicId } from 'cloudinary-build-url'
-import { env } from '~/config/environment.config'
+import { env } from '@/config/environment.config'
 import streamifier from 'streamifier'
-import { ErrorWithStatus } from '~/models/errors/Errors.schema'
+import { ErrorWithStatus } from '@/models/errors/Errors.schema'
 import _ from 'lodash'
 
 cloudinary.config({

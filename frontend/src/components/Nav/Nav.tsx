@@ -30,7 +30,6 @@ const paths = [
 export default function Nav() {
 	const { user, logout } = useMe();
 
-
 	return (
 		<nav className='flex items-center justify-between md:justify-center  w-full  flex-wrap'>
 			<a
@@ -46,11 +45,11 @@ export default function Nav() {
 				{user ? (
 					<div>
 						<img
-							src={user.avatar?.value}
+							src={user.avatar}
 							alt='User Avatar'
 							className='w-12 h-12 rounded-full absolute top-12 right-14'
 						/>
-            <Button onClick={() => logout()}>Đăng xuất</Button>
+						<Button onClick={() => logout()}>Đăng xuất</Button>
 					</div>
 				) : (
 					<Button

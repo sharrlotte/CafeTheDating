@@ -6,53 +6,11 @@ import userServices from '@/services/users.service'
 import RefreshToken from '@/models/schemas/RefreshToken.schema'
 import { Request, Response } from 'express'
 import { AuthProvider } from '@/@types/auth.type'
-import { Strategy as FacebookStrategy } from 'passport-facebook'
 import { Strategy as GoogleStrategy } from 'passport-google-oauth20'
 import { ObjectId } from 'mongodb'
 
 class AuthService {
   init() {
-    passport.use(
-      new FacebookStrategy(
-        {
-          clientID: env.auth.facebook.client_id,
-          clientSecret: env.auth.facebook.client_secret,
-          callbackURL: env.auth.facebook.callback_url,
-          passReqToCallback: true
-        },
-        async function (req, accessToken, refreshToken, profile, done) {
-          try {
-            let user = await databaseService.users.findOne<User>({ provider: 'facebook', providerId: profile.id })
-            if (!user) {
-              const newUser = new User({
-                // @ts-ignore
-                email: profile.email,
-                username: profile.displayName,
-                provider: 'facebook',
-                avatar: profile.profileUrl,
-                providerId: profile.id
-              })
-              user = newUser
-              await databaseService.users.insertOne(newUser)
-              req.user = { ...newUser, _id: newUser._id.toString() }
-              return done(null, newUser)
-            }
-
-            await databaseService.users.updateOne(
-              { _id: user._id },
-              {
-                $set: { ...user }
-              }
-            )
-            req.user = { ...user, _id: user._id.toString() }
-            return done(null, user)
-          } catch (error) {
-            return done(error, null)
-          }
-        }
-      )
-    )
-
     passport.use(
       new GoogleStrategy(
         {
@@ -63,14 +21,14 @@ class AuthService {
         },
         async function (req, accessToken, refreshToken, profile, done) {
           try {
-            let user = await databaseService.users.findOne<User>({ provider: 'facebook', providerId: profile.id })
+            let user = await databaseService.users.findOne<User>({ provider: 'google', providerId: profile.id })
             if (!user) {
               const newUser = new User({
-                // @ts-ignore
+                avatar: profile._json.picture,
+                //@ts-ignore
                 email: profile.email,
                 username: profile.displayName,
-                avatar: profile.profileUrl,
-                provider: 'facebook',
+                provider: 'google',
                 providerId: profile.id
               })
               user = newUser
@@ -79,12 +37,14 @@ class AuthService {
               return done(null, newUser)
             }
 
-            const avatar = profile.profileUrl
+            const avatar = profile._json.picture
+
+            user = { ...user, avatar }
 
             await databaseService.users.updateOne(
               { _id: user._id },
               {
-                $set: { ...user, avatar }
+                $set: user
               }
             )
             req.user = { ...user, _id: user._id.toString() }

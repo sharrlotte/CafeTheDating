@@ -108,7 +108,7 @@ class ProductService {
 
     await databaseService.products.insertOne(new Product({ ...payload, image: url }))
   }
-  async updateProduct(id: string, payload: UpdateProductBody) {
+async updateProduct(id: string, payload: UpdateProductBody) {
     await databaseService.products.updateOne(
       { _id: new ObjectId(id) },
       {

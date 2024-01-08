@@ -28,20 +28,23 @@ const paths = [
 ];
 
 export default function Nav() {
-  const me = useMe((state) => state.user);
+  const { user, logout } = useMe();
 
   return (
-    <nav className="flex items-center justify-between md:justify-center  w-full  flex-wrap">
-      <a className="w-28  md:absolute  md:top-4 md:left-10" href="/home">
+    <nav className="flex items-center justify-between md:justify-center  w-full  flex-wrap \">
+      <a className="w-28  md:absolute  md:top-4 md:left-10 z-50 " href="/home">
         <img src="/img/Logo.svg" alt="TheDating"></img>
       </a>
       <div>
-        {me ? (
-          <img
-            src={me.avatar?.value}
-            alt="User Avatar"
-            className="w-12 h-12 rounded-full absolute top-12 right-14"
-          />
+        {user ? (
+          <div>
+            <img
+              src={user.avatar}
+              alt="User Avatar"
+              className="w-12 h-12 rounded-full absolute top-12 right-14"
+            />
+            <Button onClick={() => logout()}>Đăng xuất</Button>
+          </div>
         ) : (
           <Button
             className="bg-[hsla(126,100%,24%,1)] rounded-full text-white w-24 h-14 top-12 right-14 md:absolute"
@@ -60,12 +63,13 @@ export default function Nav() {
         {paths.map((item, index) => (
           <Link
             key={index}
-            className=" group hover:text-[hsla(29,90%,58%,1)]"
+            className="group hover:text-[hsla(29,90%,58%,1)] relative flex justify-center items-center"
             to={item.path}
           >
             {item.name}
-            <Icons.Arrow className="opacity-0 group-hover:opacity-100 absolute w-4 translate-x-1/2 transition-opacity duration-200" />
-            <div className="top-12  right-12 absolute "></div>
+            <div className="opacity-0 group-hover:opacity-100 absolute translate-y-[20px] transition-opacity duration-500">
+              <Icons.Arrow className="w-5" />
+            </div>
           </Link>
         ))}
       </div>

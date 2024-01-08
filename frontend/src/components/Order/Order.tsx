@@ -110,8 +110,9 @@ export default function Order() {
           </Select>
         </div>
       </div>
-
-      <OrderItem filter={filter} />
+      <div className="md:hidden">
+        <OrderItem filter={filter} />
+      </div>
     </>
   );
 }

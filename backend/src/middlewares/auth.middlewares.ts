@@ -22,19 +22,20 @@ export const authMiddleware = async (req: Request, res: Response, next: NextFunc
   }
 
   const access_token = tokens[1]
-  const user = (await verifyToken({
+  const user = await verifyToken({
     token: access_token,
     secretOrPublicKey: env.jwt.secret_key
-  })) as AuthUser
+  })
 
-  req.user = user
+  req.user = user as AuthUser
   return next()
 }
 
 export const requireLoginMiddleware = () => {
-  return async (req: Request, res: Response, next: NextFunction) => {
-    try {
-      await authMiddleware(req, res, async () => {
+  return [
+    authMiddleware,
+    (req: Request, res: Response, next: NextFunction) => {
+      try {
         if (!req.user) {
           throw new ErrorWithStatus({
             statusCode: StatusCodes.UNAUTHORIZED,
@@ -42,17 +43,18 @@ export const requireLoginMiddleware = () => {
           })
         }
         return next()
-      })
-    } catch (error) {
-      next(error)
+      } catch (error) {
+        return next(error)
+      }
     }
-  }
+  ]
 }
 
 export const requireRoleMiddleware = (...roles: UserRole[]) => {
-  return async (req: Request, res: Response, next: NextFunction) => {
-    try {
-      await authMiddleware(req, res, async () => {
+  return [
+    authMiddleware,
+    async (req: Request, res: Response, next: NextFunction) => {
+      try {
         if (!req.user || !roles.includes(req.user.role)) {
           throw new ErrorWithStatus({
             statusCode: StatusCodes.UNAUTHORIZED,
@@ -60,9 +62,9 @@ export const requireRoleMiddleware = (...roles: UserRole[]) => {
           })
         }
         return next()
-      })
-    } catch (error) {
-      next(error)
+      } catch (error) {
+        return next(error)
+      }
     }
-  }
+  ]
 }

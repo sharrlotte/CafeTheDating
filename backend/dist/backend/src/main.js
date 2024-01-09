@@ -76,7 +76,7 @@ app.use((req, res, next) => {
 app.disable("etag");
 import_database.databaseService.connect();
 app.use(import_errors.defaultErrorHandler);
-httpServer.listen(import_environment.env.server.port, import_environment.env.server.host, () => {
+httpServer.listen(import_environment.env.server.port, "0.0.0.0", () => {
   console.log(`\u{1F680} Server Running On Port ${import_environment.env.server.port}`);
 });
 (0, import_async_exit_hook.default)(() => {

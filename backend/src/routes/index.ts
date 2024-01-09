@@ -11,4 +11,8 @@ rootRouter.use('/auth', authRouter)
 rootRouter.use('/products', productRouter)
 rootRouter.use('/orders', orderRouter)
 
+rootRouter.get('/health', (req, res) => {
+  res.status(200).send('Healthy')
+})
+
 export default rootRouter

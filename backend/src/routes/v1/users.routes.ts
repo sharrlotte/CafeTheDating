@@ -33,6 +33,6 @@ userRouter.get('/', requireRoleMiddleware(UserRole.Admin), paginationValidator, 
  * Header: { Authorization: Bearer <access_token> }
  */
 
-userRouter.get('/@me/profile', requireLoginMiddleware(), wrapRequestHandler(userController.getMe))
+userRouter.get('/@me/profile', requireLoginMiddleware, wrapRequestHandler(userController.getMe))
 
 export default userRouter

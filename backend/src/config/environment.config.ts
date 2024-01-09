@@ -1,10 +1,7 @@
 import dotenv from 'dotenv'
 import Joi from 'joi'
 
-if (process.env.NODE_ENV !== 'production')
-{
-    dotenv.config()
-}
+dotenv.config()
 
 // Validation schema env
 const envSchema = Joi.object({

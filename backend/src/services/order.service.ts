@@ -29,7 +29,7 @@ class OrderService {
   }
   async createOrder(user: AuthUser, payload: CreateOrderBody) {
     console.log(payload)
-    const orders = payload.orders.map(async ({ size, amount, product_id }) => {
+    const orders = payload.orders.map(async ({ amount, product_id }) => {
       const { price, discount } = await databaseService.products.findOne({ _id: new ObjectId(product_id) })
 
       return new Order({
@@ -39,8 +39,7 @@ class OrderService {
         amount,
         product_id: new ObjectId(product_id),
         user_id: new ObjectId(user._id),
-        state: 'pending',
-        size
+        state: 'pending'
       })
     })
 

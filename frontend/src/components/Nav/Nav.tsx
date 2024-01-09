@@ -53,7 +53,7 @@ export default function Nav() {
           </div>
         ) : (
           <Button
-            className="bg-[hsla(126,100%,24%,1)] rounded-full text-white w-24 h-14 top-12 right-14 sm:absolute"
+            className="bg-[hsla(126,100%,24%,1)] rounded-full hover:bg-gray-400 text-white w-24 h-14 top-12 right-14 sm:absolute"
             asChild
           >
             <Link

@@ -24,8 +24,6 @@ const envSchema = Joi.object({
   ACCESS_TOKEN_EXPIRESIN: Joi.string().required(),
   REFRESH_TOKEN_EXPIRESIN: Joi.string().required(),
   JWT_ALGORITHM: Joi.string().required(),
-  COOKIES_EXPIRESIN: Joi.number().required(),
-  SECRET_COOKIE_NAME: Joi.string().required(),
   CLOUDINARY_KEY: Joi.string().required(),
   CLOUDINARY_SECRET: Joi.string().required(),
   CLOUDINARY_NAME: Joi.string().required(),
@@ -84,11 +82,6 @@ export const env = {
     max_items: 20
   },
   auth: {
-    facebook: {
-      client_id: envVars.FACEBOOK_AUTH_CLIENT_ID,
-      client_secret: envVars.FACEBOOK_AUTH_CLIENT_SECRET,
-      callback_url: envVars.FACEBOOK_AUTH_CALLBACK_URL
-    },
     google: {
       client_id: envVars.GOOGLE_AUTH_CLIENT_ID,
       client_secret: envVars.GOOGLE_AUTH_CLIENT_SECRET,

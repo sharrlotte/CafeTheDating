@@ -34,7 +34,7 @@ var import_order = __toESM(require("@/services/order.service"));
 var import_http_status_codes = require("http-status-codes");
 const orderController = {
   getAllOrderByUser: async (req, res, next) => {
-    const result = await import_order.default.getAllOrderByUser(req.query);
+    const result = await import_order.default.getAllOrderByUser(req.query, req.user._id);
     return res.status(import_http_status_codes.StatusCodes.OK).json(result);
   },
   createOrder: async (req, res, next) => {

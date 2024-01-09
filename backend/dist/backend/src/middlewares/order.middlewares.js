@@ -52,29 +52,9 @@ const getAllOrderValidator = (0, import_validate.default)(
         optional: true,
         custom: {
           options: (value) => {
-            if (!import_Order.orderStates.includes(value)) {
+            if (![import_Order.orderStates].includes(value)) {
               throw new import_Errors.ErrorWithStatus({
                 message: "Invalid order state",
-                statusCode: import_http_status_codes.StatusCodes.BAD_REQUEST
-              });
-            }
-            return true;
-          }
-        }
-      },
-      user_id: {
-        trim: true,
-        isString: {
-          errorMessage: "User id must be a string"
-        },
-        optional: true,
-        custom: {
-          options: (value) => {
-            (0, import_commons.validateObjectId)(value);
-            const user = import_database.databaseService.users.findOne({ _id: new import_mongodb.ObjectId(value) });
-            if (!Boolean(user)) {
-              throw new import_Errors.ErrorWithStatus({
-                message: "Invalid user id, user not found",
                 statusCode: import_http_status_codes.StatusCodes.BAD_REQUEST
               });
             }
@@ -134,14 +114,21 @@ const createOrderValidator = (0, import_validate.default)(
       },
       orders: {
         isArray: {
-          errorMessage: "Orders must be an array"
-        }
+          errorMessage: "Orders must be an array",
+          options: {
+            min: 1
+          }
+        },
+        toArray: true
       },
-      "order_.product_id": {
+      "orders.*.product_id": {
+        trim: true,
+        isString: true,
         custom: {
-          options: (value) => {
+          options: async (value) => {
+            console.log(value);
             (0, import_commons.validateObjectId)(value);
-            var product = import_database.databaseService.products.findOne({ _id: new import_mongodb.ObjectId(value) });
+            var product = await import_database.databaseService.products.findOne({ _id: new import_mongodb.ObjectId(value) });
             if (!product) {
               throw new import_Errors.ErrorWithStatus({
                 message: "Product not found for id: " + value,
@@ -152,7 +139,7 @@ const createOrderValidator = (0, import_validate.default)(
           }
         }
       },
-      "order_.amount": {
+      "orders.*.amount": {
         isInt: {
           options: {
             min: 1

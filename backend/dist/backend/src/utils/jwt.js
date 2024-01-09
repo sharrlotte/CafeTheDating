@@ -32,11 +32,13 @@ __export(jwt_exports, {
 });
 module.exports = __toCommonJS(jwt_exports);
 var import_jsonwebtoken = __toESM(require("jsonwebtoken"));
+var import_Errors = require("@/models/errors/Errors.schema");
+var import_http_status_codes = require("http-status-codes");
 const signToken = ({ payload, privateKey, options }) => {
   return new Promise((resolve, reject) => {
     import_jsonwebtoken.default.sign(payload, privateKey, options, (err, token) => {
       if (err) {
-        reject(err);
+        reject(new import_Errors.ErrorWithStatus({ message: err.message, statusCode: import_http_status_codes.StatusCodes.UNAUTHORIZED }));
       }
       resolve(token);
     });
@@ -46,7 +48,7 @@ const verifyToken = ({ token, secretOrPublicKey }) => {
   return new Promise((resolve, reject) => {
     import_jsonwebtoken.default.verify(token, secretOrPublicKey, function(err, decoded) {
       if (err) {
-        throw reject(err);
+        reject(new import_Errors.ErrorWithStatus({ message: err.message, statusCode: import_http_status_codes.StatusCodes.UNAUTHORIZED }));
       }
       resolve(decoded);
     });

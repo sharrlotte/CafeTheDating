@@ -51,39 +51,33 @@ const authMiddleware = async (req, res, next) => {
     return next(error);
   }
 };
-const requireLoginMiddleware = () => {
-  return [
-    authMiddleware,
-    (req, res, next) => {
-      try {
-        if (!req.user) {
-          throw new import_Errors.ErrorWithStatus({
-            statusCode: import_http_status_codes.StatusCodes.UNAUTHORIZED,
-            message: import_message.VALIDATION_MESSAGES.USER.COMMONS.USER_NOT_LOGIN
-          });
-        }
-        return next();
-      } catch (error) {
-        return next(error);
-      }
+const requireLoginMiddleware = [
+  authMiddleware,
+  (req, res, next) => {
+    if (!req.user) {
+      return next(
+        new import_Errors.ErrorWithStatus({
+          statusCode: import_http_status_codes.StatusCodes.UNAUTHORIZED,
+          message: import_message.VALIDATION_MESSAGES.USER.COMMONS.USER_NOT_LOGIN
+        })
+      );
     }
-  ];
-};
+    return next();
+  }
+];
 const requireRoleMiddleware = (...roles) => {
   return [
     authMiddleware,
     async (req, res, next) => {
-      try {
-        if (!req.user || !roles.includes(req.user.role)) {
-          throw new import_Errors.ErrorWithStatus({
+      if (!req.user || !roles.includes(req.user.role)) {
+        return next(
+          new import_Errors.ErrorWithStatus({
             statusCode: import_http_status_codes.StatusCodes.UNAUTHORIZED,
             message: import_message.VALIDATION_MESSAGES.USER.COMMONS.USER_NOT_LOGIN
-          });
-        }
-        return next();
-      } catch (error) {
-        return next(error);
+          })
+        );
       }
+      return next();
     }
   ];
 };

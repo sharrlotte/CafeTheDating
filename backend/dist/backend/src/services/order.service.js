@@ -34,10 +34,9 @@ var import_Order = __toESM(require("@/models/schemas/Order.schema"));
 var import_database = require("@/services/database.service");
 var import_mongodb = require("mongodb");
 class OrderService {
-  async getAllOrderByUser(query) {
+  async getAllOrderByUser(query, userId) {
     const state = query.state;
-    const userId = query.user_id;
-    if (state) {
+    if (state && state !== "all") {
       return await import_database.databaseService.orders.find({ state, user_id: new import_mongodb.ObjectId(userId) }).toArray();
     }
     return await import_database.databaseService.orders.find({ user_id: new import_mongodb.ObjectId(userId) }).toArray();
@@ -55,7 +54,8 @@ class OrderService {
     );
   }
   async createOrder(user, payload) {
-    const orders = payload.orders.map(async ({ size, amount, product_id }) => {
+    console.log(payload);
+    const orders = payload.orders.map(async ({ amount, product_id }) => {
       const { price, discount } = await import_database.databaseService.products.findOne({ _id: new import_mongodb.ObjectId(product_id) });
       return new import_Order.default({
         address: payload.address,
@@ -64,8 +64,7 @@ class OrderService {
         amount,
         product_id: new import_mongodb.ObjectId(product_id),
         user_id: new import_mongodb.ObjectId(user._id),
-        state: "pending",
-        size
+        state: "pending"
       });
     });
     return await import_database.databaseService.orders.insertMany(await Promise.all(orders));

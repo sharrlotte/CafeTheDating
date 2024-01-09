@@ -15,8 +15,8 @@ RUN addgroup --system backend && \
           adduser --system -G backend backend
 
 COPY dist/backend backend
+COPY /etc/secrets/.env /app/backend/.env
 RUN chown -R backend:backend .
-RUN --mount=type=secret,id=_env,dst=/app/backend/.env cat /app/backend/.env
 
 # You can remove this install step if you build with `--bundle` option.
 # The bundled output will include external dependencies.

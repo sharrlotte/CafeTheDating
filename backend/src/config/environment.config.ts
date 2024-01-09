@@ -6,7 +6,6 @@ dotenv.config()
 // Validation schema env
 const envSchema = Joi.object({
   APP_PORT: Joi.number().required(),
-  APP_HOST: Joi.string().required(),
   NODE_ENV: Joi.string().valid('development', 'production', 'test').default('development'),
   DB_NAME: Joi.string().required(),
   DB_REFRESH_TOKEN_COLLECTION: Joi.string().required(),

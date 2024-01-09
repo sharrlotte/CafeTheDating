@@ -28,6 +28,7 @@ class OrderService {
     )
   }
   async createOrder(user: AuthUser, payload: CreateOrderBody) {
+    console.log(payload)
     const orders = payload.orders.map(async ({ size, amount, product_id }) => {
       const { price, discount } = await databaseService.products.findOne({ _id: new ObjectId(product_id) })
 

@@ -5,10 +5,10 @@ import { Button } from "../ui/button";
 import { createOrder } from "@/query/orders";
 
 function CardItems() {
-  const { products, removeProduct } = useCart();
+  const { products, removeProduct, clear } = useCart();
   function handleOrder() {
     createOrder(products);
-    
+    clear();
   }
   return (
     <>

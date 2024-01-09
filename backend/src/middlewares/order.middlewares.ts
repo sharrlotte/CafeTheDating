@@ -82,11 +82,15 @@ export const createOrderValidator = validate(
       },
       orders: {
         isArray: {
-          errorMessage: 'Orders must be an array'
+          errorMessage: 'Orders must be an array',
+          bail: true,
+          options: {
+            min: 0
+          }
         },
         toArray: true
       },
-      'order_.product_id': {
+      'orders.*.product_id': {
         custom: {
           options: (value) => {
             validateObjectId(value)
@@ -103,7 +107,7 @@ export const createOrderValidator = validate(
           }
         }
       },
-      'order_.amount': {
+      'orders.*.amount': {
         isInt: {
           options: {
             min: 1

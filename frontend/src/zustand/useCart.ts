@@ -47,12 +47,13 @@ const useCart = create<CardState>((set) => {
         const existingProduct = prev.products.find(
           (item) => item._id === product._id
         );
+
         if (existingProduct) {
           const updatedCart = {
             products: prev.products
               .map((item) =>
                 item._id === product._id
-                  ? { ...item, count: item.amount - 1 }
+                  ? { ...item, amount: item.amount - 1 }
                   : item
               )
               .filter((item) => item.amount > 0),
@@ -68,7 +69,7 @@ const useCart = create<CardState>((set) => {
         localStorage.setItem("cart", JSON.stringify(updatedCart));
         return updatedCart;
       }),
-    clear: () => set((prev) => ({ products: [] })),
+    clear: () => set((prev) => ({ ...prev, products: [] })),
   };
 });
 

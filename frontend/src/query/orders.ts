@@ -7,9 +7,9 @@ async function createOrder(orders: CardItem[]) {
   const form = new FormData();
 
   form.append("orders", JSON.stringify(orders));
-  form.append("address", "");
+  form.append("address", "123");
 
-  return await api.post("/orders", orders);
+  return await api.post("/orders", form);
 }
 const getOrders = async (
   state: OrderState,
@@ -17,6 +17,7 @@ const getOrders = async (
 ): Promise<Order[]> => {
   return api
     .get("/orders", { params: { state, user_id } })
-    .then((result) => result.data);
+    .then((result) => result.data)
+    .catch((error) => console.error(error));
 };
 export { getOrders, createOrder };

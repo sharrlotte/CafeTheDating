@@ -35,40 +35,34 @@ export const authMiddleware = async (req: Request, res: Response, next: NextFunc
   }
 }
 
-export const requireLoginMiddleware = () => {
-  return [
-    authMiddleware,
-    (req: Request, res: Response, next: NextFunction) => {
-      try {
-        if (!req.user) {
-          throw new ErrorWithStatus({
-            statusCode: StatusCodes.UNAUTHORIZED,
-            message: VALIDATION_MESSAGES.USER.COMMONS.USER_NOT_LOGIN
-          })
-        }
-        return next()
-      } catch (error) {
-        return next(error)
-      }
+export const requireLoginMiddleware = [
+  authMiddleware,
+  (req: Request, res: Response, next: NextFunction) => {
+    if (!req.user) {
+      return next(
+        new ErrorWithStatus({
+          statusCode: StatusCodes.UNAUTHORIZED,
+          message: VALIDATION_MESSAGES.USER.COMMONS.USER_NOT_LOGIN
+        })
+      )
     }
-  ]
-}
+    return next()
+  }
+]
 
 export const requireRoleMiddleware = (...roles: UserRole[]) => {
   return [
     authMiddleware,
     async (req: Request, res: Response, next: NextFunction) => {
-      try {
-        if (!req.user || !roles.includes(req.user.role)) {
-          throw new ErrorWithStatus({
+      if (!req.user || !roles.includes(req.user.role)) {
+        return next(
+          new ErrorWithStatus({
             statusCode: StatusCodes.UNAUTHORIZED,
             message: VALIDATION_MESSAGES.USER.COMMONS.USER_NOT_LOGIN
           })
-        }
-        return next()
-      } catch (error) {
-        return next(error)
+        )
       }
+      return next()
     }
   ]
 }

@@ -1,6 +1,7 @@
 import { UserRole } from '@/constants/enums'
 import orderController from '@/controllers/order.controller'
 import { requireLoginMiddleware, requireRoleMiddleware } from '@/middlewares/auth.middlewares'
+import { createOrderValidator } from '@/middlewares/order.middlewares'
 import { wrapRequestHandler } from '@/utils/handler'
 import { Router } from 'express'
 
@@ -8,7 +9,7 @@ const orderRouter = Router()
 
 orderRouter.get('/', requireLoginMiddleware, wrapRequestHandler(orderController.getAllOrderByUser))
 
-orderRouter.post('/', requireLoginMiddleware, wrapRequestHandler(orderController.createOrder))
+orderRouter.post('/', requireLoginMiddleware, createOrderValidator, wrapRequestHandler(orderController.createOrder))
 
 orderRouter.put('/:id', requireRoleMiddleware(UserRole.Admin), wrapRequestHandler(orderController.updateOrder))
 

@@ -11,7 +11,7 @@ ENV PORT=3000
 
 WORKDIR /app
 
-RUN ls /
+RUN ls /etc/secrets
 
 RUN addgroup --system backend && \
           adduser --system -G backend backend

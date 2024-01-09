@@ -4,5 +4,5 @@ type OrderCardProps = {
   order: Order;
 };
 export default function OrderCard({ order }: OrderCardProps) {
-  return <div>OrtherCard</div>;
+  return <div>{JSON.stringify(order)}</div>;
 }

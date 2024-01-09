@@ -26,7 +26,6 @@ export type CreateOrderBody = {
   orders: Array<{
     product_id: string
     amount: number
-    size: string
   }>
   address: string
 }

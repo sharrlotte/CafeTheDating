@@ -18,7 +18,7 @@ export const getAllOrderValidator = validate(
         optional: true,
         custom: {
           options: (value) => {
-            if (!orderStates.includes(value)) {
+            if (![orderStates].includes(value)) {
               throw new ErrorWithStatus({
                 message: 'Invalid order state',
                 statusCode: StatusCodes.BAD_REQUEST
@@ -83,19 +83,21 @@ export const createOrderValidator = validate(
       orders: {
         isArray: {
           errorMessage: 'Orders must be an array',
-          bail: true,
           options: {
-            min: 0
+            min: 1
           }
         },
         toArray: true
       },
       'orders.*.product_id': {
+        trim: true,
+        isString: true,
         custom: {
-          options: (value) => {
+          options: async (value) => {
+            console.log(value)
             validateObjectId(value)
 
-            var product = databaseService.products.findOne({ _id: new ObjectId(value) })
+            var product = await databaseService.products.findOne({ _id: new ObjectId(value) })
 
             if (!product) {
               throw new ErrorWithStatus({

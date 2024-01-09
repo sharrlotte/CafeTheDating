@@ -14,6 +14,7 @@ WORKDIR /app
 RUN addgroup --system backend && \
           adduser --system -G backend backend
 
+COPY dist/backend backend
 RUN chown -R backend:backend .
 
 # You can remove this install step if you build with `--bundle` option.

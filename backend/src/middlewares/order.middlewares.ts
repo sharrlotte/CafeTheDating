@@ -27,28 +27,6 @@ export const getAllOrderValidator = validate(
             return true
           }
         }
-      },
-      user_id: {
-        trim: true,
-        isString: {
-          errorMessage: 'User id must be a string'
-        },
-        optional: true,
-        custom: {
-          options: (value) => {
-            validateObjectId(value)
-
-            const user = databaseService.users.findOne({ _id: new ObjectId(value) })
-            if (!Boolean(user)) {
-              throw new ErrorWithStatus({
-                message: 'Invalid user id, user not found',
-                statusCode: StatusCodes.BAD_REQUEST
-              })
-            }
-
-            return true
-          }
-        }
       }
     },
     ['query']

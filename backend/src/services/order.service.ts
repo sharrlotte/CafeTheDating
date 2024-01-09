@@ -6,9 +6,8 @@ import { ObjectId } from 'mongodb'
 import { ParsedUrlQuery } from 'querystring'
 
 class OrderService {
-  async getAllOrderByUser(query: ParsedUrlQuery) {
+  async getAllOrderByUser(query: ParsedUrlQuery, userId: string) {
     const state = query.state as OrderState | undefined
-    const userId = query.user_id as string
 
     if (state) {
       return await databaseService.orders.find({ state: state, user_id: new ObjectId(userId) }).toArray()

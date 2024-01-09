@@ -77,7 +77,7 @@ export default function Order() {
 
             <SelectContent className="w-[180px] rounded-lg p-2 bg-slate-200  mt-1">
               <SelectGroup>
-                <SelectItem  key={"all"} value={"all"}>
+                <SelectItem key={"all"} value={"all"}>
                   Tất cả
                 </SelectItem>
 

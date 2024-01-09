@@ -57,7 +57,7 @@ app.use((req: Request, res: Response, next: NextFunction) => {
 app.disable('etag')
 databaseService.connect()
 app.use(defaultErrorHandler)
-httpServer.listen(env.server.port, () => {
+httpServer.listen(env.server.port, '0.0.0.0', () => {
   console.log(`🚀 Server Running On Port ${env.server.port}`)
 })
 

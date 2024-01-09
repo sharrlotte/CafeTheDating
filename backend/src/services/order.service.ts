@@ -7,9 +7,9 @@ import { ParsedUrlQuery } from 'querystring'
 
 class OrderService {
   async getAllOrderByUser(query: ParsedUrlQuery, userId: string) {
-    const state = query.state as OrderState | undefined
+    const state = query.state as (OrderState & 'all') | undefined
 
-    if (state) {
+    if (state && state !== 'all') {
       return await databaseService.orders.find({ state: state, user_id: new ObjectId(userId) }).toArray()
     }
     return await databaseService.orders.find({ user_id: new ObjectId(userId) }).toArray()

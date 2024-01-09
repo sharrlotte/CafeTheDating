@@ -18,7 +18,7 @@ export const getAllOrderValidator = validate(
         optional: true,
         custom: {
           options: (value) => {
-            if (!orderStates.includes(value)) {
+            if (![orderStates].includes(value)) {
               throw new ErrorWithStatus({
                 message: 'Invalid order state',
                 statusCode: StatusCodes.BAD_REQUEST

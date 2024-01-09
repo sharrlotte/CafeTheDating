@@ -40,5 +40,5 @@ var import_handler = require("@/utils/handler");
 const userRouter = (0, import_express.Router)();
 userRouter.post("/refresh-token", import_users2.refreshTokenValidator, (0, import_handler.wrapRequestHandler)(import_users.default.refreshToken));
 userRouter.get("/", (0, import_auth.requireRoleMiddleware)(import_enums.UserRole.Admin), import_commons.paginationValidator, import_users2.getAllUserValidator, (0, import_handler.wrapRequestHandler)(import_users.default.getAllUser));
-userRouter.get("/@me/profile", (0, import_auth.requireLoginMiddleware)(), (0, import_handler.wrapRequestHandler)(import_users.default.getMe));
+userRouter.get("/@me/profile", import_auth.requireLoginMiddleware, (0, import_handler.wrapRequestHandler)(import_users.default.getMe));
 var users_routes_default = userRouter;

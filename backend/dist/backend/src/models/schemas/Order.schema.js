@@ -29,7 +29,6 @@ class Order {
   product_id;
   amount;
   address;
-  size;
   user_id;
   state;
   created_at;
@@ -41,7 +40,6 @@ class Order {
     this.discount = order.discount;
     this.product_id = order.product_id;
     this.amount = order.amount;
-    this.size = order.size;
     this.address = order.address;
     this.user_id = order.user_id;
     this.created_at = order.created_at || /* @__PURE__ */ new Date();

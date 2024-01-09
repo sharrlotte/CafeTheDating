@@ -83,7 +83,8 @@ export const createOrderValidator = validate(
       orders: {
         isArray: {
           errorMessage: 'Orders must be an array'
-        }
+        },
+        toArray: true
       },
       'order_.product_id': {
         custom: {

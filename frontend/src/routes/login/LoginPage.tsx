@@ -9,7 +9,7 @@ export default function LoginPage() {
       <div className=" w-full md:w-5/6 bg-white shadow-2xl rounded-[34px] h-screen flex relative">
         <div className=" md:p-24  flex-col flex gap-4 z-10 w-full md:w-1/2 relative justify-center items-center">
           <div className=" flex flex-col  items-center justify-center gap-8 ">
-            <span className="text-4xl font-bold text-center">Log In</span>
+            <span className="text-4xl font-bold text-center">Đăng Nhập</span>
 
             <Button
               asChild

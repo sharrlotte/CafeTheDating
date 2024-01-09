@@ -14,9 +14,10 @@ export default function Search() {
           placeholder="Tìm kiếm"
         />
       </div>
-      <Button className="bg-[hsla(126,100%,24%,0.69)] rounded-full w-32 hover:bg-orange-500">
+      <Button className="bg-[hsla(126,100%,24%,0.69)] hover:bg-orange-500 rounded-full w-32 ">
         Tìm Kiếm
       </Button>
     </div>
   );
 }
+

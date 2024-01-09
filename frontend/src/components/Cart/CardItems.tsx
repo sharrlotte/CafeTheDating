@@ -2,10 +2,14 @@ import { pricy } from "../../lib/util";
 import Icons from "../../constants/icon";
 import useCart from "../../zustand/useCart";
 import { Button } from "../ui/button";
+import { createOrder } from "@/query/orders";
 
 function CardItems() {
   const { products, removeProduct } = useCart();
-
+  function handleOrder() {
+    createOrder(products);
+    
+  }
   return (
     <>
       <div className="p-4 flex w-full flex-row">
@@ -26,8 +30,8 @@ function CardItems() {
                     className="relative group overflow-hidden border rounded-lg shadow-md"
                   >
                     <div className="p-4 bg-white flex flex-col relative">
-                      {product.count > 1 && (
-                        <span className="absolute top-4 left-1 bg-orange-400 text-white rounded-full aspect-square  p-2">{`${product.count}x`}</span>
+                      {product.amount > 1 && (
+                        <span className="absolute top-4 left-1 bg-orange-400 text-white rounded-full aspect-square  p-2">{`${product.amount}x`}</span>
                       )}
                       <span className="text-green-700 font-bold mb-2 text-xl	">
                         {pricy(
@@ -79,8 +83,8 @@ function CardItems() {
                         .map((item) => {
                           return item.discount > 0
                             ? ((item.price * (100 - item.discount)) / 100) *
-                                item.count
-                            : item.price * item.count;
+                                item.amount
+                            : item.price * item.amount;
                         })
 
                         .reduce((prev, curr) => prev + curr, 0)
@@ -104,8 +108,8 @@ function CardItems() {
                         .map((item) => {
                           return item.discount > 0
                             ? ((item.price * (100 - item.discount)) / 100) *
-                                item.count
-                            : item.price * item.count;
+                                item.amount
+                            : item.price * item.amount;
                         })
 
                         .reduce((prev, curr) => prev + curr, 0)
@@ -121,8 +125,11 @@ function CardItems() {
                 </Button>
               </div>
               <div className="flex justify-center">
-                <Button className="bg-[hsla(26,87%,51%,1)] hover:bg-orange-600	  rounded-3xl w-60 flex justify-center ">
-                  <span>Giỏ hàng</span>
+                <Button
+                  onClick={() => handleOrder()}
+                  className="bg-[hsla(26,87%,51%,1)] hover:bg-orange-600	  rounded-3xl w-60 flex justify-center "
+                >
+                  <span>Đặt hàng</span>
                 </Button>
               </div>
               <div className="border "> </div>

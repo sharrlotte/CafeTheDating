@@ -17,15 +17,18 @@ class OrderService {
       orders = await databaseService.orders.find({ user_id: new ObjectId(userId) }).toArray()
     }
 
-    return orders.map(async (item) => {
+    const items = orders.map(async (item) => {
       const product = await databaseService.products.findOne({ _id: new ObjectId(item.product_id) })
 
       if (!product) {
         throw new Error('Order product not found')
       }
 
-      return (item.product_name = product.name)
+      item.product_name = product.name
+      return item
     })
+
+    return Promise.all(items)
   }
 
   async updateOrder(id: string, state: OrderState) {

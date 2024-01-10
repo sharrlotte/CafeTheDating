@@ -12,7 +12,10 @@ class OrderService {
     let orders: Order[]
 
     if (state && state !== 'all') {
-      orders = await databaseService.orders.find({ state: state, user_id: new ObjectId(userId) }).toArray()
+      orders = await databaseService.orders
+        .find({ state: state, user_id: new ObjectId(userId) })
+        .sort('created_at', 'desc')
+        .toArray()
     } else {
       orders = await databaseService.orders.find({ user_id: new ObjectId(userId) }).toArray()
     }

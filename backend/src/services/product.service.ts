@@ -108,7 +108,7 @@ class ProductService {
 
     await databaseService.products.insertOne(new Product({ ...payload, image: url }))
   }
-async updateProduct(id: string, payload: UpdateProductBody) {
+  async updateProduct(id: string, payload: UpdateProductBody) {
     await databaseService.products.updateOne(
       { _id: new ObjectId(id) },
       {
@@ -121,7 +121,15 @@ async updateProduct(id: string, payload: UpdateProductBody) {
   }
 
   async deleteProduct(id: string) {
-    await databaseService.products.deleteOne({ _id: new ObjectId(id) })
+    await databaseService.products.updateOne(
+      { _id: new ObjectId(id) },
+      {
+        $set: {
+          deleted: true
+        }
+      },
+      { upsert: false }
+    )
   }
 
   async uploadImage(id: string, image: Express.Multer.File) {

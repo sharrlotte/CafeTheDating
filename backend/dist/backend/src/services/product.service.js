@@ -87,6 +87,7 @@ class ProductService {
       case "discount":
         return await import_database.databaseService.products.find({
           product_type,
+          deleted: false,
           discount: {
             $gt: 0
           }
@@ -94,6 +95,7 @@ class ProductService {
       case "best-choice":
         return await import_database.databaseService.products.find({
           product_type,
+          deleted: false,
           tags: {
             $in: ["best-choice"]
           }
@@ -101,13 +103,15 @@ class ProductService {
       case "new":
         return await import_database.databaseService.products.find({
           product_type,
+          deleted: false,
           tags: {
             $in: ["new"]
           }
         }).toArray();
       default:
         return await import_database.databaseService.products.find({
-          product_type
+          product_type,
+          deleted: false
         }).toArray();
     }
   }
@@ -127,7 +131,15 @@ class ProductService {
     );
   }
   async deleteProduct(id) {
-    await import_database.databaseService.products.deleteOne({ _id: new import_mongodb.ObjectId(id) });
+    await import_database.databaseService.products.updateOne(
+      { _id: new import_mongodb.ObjectId(id) },
+      {
+        $set: {
+          deleted: true
+        }
+      },
+      { upsert: false }
+    );
   }
   async uploadImage(id, image) {
     const result = await import_cloudinary.default.uploadImage("products", image.buffer);

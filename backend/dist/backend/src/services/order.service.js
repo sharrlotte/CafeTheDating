@@ -36,10 +36,19 @@ var import_mongodb = require("mongodb");
 class OrderService {
   async getAllOrderByUser(query, userId) {
     const state = query.state;
+    let orders;
     if (state && state !== "all") {
-      return await import_database.databaseService.orders.find({ state, user_id: new import_mongodb.ObjectId(userId) }).toArray();
+      orders = await import_database.databaseService.orders.find({ state, user_id: new import_mongodb.ObjectId(userId) }).toArray();
+    } else {
+      orders = await import_database.databaseService.orders.find({ user_id: new import_mongodb.ObjectId(userId) }).toArray();
     }
-    return await import_database.databaseService.orders.find({ user_id: new import_mongodb.ObjectId(userId) }).toArray();
+    return orders.map(async (item) => {
+      const product = await import_database.databaseService.products.findOne({ _id: new import_mongodb.ObjectId(item._id) });
+      if (!product) {
+        throw new Error("Order product not found");
+      }
+      return item.product_name = product.name;
+    });
   }
   async updateOrder(id, state) {
     return await import_database.databaseService.orders.findOneAndUpdate(

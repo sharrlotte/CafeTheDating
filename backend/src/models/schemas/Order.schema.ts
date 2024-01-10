@@ -11,6 +11,7 @@ interface OrderType {
   discount: number
   product_id: ObjectId
   address: string
+  product_name?: string
   amount: number
   state: OrderState
   created_at?: Date
@@ -20,6 +21,7 @@ interface OrderType {
 export default class Order {
   _id: ObjectId
   price: number
+  product_name: string
   discount: number
   product_id: ObjectId
   amount: number

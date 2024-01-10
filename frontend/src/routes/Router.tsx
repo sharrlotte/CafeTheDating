@@ -48,7 +48,11 @@ const routes: RouteProps[] = [
   },
   {
     path: paths.order,
-    element: <Order />,
+    element: (
+      <Auth roles={[UserRole.User, UserRole.Admin]}>
+        <Order />
+      </Auth>
+    ),
   },
 ];
 
@@ -76,7 +80,8 @@ function BackgroundImage() {
           const user: User = result.data;
           setMe(user);
         })
-        .catch((err) => {});
+        .catch(setMe)
+        .finally();
     }
   }, [setMe]);
 

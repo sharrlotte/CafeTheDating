@@ -31,40 +31,13 @@ export default function Nav() {
   const { user, logout } = useMe();
 
   return (
-    <nav className="flex items-center justify-between md:justify-center  w-full  flex-wrap \">
-      <a className="w-28  md:absolute  md:top-4 md:left-10 z-50 " href="/home">
-        <img src="/img/Logo.svg" alt="TheDating"></img>
-      </a>
-      <div>
-        {user ? (
-          <div>
-            <img
-              src={user.avatar}
-              alt="User Avatar"
-              className="w-12 h-12 rounded-full absolute top-12 right-14 "
-            />
-
-            <Button
-              className="absolute right-28 top-12 bg-[hsla(126,100%,24%,1)] hover:bg-gray-400 rounded-full text-black w-24 h-14 z-50"
-              onClick={() => logout()}
-            >
-              Đăng xuất
-            </Button>
-          </div>
-        ) : (
-          <Button
-            className="bg-[hsla(126,100%,24%,1)] rounded-full hover:bg-gray-400 text-white w-24 h-14 top-12 right-14 sm:absolute"
-            asChild
-          >
-            <Link
-              className=" group hover:text-[hsla(29,90%,58%,1)]"
-              to={"/login"}
-            >
-              {"Login"}
-            </Link>
-          </Button>
-        )}
+    <nav className="flex items-center justify-between   w-full  flex-wrap ">
+      <div className="flex justify-start ">
+        <a className="w-28  z-50 " href="/home">
+          <img src="/img/Logo.svg" alt="TheDating"></img>
+        </a>
       </div>
+
       <div className="font-[600] bg-white p-5 gap-3 md:gap-8 text-xl flex border-2 rounded-full shadow-gray-200 shadow-md">
         {paths.map((item, index) => (
           <Link
@@ -78,6 +51,33 @@ export default function Nav() {
             </div>
           </Link>
         ))}
+      </div>
+      <div className=" p-4 ">
+        {user ? (
+          <div className=" h-full w-full flex items-center justify-end gap-2 ">
+            <img
+              src={user.avatar}
+              alt="User Avatar"
+              className="w-12 h-12 rounded-full   "
+            />
+
+            <Button
+              className="   bg-[hsla(126,100%,24%,0.69)] hover:bg-orange-500 rounded-full  w-24 h-14 z-50"
+              onClick={() => logout()}
+            >
+              Đăng xuất
+            </Button>
+          </div>
+        ) : (
+          <div className="h-full w-full flex items-center justify-end ">
+            <Button
+              className="rounded-full bg-[hsla(126,100%,24%,0.69)] hover:bg-orange-500   w-24 h-14 "
+              asChild
+            >
+              <Link to={"/login"}>{"Đăng Nhập"}</Link>
+            </Button>
+          </div>
+        )}
       </div>
     </nav>
   );

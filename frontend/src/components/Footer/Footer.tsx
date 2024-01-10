@@ -11,7 +11,7 @@ export default function Footer() {
             <img src="/img/Logo.svg" alt="TheDating"></img>
           </a>
         </div>
-        <div className="gap-8 flex flex-col">
+        <div className="gap-8 p-2 flex flex-col">
           <div className="flex flex-col">
             <span className="flex items-center gap-4">
               <Icons.Location></Icons.Location>

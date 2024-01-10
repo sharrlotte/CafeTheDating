@@ -25,6 +25,7 @@ const orderStates = ["pending", "accept", "shipping", "completed", "canceled", "
 class Order {
   _id;
   price;
+  product_name;
   discount;
   product_id;
   amount;

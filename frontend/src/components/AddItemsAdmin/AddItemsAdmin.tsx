@@ -58,6 +58,21 @@ export default function AddItemsAdmin() {
               <Input id="image" type="image" className="col-span-3 " />
             </div>
             <div className="grid grid-cols-4 items-center gap-4">
+              <Label htmlFor="Mô tả" className="text-right whitespace-nowrap">
+                Mô tả
+              </Label>
+              <Input id="description" type="text" className="col-span-3 " />
+            </div>
+            <div className="grid grid-cols-4 items-center gap-4">
+              <Label
+                htmlFor="Giảm giá"
+                className="text-right whitespace-nowrap"
+              >
+                Giảm giá
+              </Label>
+              <Input id="discount" type="number" className="col-span-3 " />
+            </div>
+            <div className="grid grid-cols-4 items-center gap-4">
               <Label
                 htmlFor="loại"
                 className="text-right whitespace-nowrap"

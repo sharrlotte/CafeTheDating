@@ -419,10 +419,6 @@ const Icons = {
       />
     </svg>
   ),
-<<<<<<< HEAD
-=======
- 
->>>>>>> b70b0071113bda2e67418af048463d650b2ebb4f
 };
 
 export default Icons;

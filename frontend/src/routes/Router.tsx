@@ -12,9 +12,9 @@ import Order from "../components/Order/Order";
 import { cn } from "../lib/util";
 import User, { UserRole } from "@/type/User";
 import useMe from "@/zustand/useMe";
-import api from "@/api/api";
-import MenuAdmin from "@/routes/admin/menuadmin/MenuAdmin";
+import api from "@/api/api";  
 import Auth from "@/layouts/Auth";
+import Admin from "@/routes/admin/menuadmin/Admin";
 
 type RouteProps = {
   path: string;
@@ -111,7 +111,7 @@ function BackgroundImage() {
           path={paths.admin}
           element={
             <Auth roles={[UserRole.Admin]}>
-              <MenuAdmin />
+              <Admin />
             </Auth>
           }
         />

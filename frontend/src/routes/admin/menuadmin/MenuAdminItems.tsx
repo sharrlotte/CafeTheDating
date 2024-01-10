@@ -1,5 +1,5 @@
-import Icons from "../../constants/icon";
-import { getProducts } from "../../query/products";
+import Icons from "../../../constants/icon";
+import { getProducts } from "../../../query/products";
 import React from "react";
 import { useQuery } from "react-query";
 import { ProductSort, ProductType } from "@/type/Product";

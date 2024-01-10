@@ -42,13 +42,15 @@ class OrderService {
     } else {
       orders = await import_database.databaseService.orders.find({ user_id: new import_mongodb.ObjectId(userId) }).toArray();
     }
-    return orders.map(async (item) => {
-      const product = await import_database.databaseService.products.findOne({ _id: new import_mongodb.ObjectId(item._id) });
+    const items = orders.map(async (item) => {
+      const product = await import_database.databaseService.products.findOne({ _id: new import_mongodb.ObjectId(item.product_id) });
       if (!product) {
         throw new Error("Order product not found");
       }
-      return item.product_name = product.name;
+      item.product_name = product.name;
+      return item;
     });
+    return Promise.all(items);
   }
   async updateOrder(id, state) {
     return await import_database.databaseService.orders.findOneAndUpdate(

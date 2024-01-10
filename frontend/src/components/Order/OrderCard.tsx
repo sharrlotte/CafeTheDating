@@ -7,22 +7,26 @@ type OrderCardProps = {
 
 export default function OrderCard({ order }: OrderCardProps) {
   const calculateTotal = () => {
-    const totalPrice = (order.price - (order.discount || 0)) * order.amount;
+    const totalPrice =
+      (order.price - ((order.discount || 0) * order.price) / 100) *
+      order.amount;
     return totalPrice.toLocaleString();
   };
   return (
     <div className="min-h-[80px] w-full  bg-white  ">
       <div className="w-full bg-white flex flex-row justify-between items-center overflow-auto gap-4 ">
         <div className="w-full flex justify-center">
-          <div className="break-all w-32">{order._id}</div>
+          <div className="break-all md:break-keep w-32">{order._id}</div>
         </div>
 
         <div className="w-full flex justify-center items-center  flex-col">
           <div className=" flex justify-center items-start flex-col">
-            <div>Sản phẩm : {order.product_name}</div>
-            <div>Số lượng: {order.amount}</div>
-            <div>Giá: {order.price}</div>
-            <div>Tình trạng: {translate(order.state)}</div>
+            <span>Sản phẩm : {order.product_name}</span>
+            <span>Số lượng: {order.amount}</span>
+            <span>Giá: {order.price}</span>
+            <span>Giảm giá: {order.discount || 0}% </span>
+
+            <span>Tình trạng: {translate(order.state)}</span>
           </div>
         </div>
         <div className="w-full flex justify-center items-center">

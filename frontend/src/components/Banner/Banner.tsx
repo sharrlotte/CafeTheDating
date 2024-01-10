@@ -32,7 +32,7 @@ export default function Banner() {
         <div className="text-white flex flex-row  h-full p-4 md:p-8 gap-4 justify-between relative flex-wrap ">
           <div className="flex flex-col gap-4 justify-center">
             <span className="text-sm">Lần đầu tiên! </span>
-            <span className="text-3xl">Bánh kẹp bơ thanh long</span>
+            <span className="text-3xl">Bánh kẹp bơ thanh longlong</span>
             <div className="gap-4 flex flex-row">
               <Button
                 variant="ghost"

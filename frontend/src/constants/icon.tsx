@@ -257,6 +257,7 @@ const Icons = {
       />
     </svg>
   ),
+<<<<<<< HEAD
   HomeAdminBlue: () => (
     <svg
       xmlns="http://www.w3.org/2000/svg"
@@ -419,6 +420,9 @@ const Icons = {
       />
     </svg>
   ),
+=======
+ 
+>>>>>>> 1c3465e834ecc96a3df99c692df148da3a98a132
 };
 
 export default Icons;

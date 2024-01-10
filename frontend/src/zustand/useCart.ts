@@ -1,50 +1,76 @@
 import Product from "../type/Product";
 import { create } from "zustand";
 
-interface CardItem extends Product {
-  count: number;
+export interface CardItem extends Product {
+  amount: number;
 }
 
-interface UserState {
+interface CardState {
   products: CardItem[];
   addProduct: (by: Product) => void;
   removeProduct: (by: Product) => void;
+  clear: () => void;
 }
 
-const useCart = create<UserState>((set) => ({
-  products: [],
-  addProduct: (product: Product) =>
-    set((prev) => {
-      const existingProduct = prev.products.find(
-        (item) => item._id === product._id
-      );
-      if (existingProduct) {
-        return {
-          products: prev.products.map((item) =>
-            item._id === product._id ? { ...item, count: item.count + 1 } : item
-          ),
-        };
-      }
-      return { products: [...prev.products, { ...product, count: 1 }] };
-    }),
-  removeProduct: (product: Product) =>
-    set((prev) => {
-      const existingProduct = prev.products.find(
-        (item) => item._id === product._id
-      );
-      if (existingProduct) {
-        return {
-          products: prev.products
-            .map((item) =>
+const useCart = create<CardState>((set) => {
+  const storedCart = localStorage.getItem("cart");
+  const initialCart = storedCart ? JSON.parse(storedCart) : { products: [] };
+
+  return {
+    products: initialCart.products,
+    addProduct: (product: Product) =>
+      set((prev) => {
+        const existingProduct = prev.products.find(
+          (item) => item._id === product._id
+        );
+        if (existingProduct) {
+          const updatedCart = {
+            products: prev.products.map((item) =>
               item._id === product._id
-                ? { ...item, count: item.count - 1 }
+                ? { ...item, amount: item.amount + 1 }
                 : item
-            )
-            .filter((item) => item.count > 0),
+            ),
+          };
+
+          localStorage.setItem("cart", JSON.stringify(updatedCart));
+          return updatedCart;
+        }
+        const updatedCart = {
+          products: [...prev.products, { ...product, amount: 1 }],
         };
-      }
-      return { products: [...prev.products, { ...product, count: 1 }] };
-    }),
-}));
+
+        localStorage.setItem("cart", JSON.stringify(updatedCart));
+        return updatedCart;
+      }),
+    removeProduct: (product: Product) =>
+      set((prev) => {
+        const existingProduct = prev.products.find(
+          (item) => item._id === product._id
+        );
+
+        if (existingProduct) {
+          const updatedCart = {
+            products: prev.products
+              .map((item) =>
+                item._id === product._id
+                  ? { ...item, amount: item.amount - 1 }
+                  : item
+              )
+              .filter((item) => item.amount > 0),
+          };
+
+          localStorage.setItem("cart", JSON.stringify(updatedCart));
+          return updatedCart;
+        }
+        const updatedCart = {
+          products: [...prev.products, { ...product, amount: 1 }],
+        };
+
+        localStorage.setItem("cart", JSON.stringify(updatedCart));
+        return updatedCart;
+      }),
+    clear: () => set((prev) => ({ ...prev, products: [] })),
+  };
+});
 
 export default useCart;

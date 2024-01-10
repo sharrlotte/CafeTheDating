@@ -18,34 +18,12 @@ export const getAllOrderValidator = validate(
         optional: true,
         custom: {
           options: (value) => {
-            if (!orderStates.includes(value)) {
+            if (![orderStates].includes(value)) {
               throw new ErrorWithStatus({
                 message: 'Invalid order state',
                 statusCode: StatusCodes.BAD_REQUEST
               })
             }
-            return true
-          }
-        }
-      },
-      user_id: {
-        trim: true,
-        isString: {
-          errorMessage: 'User id must be a string'
-        },
-        optional: true,
-        custom: {
-          options: (value) => {
-            validateObjectId(value)
-
-            const user = databaseService.users.findOne({ _id: new ObjectId(value) })
-            if (!Boolean(user)) {
-              throw new ErrorWithStatus({
-                message: 'Invalid user id, user not found',
-                statusCode: StatusCodes.BAD_REQUEST
-              })
-            }
-
             return true
           }
         }
@@ -104,15 +82,22 @@ export const createOrderValidator = validate(
       },
       orders: {
         isArray: {
-          errorMessage: 'Orders must be an array'
-        }
+          errorMessage: 'Orders must be an array',
+          options: {
+            min: 1
+          }
+        },
+        toArray: true
       },
-      'order_.product_id': {
+      'orders.*.product_id': {
+        trim: true,
+        isString: true,
         custom: {
-          options: (value) => {
+          options: async (value) => {
+            console.log(value)
             validateObjectId(value)
 
-            var product = databaseService.products.findOne({ _id: new ObjectId(value) })
+            var product = await databaseService.products.findOne({ _id: new ObjectId(value) })
 
             if (!product) {
               throw new ErrorWithStatus({
@@ -124,7 +109,7 @@ export const createOrderValidator = validate(
           }
         }
       },
-      'order_.amount': {
+      'orders.*.amount': {
         isInt: {
           options: {
             min: 1

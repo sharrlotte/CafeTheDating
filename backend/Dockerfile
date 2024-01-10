@@ -6,8 +6,7 @@
 # Run the container with `docker run -p 3000:3000 -t backend`.
 FROM docker.io/node:lts-alpine
 
-ENV HOST=0.0.0.0
-ENV PORT=3000
+RUN --mount=type=secret,id=_env,dst=/app/backend/.env cat /app/backend/.env
 
 WORKDIR /app
 
@@ -16,7 +15,6 @@ RUN addgroup --system backend && \
 
 COPY dist/backend backend
 RUN chown -R backend:backend .
-
 # You can remove this install step if you build with `--bundle` option.
 # The bundled output will include external dependencies.
 RUN npm --prefix backend --omit=dev -f install

@@ -9,9 +9,10 @@ import {
   SelectItem,
   SelectTrigger,
 } from "@radix-ui/react-select";
+import { OrderState } from "@/type/Order";
 
 export default function Order() {
-  const [filter, setFilter] = useState("Tất cả");
+  const [filter, setFilter] = useState<OrderState>(undefined);
   return (
     <>
       <div className="w-full hidden md:block">
@@ -31,12 +32,7 @@ export default function Order() {
               >
                 Chờ thanh toán
               </TabsTrigger>
-              <TabsTrigger
-                className="font-bold text-black text-2xl hover:bg-white"
-                value="ship"
-              >
-                Đang vận chuyển
-              </TabsTrigger>
+
               <TabsTrigger
                 className="font-bold text-black text-2xl hover:bg-white"
                 value="complete"
@@ -51,16 +47,14 @@ export default function Order() {
               </TabsTrigger>
             </TabsList>
             <TabsContent value="all">
-              <OrderItem filter="all" />
+              <OrderItem filter={undefined} />
             </TabsContent>
             <TabsContent value="wait">
-              <OrderItem filter="wait" />
+              <OrderItem filter="pending" />
             </TabsContent>
-            <TabsContent value="ship">
-              <OrderItem filter="ship" />
-            </TabsContent>
+
             <TabsContent value="complete">
-              <OrderItem filter="complete" />
+              <OrderItem filter="completed" />
             </TabsContent>
             <TabsContent value="cancelled">
               <OrderItem filter="canceled" />
@@ -71,8 +65,8 @@ export default function Order() {
       <div className="md:hidden pt-2 pb-2 flex justify-start items-center text-black">
         <div>
           <Select
-            onValueChange={(value) => setFilter(value)}
-            value={filter.toString()}
+            onValueChange={(value) => setFilter(value as OrderState)}
+            value={filter}
             defaultValue={filter}
           >
             <SelectTrigger
@@ -83,26 +77,22 @@ export default function Order() {
             </SelectTrigger>
             <SelectContent className="w-[180px] rounded-lg p-2 bg-slate-200  mt-1">
               <SelectGroup>
-                <SelectItem key={"all"} value={"Tất cả".toString()}>
+                <SelectItem key={"all"} value={"all"}>
                   Tất cả
                 </SelectItem>
                 <div className="border-black h-1 w-full border-b"></div>
-                <SelectItem key={"wait"} value={"Chờ thanh toán".toString()}>
+                <SelectItem key={"wait"} value={"pending"}>
                   Chờ thanh toán
                 </SelectItem>
+
                 <div className="border-black h-1 w-full border-b"></div>
 
-                <SelectItem key={"ship"} value="Đang vận chuyển">
-                  Đang vận chuyển
-                </SelectItem>
-                <div className="border-black h-1 w-full border-b"></div>
-
-                <SelectItem key={"complete"} value="Hoàn thành">
+                <SelectItem key={"complete"} value="completed">
                   Hoàn thành
                 </SelectItem>
                 <div className="border-black h-1 w-full border-b"></div>
 
-                <SelectItem key={"canceled"} value="Đã hủy">
+                <SelectItem key={"canceled"} value="cancelled">
                   Đã hủy
                 </SelectItem>
               </SelectGroup>
@@ -110,8 +100,9 @@ export default function Order() {
           </Select>
         </div>
       </div>
-
-      <OrderItem filter={filter} />
+      <div className="md:hidden">
+        <OrderItem filter={filter} />
+      </div>
     </>
   );
 }

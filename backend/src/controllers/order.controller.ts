@@ -7,7 +7,7 @@ import { StatusCodes } from 'http-status-codes'
 
 const orderController = {
   getAllOrderByUser: async (req: Request<ParamsDictionary, any, any, ParsedUrlQuery>, res: Response, next: NextFunction) => {
-    const result = await orderService.getAllOrderByUser(req.query)
+    const result = await orderService.getAllOrderByUser(req.query, req.user._id)
     return res.status(StatusCodes.OK).json(result)
   },
 

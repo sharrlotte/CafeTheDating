@@ -25,6 +25,7 @@ const orderStates = ["pending", "accept", "shipping", "completed", "canceled", "
 class Order {
   _id;
   price;
+  product_name;
   discount;
   product_id;
   amount;
@@ -50,3 +51,4 @@ class Order {
 0 && (module.exports = {
   orderStates
 });
+//# sourceMappingURL=Order.schema.js.map

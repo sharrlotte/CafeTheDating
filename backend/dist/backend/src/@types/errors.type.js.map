@@ -1,0 +1,7 @@
+{
+  "version": 3,
+  "sources": ["../../../../src/@types/errors.type.ts"],
+  "sourcesContent": ["export type ErrorType = {\r\n  statusCode: number\r\n  message: string\r\n  created_at?: string\r\n  updated_at?: string\r\n  messageConstants?: string\r\n}\r\nexport type ErrorEntityType = {\r\n  msg: string\r\n  [key: string]: any\r\n}\r\n"],
+  "mappings": ";;;;;;;;;;;;;AAAA;AAAA;",
+  "names": []
+}

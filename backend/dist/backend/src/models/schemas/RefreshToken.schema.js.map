@@ -1,0 +1,7 @@
+{
+  "version": 3,
+  "sources": ["../../../../../src/models/schemas/RefreshToken.schema.ts"],
+  "sourcesContent": ["import { ObjectId } from 'mongodb'\r\n\r\ninterface RefreshTokenType {\r\n  _id?: ObjectId\r\n  user_id: ObjectId\r\n  token: string\r\n  created_at?: Date\r\n  updated_at?: Date\r\n}\r\n\r\nexport default class RefreshToken {\r\n  _id?: ObjectId\r\n  user_id: ObjectId\r\n  token: string\r\n  created_at: Date\r\n  updated_at: Date\r\n\r\n  constructor(refreshToken: RefreshTokenType) {\r\n    this._id = refreshToken._id\r\n    this.user_id = refreshToken.user_id\r\n    this.token = refreshToken.token\r\n    this.created_at = refreshToken.created_at || new Date()\r\n    this.updated_at = refreshToken.updated_at || null\r\n  }\r\n}\r\n"],
+  "mappings": ";;;;;;;;;;;;;;;;;AAAA;AAAA;AAAA;AAAA;AAAA;AAUA,MAAO,aAA2B;AAAA,EAChC;AAAA,EACA;AAAA,EACA;AAAA,EACA;AAAA,EACA;AAAA,EAEA,YAAY,cAAgC;AAC1C,SAAK,MAAM,aAAa;AACxB,SAAK,UAAU,aAAa;AAC5B,SAAK,QAAQ,aAAa;AAC1B,SAAK,aAAa,aAAa,cAAc,oBAAI,KAAK;AACtD,SAAK,aAAa,aAAa,cAAc;AAAA,EAC/C;AACF;",
+  "names": []
+}

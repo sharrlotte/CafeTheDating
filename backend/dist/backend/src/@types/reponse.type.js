@@ -13,3 +13,4 @@ var __copyProps = (to, from, except, desc) => {
 var __toCommonJS = (mod) => __copyProps(__defProp({}, "__esModule", { value: true }), mod);
 var reponse_type_exports = {};
 module.exports = __toCommonJS(reponse_type_exports);
+//# sourceMappingURL=reponse.type.js.map

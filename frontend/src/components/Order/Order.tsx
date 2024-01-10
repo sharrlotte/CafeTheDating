@@ -52,7 +52,6 @@ export default function Order() {
             <TabsContent value="wait">
               <OrderItem filter="pending" />
             </TabsContent>
-
             <TabsContent value="complete">
               <OrderItem filter="completed" />
             </TabsContent>
@@ -73,27 +72,29 @@ export default function Order() {
               className="w-[180px] h-10 text-left p-2 bg-white border-border border-2 rounded-lg "
               value={filter}
             >
-              {filter}
+              {translate(filter)}
             </SelectTrigger>
+
             <SelectContent className="w-[180px] rounded-lg p-2 bg-slate-200  mt-1">
               <SelectGroup>
                 <SelectItem key={"all"} value={"all"}>
-                  Tất cả
+                  {translate("all")}
                 </SelectItem>
+
                 <div className="border-black h-1 w-full border-b"></div>
                 <SelectItem key={"wait"} value={"pending"}>
-                  Chờ thanh toán
+                  {translate("pending")}
                 </SelectItem>
 
                 <div className="border-black h-1 w-full border-b"></div>
 
                 <SelectItem key={"complete"} value="completed">
-                  Hoàn thành
+                  {translate("completed")}
                 </SelectItem>
                 <div className="border-black h-1 w-full border-b"></div>
 
-                <SelectItem key={"canceled"} value="cancelled">
-                  Đã hủy
+                <SelectItem key={"canceled"} value="canceled">
+                  {translate("cancelled")}
                 </SelectItem>
               </SelectGroup>
             </SelectContent>
@@ -105,4 +106,16 @@ export default function Order() {
       </div>
     </>
   );
+}
+function translate(orderStates: string | undefined) {
+  switch (orderStates) {
+    case "all":
+      return "Tất cả";
+    case "pending":
+      return "Chờ thanh toán";
+    case "completed":
+      return "Hoàn thành";
+    case "cancelled":
+      return "Đã hủy";
+  }
 }

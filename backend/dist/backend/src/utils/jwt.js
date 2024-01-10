@@ -59,3 +59,4 @@ const verifyToken = ({ token, secretOrPublicKey }) => {
   signToken,
   verifyToken
 });
+//# sourceMappingURL=jwt.js.map

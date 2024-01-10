@@ -25,3 +25,4 @@ const productTypes = ["drink", "icescream", "food", "cafe", "milk", "cake", "cre
 0 && (module.exports = {
   productTypes
 });
+//# sourceMappingURL=ProductType.schema.js.map

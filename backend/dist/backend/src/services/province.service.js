@@ -69,3 +69,4 @@ class ProvinceService {
 }
 const provinceService = new ProvinceService();
 var province_service_default = provinceService;
+//# sourceMappingURL=province.service.js.map

@@ -13,3 +13,4 @@ var __copyProps = (to, from, except, desc) => {
 var __toCommonJS = (mod) => __copyProps(__defProp({}, "__esModule", { value: true }), mod);
 var Province_schema_exports = {};
 module.exports = __toCommonJS(Province_schema_exports);
+//# sourceMappingURL=Province.schema.js.map

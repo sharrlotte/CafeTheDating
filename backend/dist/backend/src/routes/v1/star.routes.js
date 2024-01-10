@@ -38,3 +38,4 @@ var import_handler = require("@/utils/handler");
 const startRouter = (0, import_express.Router)();
 startRouter.post("/", import_auth.requireLoginMiddleware, import_star2.createStarValidator, (0, import_handler.wrapRequestHandler)(import_star.default.createStar));
 var star_routes_default = startRouter;
+//# sourceMappingURL=star.routes.js.map

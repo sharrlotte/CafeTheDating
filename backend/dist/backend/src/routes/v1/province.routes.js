@@ -39,3 +39,4 @@ provinceRouter.get("", (0, import_handler.wrapRequestHandler)(import_province.de
 provinceRouter.get("/:id", import_province2.getDistrictValidator, (0, import_handler.wrapRequestHandler)(import_province.default.getDistrict));
 provinceRouter.get("/:id/:did", import_province2.getWardValidator, (0, import_handler.wrapRequestHandler)(import_province.default.getWard));
 var province_routes_default = provinceRouter;
+//# sourceMappingURL=province.routes.js.map

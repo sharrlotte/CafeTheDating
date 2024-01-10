@@ -48,3 +48,4 @@ class User {
     this.updated_at = user.updated_at || null;
   }
 }
+//# sourceMappingURL=Users.schema.js.map

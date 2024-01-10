@@ -50,3 +50,4 @@ class Product {
 0 && (module.exports = {
   productSorts
 });
+//# sourceMappingURL=Product.schema.js.map

@@ -83,3 +83,4 @@ httpServer.listen(import_environment.env.server.port, "0.0.0.0", () => {
   import_database.databaseService.disconnect();
   console.log(import_message.DATABASE_MESSAGE.DB_MAIN.DISCONNECT);
 });
+//# sourceMappingURL=main.js.map

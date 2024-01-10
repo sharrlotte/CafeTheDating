@@ -1,0 +1,7 @@
+{
+  "version": 3,
+  "sources": ["../../../../src/@types/request.type.ts"],
+  "sourcesContent": ["import { ProductTag } from '@/models/schemas/Product.schema'\r\nimport ProductType from '@/models/schemas/ProductType.schema'\r\nimport { OrderState } from '@/models/schemas/Order.schema'\r\n\r\nexport type CreateProductBody = {\r\n  name: string\r\n  description: string\r\n  price: number\r\n  tags: ProductTag[]\r\n  product_type: ProductType\r\n  image: string\r\n}\r\n\r\nexport type UpdateProductBody = CreateProductBody\r\n\r\nexport type CreateStarBody = {\r\n  user_id: string\r\n  product_id: string\r\n}\r\n\r\nexport type UpdateOrderBody = {\r\n  state: OrderState\r\n}\r\n\r\nexport type CreateOrderBody = {\r\n  orders: Array<{\r\n    product_id: string\r\n    amount: number\r\n  }>\r\n  address: string\r\n}\r\n"],
+  "mappings": ";;;;;;;;;;;;;AAAA;AAAA;",
+  "names": []
+}

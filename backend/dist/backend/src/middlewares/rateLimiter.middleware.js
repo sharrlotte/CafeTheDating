@@ -41,3 +41,4 @@ const rateLimiterMiddleware = (req, res, next) => {
 0 && (module.exports = {
   rateLimiterMiddleware
 });
+//# sourceMappingURL=rateLimiter.middleware.js.map

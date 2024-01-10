@@ -55,3 +55,4 @@ const productController = {
   }
 };
 var product_controllers_default = productController;
+//# sourceMappingURL=product.controllers.js.map

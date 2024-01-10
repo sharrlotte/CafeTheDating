@@ -1,0 +1,7 @@
+{
+  "version": 3,
+  "sources": ["../../../../src/utils/crypto.ts"],
+  "sourcesContent": ["import { createHash, randomBytes, randomInt } from 'crypto'\r\nimport { env } from '@/config/environment.config'\r\n\r\nexport const sha256 = (content: string) => createHash('sha256').update(content).digest('hex')\r\n\r\nexport const generatePassword = () => randomBytes(8).toString('hex')\r\n\r\nexport const hashPassword = (password: string) => sha256(password + env.server.password_secret)\r\n\r\nexport const generateOTPCode = () => randomInt(100000, 999999).toString()\r\n\r\nexport const hashOTP = (password: string) => sha256(password + env.server.otp_secret)\r\n"],
+  "mappings": ";;;;;;;;;;;;;;;;;AAAA;AAAA;AAAA;AAAA;AAAA;AAAA;AAAA;AAAA;AAAA;AAAA,oBAAmD;AACnD,yBAAoB;AAEb,MAAM,SAAS,CAAC,gBAAoB,0BAAW,QAAQ,EAAE,OAAO,OAAO,EAAE,OAAO,KAAK;AAErF,MAAM,mBAAmB,UAAM,2BAAY,CAAC,EAAE,SAAS,KAAK;AAE5D,MAAM,eAAe,CAAC,aAAqB,OAAO,WAAW,uBAAI,OAAO,eAAe;AAEvF,MAAM,kBAAkB,UAAM,yBAAU,KAAQ,MAAM,EAAE,SAAS;AAEjE,MAAM,UAAU,CAAC,aAAqB,OAAO,WAAW,uBAAI,OAAO,UAAU;",
+  "names": []
+}

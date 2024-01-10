@@ -1,0 +1,7 @@
+{
+  "version": 3,
+  "sources": ["../../../../../src/models/schemas/Star.schema.ts"],
+  "sourcesContent": ["import { ObjectId } from 'mongodb'\r\n\r\ninterface StarType {\r\n  _id?: ObjectId\r\n  user_id: ObjectId\r\n  product_id: string\r\n  created_at?: Date\r\n  updated_at?: Date\r\n}\r\n\r\nexport default class Star {\r\n  _id?: ObjectId\r\n  user_id: ObjectId\r\n  product_id: string\r\n  created_at: Date\r\n  updated_at: Date\r\n\r\n  constructor(star: StarType) {\r\n    this._id = star._id\r\n    this.user_id = star.user_id\r\n    this.product_id = star.product_id\r\n    this.created_at = star.created_at || new Date()\r\n    this.updated_at = star.updated_at || null\r\n  }\r\n}\r\n"],
+  "mappings": ";;;;;;;;;;;;;;;;;AAAA;AAAA;AAAA;AAAA;AAAA;AAUA,MAAO,KAAmB;AAAA,EACxB;AAAA,EACA;AAAA,EACA;AAAA,EACA;AAAA,EACA;AAAA,EAEA,YAAY,MAAgB;AAC1B,SAAK,MAAM,KAAK;AAChB,SAAK,UAAU,KAAK;AACpB,SAAK,aAAa,KAAK;AACvB,SAAK,aAAa,KAAK,cAAc,oBAAI,KAAK;AAC9C,SAAK,aAAa,KAAK,cAAc;AAAA,EACvC;AACF;",
+  "names": []
+}

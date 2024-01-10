@@ -262,3 +262,4 @@ const updateProductValidator = (0, import_validate.default)(
   getAllProductValidator,
   updateProductValidator
 });
+//# sourceMappingURL=product.middlewares.js.map

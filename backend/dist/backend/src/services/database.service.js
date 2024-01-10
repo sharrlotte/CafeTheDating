@@ -76,3 +76,4 @@ const databaseService = new DatabaseServices();
 0 && (module.exports = {
   databaseService
 });
+//# sourceMappingURL=database.service.js.map

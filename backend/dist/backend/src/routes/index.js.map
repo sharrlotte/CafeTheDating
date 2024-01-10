@@ -1,0 +1,7 @@
+{
+  "version": 3,
+  "sources": ["../../../../src/routes/index.ts"],
+  "sourcesContent": ["import { Router } from 'express'\r\nimport userRouter from './v1/users.routes'\r\nimport authRouter from './v1/auth.routes'\r\nimport productRouter from '@/routes/v1/product.routes'\r\nimport orderRouter from '@/routes/v1/order.routes'\r\n\r\nconst rootRouter = Router()\r\n\r\nrootRouter.use('/users', userRouter)\r\nrootRouter.use('/auth', authRouter)\r\nrootRouter.use('/products', productRouter)\r\nrootRouter.use('/orders', orderRouter)\r\n\r\nrootRouter.get('/health', (req, res) => {\r\n  res.status(200).send('Healthy')\r\n})\r\n\r\nexport default rootRouter\r\n"],
+  "mappings": ";;;;;;;;;;;;;;;;;;;;;;;;;;;AAAA;AAAA;AAAA;AAAA;AAAA;AAAA,qBAAuB;AACvB,mBAAuB;AACvB,kBAAuB;AACvB,qBAA0B;AAC1B,mBAAwB;AAExB,MAAM,iBAAa,uBAAO;AAE1B,WAAW,IAAI,UAAU,aAAAA,OAAU;AACnC,WAAW,IAAI,SAAS,YAAAC,OAAU;AAClC,WAAW,IAAI,aAAa,eAAAC,OAAa;AACzC,WAAW,IAAI,WAAW,aAAAC,OAAW;AAErC,WAAW,IAAI,WAAW,CAAC,KAAK,QAAQ;AACtC,MAAI,OAAO,GAAG,EAAE,KAAK,SAAS;AAChC,CAAC;AAED,IAAO,iBAAQ;",
+  "names": ["userRouter", "authRouter", "productRouter", "orderRouter"]
+}

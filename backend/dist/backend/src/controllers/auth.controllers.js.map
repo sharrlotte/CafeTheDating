@@ -1,0 +1,7 @@
+{
+  "version": 3,
+  "sources": ["../../../../src/controllers/auth.controllers.ts"],
+  "sourcesContent": ["import { Request, Response, NextFunction } from 'express'\r\nimport { ParamsDictionary } from 'express-serve-static-core'\r\nimport { AuthProvider } from '@/@types/auth.type'\r\nimport oauthService from '@/services/oauth.service'\r\n\r\nconst authController = {\r\n  callback: (provider: AuthProvider) => async (req: Request<ParamsDictionary, any, any>, res: Response, next: NextFunction) => {\r\n    await oauthService.callback(provider, req, res)\r\n  }\r\n}\r\n\r\nexport default authController\r\n"],
+  "mappings": ";;;;;;;;;;;;;;;;;;;;;;;;;;;AAAA;AAAA;AAAA;AAAA;AAAA;AAGA,mBAAyB;AAEzB,MAAM,iBAAiB;AAAA,EACrB,UAAU,CAAC,aAA2B,OAAO,KAA0C,KAAe,SAAuB;AAC3H,UAAM,aAAAA,QAAa,SAAS,UAAU,KAAK,GAAG;AAAA,EAChD;AACF;AAEA,IAAO,2BAAQ;",
+  "names": ["oauthService"]
+}

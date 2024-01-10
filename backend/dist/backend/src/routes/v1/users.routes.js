@@ -42,3 +42,4 @@ userRouter.post("/refresh-token", import_users2.refreshTokenValidator, (0, impor
 userRouter.get("/", (0, import_auth.requireRoleMiddleware)(import_enums.UserRole.Admin), import_commons.paginationValidator, import_users2.getAllUserValidator, (0, import_handler.wrapRequestHandler)(import_users.default.getAllUser));
 userRouter.get("/@me/profile", import_auth.requireLoginMiddleware, (0, import_handler.wrapRequestHandler)(import_users.default.getMe));
 var users_routes_default = userRouter;
+//# sourceMappingURL=users.routes.js.map

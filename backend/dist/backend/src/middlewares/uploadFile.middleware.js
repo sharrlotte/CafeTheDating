@@ -74,3 +74,4 @@ const singleImageUpload = (req, res, next) => {
 0 && (module.exports = {
   singleImageUpload
 });
+//# sourceMappingURL=uploadFile.middleware.js.map

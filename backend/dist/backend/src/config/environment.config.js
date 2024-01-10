@@ -30,8 +30,8 @@ __export(environment_config_exports, {
   env: () => env
 });
 module.exports = __toCommonJS(environment_config_exports);
-var import_dotenv = __toESM(require("dotenv"));
 var import_joi = __toESM(require("joi"));
+var import_dotenv = __toESM(require("dotenv"));
 import_dotenv.default.config();
 const envSchema = import_joi.default.object({
   APP_PORT: import_joi.default.number().required(),
@@ -126,3 +126,4 @@ const env = {
 0 && (module.exports = {
   env
 });
+//# sourceMappingURL=environment.config.js.map

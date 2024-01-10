@@ -34,3 +34,4 @@ class Star {
     this.updated_at = star.updated_at || null;
   }
 }
+//# sourceMappingURL=Star.schema.js.map

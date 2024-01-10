@@ -1,0 +1,7 @@
+{
+  "version": 3,
+  "sources": ["../../../../src/@types/auth.type.ts"],
+  "sourcesContent": ["import { UserRole } from '@/constants/enums'\r\n\r\nexport type AuthUser = {\r\n    _id: string\r\n    role: UserRole\r\n    email: string\r\n}\r\n\r\nexport const authProviders = ['facebook', 'google'] as const\r\n\r\nexport type AuthProvider = (typeof authProviders)[number]\r\n"],
+  "mappings": ";;;;;;;;;;;;;;;;;AAAA;AAAA;AAAA;AAAA;AAAA;AAQO,MAAM,gBAAgB,CAAC,YAAY,QAAQ;",
+  "names": []
+}

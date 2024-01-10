@@ -50,3 +50,4 @@ class Order {
 0 && (module.exports = {
   orderStates
 });
+//# sourceMappingURL=Order.schema.js.map

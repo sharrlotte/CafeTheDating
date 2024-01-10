@@ -43,3 +43,4 @@ orderRouter.post("/", import_auth.requireLoginMiddleware, import_order2.createOr
 orderRouter.put("/:id", (0, import_auth.requireRoleMiddleware)(import_enums.UserRole.Admin), import_commons.objectIdValidator, (0, import_handler.wrapRequestHandler)(import_order.default.updateOrder));
 orderRouter.put("/:id/cancel", import_auth.requireLoginMiddleware, import_commons.objectIdValidator, (0, import_handler.wrapRequestHandler)(import_order.default.cancelOrder));
 var order_routes_default = orderRouter;
+//# sourceMappingURL=order.routes.js.map

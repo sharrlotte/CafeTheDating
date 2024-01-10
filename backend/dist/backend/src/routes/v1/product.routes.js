@@ -45,3 +45,4 @@ productRouter.post("/", (0, import_auth.requireRoleMiddleware)(import_enums.User
 productRouter.put("/:id", (0, import_auth.requireRoleMiddleware)(import_enums.UserRole.Admin), import_commons.objectIdValidator, (0, import_handler.wrapRequestHandler)(import_product.default.updateProduct));
 productRouter.delete("/:id", (0, import_auth.requireRoleMiddleware)(import_enums.UserRole.Admin), import_commons.objectIdValidator, (0, import_handler.wrapRequestHandler)(import_product.default.deleteProduct));
 var product_routes_default = productRouter;
+//# sourceMappingURL=product.routes.js.map

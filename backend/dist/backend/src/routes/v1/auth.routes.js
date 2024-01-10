@@ -42,3 +42,4 @@ authRouter.get("/google", import_passport.default.authenticate("google", { sessi
 authRouter.get("/callback/facebook", import_passport.default.authenticate("facebook", { session: false }), (0, import_handler.wrapRequestHandler)(import_auth.default.callback("facebook")));
 authRouter.get("/callback/google", import_passport.default.authenticate("google", { session: false }), (0, import_handler.wrapRequestHandler)(import_auth.default.callback("google")));
 var auth_routes_default = authRouter;
+//# sourceMappingURL=auth.routes.js.map

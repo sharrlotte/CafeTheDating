@@ -72,3 +72,4 @@ const createStarValidator = (0, import_validate.default)(
 0 && (module.exports = {
   createStarValidator
 });
+//# sourceMappingURL=star.middlewares.js.map

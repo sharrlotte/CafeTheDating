@@ -1,0 +1,7 @@
+{
+  "version": 3,
+  "sources": ["../../../../src/@types/tokenPayload.type.ts"],
+  "sourcesContent": ["import { SignOptions } from 'jsonwebtoken'\r\nimport { TokenType, UserRole } from '@/constants/enums'\r\n\r\nexport type TokenPayloadType = {\r\n  _id: string\r\n  email: string\r\n  role?: UserRole\r\n  token_type: TokenType\r\n}\r\n\r\nexport type SignTokenType = {\r\n  payload: TokenPayloadType\r\n  privateKey: string\r\n  options: SignOptions\r\n}\r\n\r\nexport type VerifyTokenType = {\r\n  token: string\r\n  secretOrPublicKey: string\r\n}\r\n"],
+  "mappings": ";;;;;;;;;;;;;AAAA;AAAA;",
+  "names": []
+}

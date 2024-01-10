@@ -6,9 +6,11 @@ import React from "react";
 import { useQuery } from "react-query";
 import OrtherCard from "./OrderCard";
 
+
 type Filter = {
   filter: OrderState;
 };
+
 export default function OrderItem({ filter }: Filter) {
   const { user } = useMe();
   const user_id = user?._id ?? "";
@@ -36,11 +38,11 @@ export default function OrderItem({ filter }: Filter) {
             <span>Tổng tiền</span>
           </div>
         </div>
-      </div>
-      <div className="flex flex-wrap gap-2">
-        {data.map((item) => (
-          <OrtherCard order={item} key={item._id} />
-        ))}
+        <div className="flex flex-wrap gap-2">
+          {data.map((item) => (
+            <OrtherCard order={item} key={item._id} />
+          ))}
+        </div>
       </div>
     </>
   );

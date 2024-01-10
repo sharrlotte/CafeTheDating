@@ -77,24 +77,24 @@ export default function Order() {
 
             <SelectContent className="w-[180px] rounded-lg p-2 bg-slate-200  mt-1">
               <SelectGroup>
-                <SelectItem key={"all"} value={"all"}>
-                  Tất cả
+                <SelectItem key={"all"} value={"Tất cả"}>
+                  {translate("all")}
                 </SelectItem>
 
                 <div className="border-black h-1 w-full border-b"></div>
-                <SelectItem key={"wait"} value={"pending"}>
-                  Chờ thanh toán
+                <SelectItem key={"wait"} value={"Thanh toán"}>
+                  {translate("pending")}
                 </SelectItem>
 
                 <div className="border-black h-1 w-full border-b"></div>
 
-                <SelectItem key={"complete"} value="completed">
-                  Hoàn thành
+                <SelectItem key={"complete"} value="Hoàn thành">
+                  {translate("completed")}
                 </SelectItem>
                 <div className="border-black h-1 w-full border-b"></div>
 
-                <SelectItem key={"canceled"} value="cancelled">
-                  Đã hủy
+                <SelectItem key={"canceled"} value="Đã hủy">
+                  {translate("cancelled")}
                 </SelectItem>
               </SelectGroup>
             </SelectContent>

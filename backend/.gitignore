@@ -1,16 +1,13 @@
 # See http://help.github.com/ignore-files/ for more about ignoring files.
 
 # compiled output
-dist
 tmp
 /out-tsc
 
-apps/api/.env
 
 # dependencies
 node_modules
 
-.env
 .eslintcache
 
 # IDEs and editors
@@ -192,7 +189,6 @@ __pycache__/
 .Python
 build/
 develop-eggs/
-dist/
 downloads/
 eggs/
 .eggs/
@@ -300,7 +296,6 @@ celerybeat.pid
 
 # Environments
 .env
-.venv
 env/
 venv/
 ENV/

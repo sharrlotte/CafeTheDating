@@ -73,3 +73,4 @@ const getWardValidator = (0, import_validate.default)(
   getDistrictValidator,
   getWardValidator
 });
+//# sourceMappingURL=province.middleware.js.map

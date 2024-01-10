@@ -32,3 +32,4 @@ class Like {
     this.created_at = item.created_at || /* @__PURE__ */ new Date();
   }
 }
+//# sourceMappingURL=Like.shema.js.map

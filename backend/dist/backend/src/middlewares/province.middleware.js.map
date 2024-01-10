@@ -1,0 +1,7 @@
+{
+  "version": 3,
+  "sources": ["../../../../src/middlewares/province.middleware.ts"],
+  "sourcesContent": ["import validate from '@/utils/validate'\r\nimport { checkSchema } from 'express-validator'\r\n\r\nexport const getDistrictValidator = validate(\r\n  checkSchema({\r\n    id: {\r\n      trim: true,\r\n      isInt: {\r\n        options: {\r\n          min: 0\r\n        },\r\n        errorMessage: 'Invalid province id'\r\n      }\r\n    }\r\n  })\r\n)\r\n\r\nexport const getWardValidator = validate(\r\n  checkSchema({\r\n    id: {\r\n      trim: true,\r\n      isInt: {\r\n        options: {\r\n          min: 0\r\n        },\r\n        errorMessage: 'Invalid province id'\r\n      }\r\n    },\r\n    did: {\r\n      trim: true,\r\n      isInt: {\r\n        options: {\r\n          min: 0\r\n        },\r\n        errorMessage: 'Invalid district id'\r\n      }\r\n    }\r\n  })\r\n)\r\n"],
+  "mappings": ";;;;;;;;;;;;;;;;;;;;;;;;;;;AAAA;AAAA;AAAA;AAAA;AAAA;AAAA;AAAA,sBAAqB;AACrB,+BAA4B;AAErB,MAAM,2BAAuB,gBAAAA;AAAA,MAClC,sCAAY;AAAA,IACV,IAAI;AAAA,MACF,MAAM;AAAA,MACN,OAAO;AAAA,QACL,SAAS;AAAA,UACP,KAAK;AAAA,QACP;AAAA,QACA,cAAc;AAAA,MAChB;AAAA,IACF;AAAA,EACF,CAAC;AACH;AAEO,MAAM,uBAAmB,gBAAAA;AAAA,MAC9B,sCAAY;AAAA,IACV,IAAI;AAAA,MACF,MAAM;AAAA,MACN,OAAO;AAAA,QACL,SAAS;AAAA,UACP,KAAK;AAAA,QACP;AAAA,QACA,cAAc;AAAA,MAChB;AAAA,IACF;AAAA,IACA,KAAK;AAAA,MACH,MAAM;AAAA,MACN,OAAO;AAAA,QACL,SAAS;AAAA,UACP,KAAK;AAAA,QACP;AAAA,QACA,cAAc;AAAA,MAChB;AAAA,IACF;AAAA,EACF,CAAC;AACH;",
+  "names": ["validate"]
+}

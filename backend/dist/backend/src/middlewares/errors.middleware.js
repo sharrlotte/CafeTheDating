@@ -51,3 +51,4 @@ const defaultErrorHandler = (err, req, res, next) => {
 0 && (module.exports = {
   defaultErrorHandler
 });
+//# sourceMappingURL=errors.middleware.js.map

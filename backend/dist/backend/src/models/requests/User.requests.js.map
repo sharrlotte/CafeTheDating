@@ -1,0 +1,7 @@
+{
+  "version": 3,
+  "sources": ["../../../../../src/models/requests/User.requests.ts"],
+  "sourcesContent": ["import { ObjectId } from 'mongodb'\r\nimport { ParsedUrlQuery } from 'querystring'\r\n\r\nexport interface RefreshTokenBody {\r\n  refresh_token: string\r\n}\r\nexport interface InfoTokenType {\r\n  _id: ObjectId\r\n  email: string\r\n  role: string\r\n  token_type: string\r\n  iat: number\r\n  exp: number\r\n}\r\n\r\nexport interface BlockUserBody {\r\n  blockedId: string\r\n}\r\n\r\nexport interface GetUsersByRoleQuery extends ParsedUrlQuery {\r\n  includes: string\r\n  pageNumber: string\r\n  limit: string\r\n}\r\n\r\nexport interface FavoriteBody {\r\n  friendId: string\r\n}\r\n"],
+  "mappings": ";;;;;;;;;;;;;AAAA;AAAA;",
+  "names": []
+}

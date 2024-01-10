@@ -1,0 +1,7 @@
+{
+  "version": 3,
+  "sources": ["../../../../src/controllers/star.controller.ts"],
+  "sourcesContent": ["import { NextFunction, Request, Response } from 'express'\r\nimport { ParamsDictionary } from 'express-serve-static-core'\r\nimport { StatusCodes } from 'http-status-codes'\r\nimport { ParsedUrlQuery } from 'querystring'\r\nimport { CreateStarBody } from '@/@types/request.type'\r\nimport starService from '@/services/star.service'\r\n\r\nconst starController = {\r\n  createStar: async (req: Request<ParamsDictionary, any, CreateStarBody, ParsedUrlQuery>, res: Response, next: NextFunction) => {\r\n    const result = await starService.createStar(req.body)\r\n    res.status(StatusCodes.OK).json(result)\r\n  }\r\n}\r\n\r\nexport default starController\r\n"],
+  "mappings": ";;;;;;;;;;;;;;;;;;;;;;;;;;;AAAA;AAAA;AAAA;AAAA;AAAA;AAEA,+BAA4B;AAG5B,kBAAwB;AAExB,MAAM,iBAAiB;AAAA,EACrB,YAAY,OAAO,KAAqE,KAAe,SAAuB;AAC5H,UAAM,SAAS,MAAM,YAAAA,QAAY,WAAW,IAAI,IAAI;AACpD,QAAI,OAAO,qCAAY,EAAE,EAAE,KAAK,MAAM;AAAA,EACxC;AACF;AAEA,IAAO,0BAAQ;",
+  "names": ["starService"]
+}

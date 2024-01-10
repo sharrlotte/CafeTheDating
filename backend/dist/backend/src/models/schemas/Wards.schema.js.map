@@ -1,0 +1,7 @@
+{
+  "version": 3,
+  "sources": ["../../../../../src/models/schemas/Wards.schema.ts"],
+  "sourcesContent": ["export default interface Ward {\r\n  name: string\r\n  code: number\r\n  codename: string\r\n  division_type: string\r\n}\r\n"],
+  "mappings": ";;;;;;;;;;;;;AAAA;AAAA;",
+  "names": []
+}

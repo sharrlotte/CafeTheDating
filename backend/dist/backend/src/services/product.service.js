@@ -136,3 +136,4 @@ class ProductService {
 }
 const productService = new ProductService();
 var product_service_default = productService;
+//# sourceMappingURL=product.service.js.map

@@ -25,3 +25,4 @@ const authProviders = ["facebook", "google"];
 0 && (module.exports = {
   authProviders
 });
+//# sourceMappingURL=auth.type.js.map

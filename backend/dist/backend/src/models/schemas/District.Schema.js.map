@@ -1,0 +1,7 @@
+{
+  "version": 3,
+  "sources": ["../../../../../src/models/schemas/District.Schema.ts"],
+  "sourcesContent": ["import Ward from \"@/models/schemas/Wards.schema\"\r\n\r\nexport default interface District {\r\n  name: string\r\n  code: number\r\n  codename: string\r\n  division_type: string\r\n  phone_code: number\r\n  wards: Ward[]\r\n}\r\n"],
+  "mappings": ";;;;;;;;;;;;;AAAA;AAAA;",
+  "names": []
+}

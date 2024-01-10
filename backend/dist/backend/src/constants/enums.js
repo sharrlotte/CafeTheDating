@@ -39,3 +39,4 @@ var UserRole = /* @__PURE__ */ ((UserRole2) => {
   TokenType,
   UserRole
 });
+//# sourceMappingURL=enums.js.map

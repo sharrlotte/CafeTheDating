@@ -13,3 +13,4 @@ var __copyProps = (to, from, except, desc) => {
 var __toCommonJS = (mod) => __copyProps(__defProp({}, "__esModule", { value: true }), mod);
 var Wards_schema_exports = {};
 module.exports = __toCommonJS(Wards_schema_exports);
+//# sourceMappingURL=Wards.schema.js.map

@@ -1,0 +1,7 @@
+{
+  "version": 3,
+  "sources": ["../../../../../src/models/schemas/ProductType.schema.ts"],
+  "sourcesContent": ["export const productTypes = ['drink', 'icescream', 'food', 'cafe', 'milk', 'cake', 'cream'] as const\r\ntype ProductType = (typeof productTypes)[number]\r\n\r\nexport default ProductType\r\n"],
+  "mappings": ";;;;;;;;;;;;;;;;;AAAA;AAAA;AAAA;AAAA;AAAA;AAAO,MAAM,eAAe,CAAC,SAAS,aAAa,QAAQ,QAAQ,QAAQ,QAAQ,OAAO;",
+  "names": []
+}

@@ -1,0 +1,7 @@
+{
+  "version": 3,
+  "sources": ["../../../../../src/models/schemas/Province.schema.ts"],
+  "sourcesContent": ["import District from \"@/models/schemas/District.Schema\"\r\n\r\nexport default interface Province {\r\n  name: string\r\n  code: number\r\n  codename: string\r\n  division_type: string\r\n  phone_code: number\r\n  districts: District[]\r\n}\r\n"],
+  "mappings": ";;;;;;;;;;;;;AAAA;AAAA;",
+  "names": []
+}

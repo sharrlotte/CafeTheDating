@@ -34,3 +34,4 @@ class RefreshToken {
     this.updated_at = refreshToken.updated_at || null;
   }
 }
+//# sourceMappingURL=RefreshToken.schema.js.map

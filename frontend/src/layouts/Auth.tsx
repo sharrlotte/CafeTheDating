@@ -9,14 +9,14 @@ type AuthProps = {
 };
 
 export default function Auth({ roles, children }: AuthProps) {
-  return children
-  // const { user } = useMe();
 
-  // if (!user || !user.role) {
-  //   return <Navigate to={"/login"}></Navigate>;
-  // }
+  const { user } = useMe();
 
-  // if (roles.includes(user.role)) return children;
+  if (!user || !user.role) {
+    return <Navigate to={"/login"}></Navigate>;
+  }
 
-  // return <Navigate to={"/login"}></Navigate>;
+  if (roles.includes(user.role)) return children;
+
+  return <Navigate to={"/login"}></Navigate>;
 }

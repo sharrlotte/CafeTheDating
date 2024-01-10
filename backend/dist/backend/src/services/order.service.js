@@ -38,7 +38,7 @@ class OrderService {
     const state = query.state;
     let orders;
     if (state && state !== "all") {
-      orders = await import_database.databaseService.orders.find({ state, user_id: new import_mongodb.ObjectId(userId) }).toArray();
+      orders = await import_database.databaseService.orders.find({ state, user_id: new import_mongodb.ObjectId(userId) }).sort("created_at", "desc").toArray();
     } else {
       orders = await import_database.databaseService.orders.find({ user_id: new import_mongodb.ObjectId(userId) }).toArray();
     }

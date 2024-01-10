@@ -48,7 +48,11 @@ const routes: RouteProps[] = [
   },
   {
     path: paths.order,
-    element: <Order />,
+    element: (
+      <Auth roles={[UserRole.User, UserRole.Admin]}>
+        <Order />
+      </Auth>
+    ),
   },
 ];
 

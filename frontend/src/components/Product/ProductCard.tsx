@@ -10,7 +10,7 @@ export default function ProductCard({ product }: ProductCardProps) {
 	return (
 		<div className='relative'>
 			<img
-				className='min-w'
+				className='w-[400px]'
 				onClick={() => addToCart(product)}
 				src={product.image}
 				alt={product.name}

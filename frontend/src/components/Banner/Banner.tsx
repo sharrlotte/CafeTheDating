@@ -24,7 +24,7 @@ export default function Banner() {
 
 	return (
 		<div className='p-4'>
-			<div className='bg-black h-1/4 rounded-lg w-full'>
+			<div className='bg-black rounded-lg w-full'>
 				<div className='text-white flex flex-row  h-full p-4 md:p-8 gap-4 justify-between relative flex-wrap '>
 					<div className='flex flex-col gap-4 justify-center'>
 						<span className='text-sm'>Lần đầu tiên! </span>

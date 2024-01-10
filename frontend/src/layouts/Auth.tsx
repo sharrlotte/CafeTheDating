@@ -1,7 +1,6 @@
 import { UserRole } from "@/type/User";
 import useMe from "@/zustand/useMe";
-import React, { ReactNode } from "react";
-import { Navigate, useNavigate } from "react-router-dom";
+import { Navigate } from "react-router-dom";
 
 type AuthProps = {
   roles: UserRole[];
@@ -9,8 +8,11 @@ type AuthProps = {
 };
 
 export default function Auth({ roles, children }: AuthProps) {
+  const { user, state } = useMe();
 
-  const { user } = useMe();
+  if (state === "loading") {
+    return <div>Loading</div>;
+  }
 
   if (!user || !user.role) {
     return <Navigate to={"/login"}></Navigate>;

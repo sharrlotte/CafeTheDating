@@ -80,7 +80,8 @@ function BackgroundImage() {
           const user: User = result.data;
           setMe(user);
         })
-        .catch((err) => {});
+        .catch(setMe)
+        .finally();
     }
   }, [setMe]);
 

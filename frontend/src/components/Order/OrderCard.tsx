@@ -10,7 +10,7 @@ export default function OrderCard({ order }: OrderCardProps) {
     const totalPrice =
       (order.price - ((order.discount || 0) * order.price) / 100) *
       order.amount;
-    return  pricy(totalPrice) ;
+    return pricy(totalPrice);
   };
   return (
     <div className="min-h-[80px] w-full  bg-white  ">
@@ -20,7 +20,7 @@ export default function OrderCard({ order }: OrderCardProps) {
         </div>
 
         <div className="w-full flex justify-center items-center  flex-col">
-          <div className=" flex justify-center items-start flex-col">
+          <div className="w-60 flex justify-center items-start flex-col">
             <span>Sản phẩm : {order.product_name}</span>
             <span>Số lượng: {order.amount}</span>
 

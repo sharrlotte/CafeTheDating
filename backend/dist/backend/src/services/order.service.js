@@ -40,7 +40,7 @@ class OrderService {
     if (state && state !== "all") {
       orders = await import_database.databaseService.orders.find({ state, user_id: new import_mongodb.ObjectId(userId) }).sort({ _id: -1 }).toArray();
     } else {
-      orders = await import_database.databaseService.orders.find({ user_id: new import_mongodb.ObjectId(userId) }).toArray();
+      orders = await import_database.databaseService.orders.find({ user_id: new import_mongodb.ObjectId(userId) }).sort({ _id: -1 }).toArray();
     }
     const items = orders.map(async (item) => {
       const product = await import_database.databaseService.products.findOne({ _id: new import_mongodb.ObjectId(item.product_id) });

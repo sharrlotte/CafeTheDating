@@ -72,28 +72,28 @@ export default function Order() {
               className="w-[180px] h-10 text-left p-2 bg-white border-border border-2 rounded-lg "
               value={filter}
             >
-              {filter}
+              {translate(filter)}
             </SelectTrigger>
 
             <SelectContent className="w-[180px] rounded-lg p-2 bg-slate-200  mt-1">
               <SelectGroup>
-                <SelectItem key={"all"} value={"Tất cả"}>
+                <SelectItem key={"all"} value={"all"}>
                   {translate("all")}
                 </SelectItem>
 
                 <div className="border-black h-1 w-full border-b"></div>
-                <SelectItem key={"wait"} value={"Thanh toán"}>
+                <SelectItem key={"wait"} value={"pending"}>
                   {translate("pending")}
                 </SelectItem>
 
                 <div className="border-black h-1 w-full border-b"></div>
 
-                <SelectItem key={"complete"} value="Hoàn thành">
+                <SelectItem key={"complete"} value="completed">
                   {translate("completed")}
                 </SelectItem>
                 <div className="border-black h-1 w-full border-b"></div>
 
-                <SelectItem key={"canceled"} value="Đã hủy">
+                <SelectItem key={"canceled"} value="canceled">
                   {translate("cancelled")}
                 </SelectItem>
               </SelectGroup>
@@ -107,7 +107,7 @@ export default function Order() {
     </>
   );
 }
-function translate(orderStates: string) {
+function translate(orderStates: string | undefined) {
   switch (orderStates) {
     case "all":
       return "Tất cả";

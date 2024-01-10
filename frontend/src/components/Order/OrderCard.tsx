@@ -1,26 +1,46 @@
 import Order from "@/type/Order";
-import Product, { productTypes } from "@/type/Product";
+
 import React from "react";
 type OrderCardProps = {
   order: Order;
 };
-type ProductCardProps = {
-  product: Product;
-};
+
 export default function OrderCard({ order }: OrderCardProps) {
   const calculateTotal = () => {
     const totalPrice = (order.price - (order.discount || 0)) * order.amount;
     return totalPrice.toLocaleString();
   };
   return (
-    <div className="h-20 w-full  bg-white  ">
-      <div className="w-full bg-white flex flex-row justify-between items-center overflow-auto max-h-[50%] divide-y ">
-        <div>{order._id}</div>
-        <div>Số lượng: {order.amount}</div>
-        <div>Giá: {order.price}</div>
-        <div>Sản phẩm : {}</div>
-        <p>Thành tiền: {calculateTotal()} VND</p>
+    <div className="min-h-[80px] w-full  bg-white  ">
+      <div className="w-full bg-white flex flex-row justify-between items-center overflow-auto gap-4 ">
+        <div className="w-full flex justify-center">
+          <div className="break-all w-32">{order._id}</div>
+        </div>
+
+        <div className="w-full flex justify-center items-center  flex-col">
+          <div className=" flex justify-center items-start flex-col">
+            <div>Sản phẩm : {order.product_name}</div>
+            <div>Số lượng: {order.amount}</div>
+            <div>Giá: {order.price}</div>
+            <div>Tình trạng: {translate(order.state)}</div>
+          </div>
+        </div>
+        <div className="w-full flex justify-center items-center">
+          <p> {calculateTotal()} VND</p>
+        </div>
       </div>
     </div>
   );
+}
+function translate(orderStates: string | undefined) {
+  switch (orderStates) {
+    case "all":
+      return "Tất cả";
+    case "pending":
+      return "Chờ thanh toán";
+    case "completed":
+      return "Hoàn thành";
+    case "cancelled":
+      return "Đã hủy";
+  }
 }

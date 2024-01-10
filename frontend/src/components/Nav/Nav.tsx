@@ -31,7 +31,7 @@ export default function Nav() {
   const { user, logout } = useMe();
 
   return (
-    <nav className="flex items-center justify-between md:justify-center  w-full  flex-wrap ">
+    <nav className="flex items-center justify-between   w-full  flex-wrap ">
       <div className="flex justify-start ">
         <a className="w-28  z-50 " href="/home">
           <img src="/img/Logo.svg" alt="TheDating"></img>

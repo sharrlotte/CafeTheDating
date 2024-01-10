@@ -52,7 +52,6 @@ export default function Order() {
             <TabsContent value="wait">
               <OrderItem filter="pending" />
             </TabsContent>
-
             <TabsContent value="complete">
               <OrderItem filter="completed" />
             </TabsContent>
@@ -75,11 +74,13 @@ export default function Order() {
             >
               {filter}
             </SelectTrigger>
+
             <SelectContent className="w-[180px] rounded-lg p-2 bg-slate-200  mt-1">
               <SelectGroup>
                 <SelectItem key={"all"} value={"all"}>
                   Tất cả
                 </SelectItem>
+
                 <div className="border-black h-1 w-full border-b"></div>
                 <SelectItem key={"wait"} value={"pending"}>
                   Chờ thanh toán
@@ -105,4 +106,16 @@ export default function Order() {
       </div>
     </>
   );
+}
+function translate(orderStates: string) {
+  switch (orderStates) {
+    case "all":
+      return "Tất cả";
+    case "pending":
+      return "Chờ thanh toán";
+    case "completed":
+      return "Hoàn thành";
+    case "cancelled":
+      return "Đã hủy";
+  }
 }

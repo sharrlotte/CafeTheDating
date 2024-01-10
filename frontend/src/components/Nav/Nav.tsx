@@ -45,7 +45,7 @@ export default function Nav() {
             />
 
             <Button
-              className="absolute right-28 top-12 bg-[hsla(126,100%,24%,1)] hover:bg-gray-400 rounded-full text-black w-24 h-14 z-50"
+              className="absolute right-28 top-12 bg-[hsla(126,100%,24%,0.69)] hover:bg-orange-500 rounded-full  w-24 h-14 z-50"
               onClick={() => logout()}
             >
               Đăng xuất
@@ -53,15 +53,10 @@ export default function Nav() {
           </div>
         ) : (
           <Button
-            className="bg-[hsla(126,100%,24%,1)] rounded-full hover:bg-gray-400 text-white w-24 h-14 top-12 right-14 sm:absolute"
+            className="rounded-full bg-[hsla(126,100%,24%,0.69)] hover:bg-orange-500   w-24 h-14 top-12 right-14 sm:absolute"
             asChild
           >
-            <Link
-              className=" group hover:text-[hsla(29,90%,58%,1)]"
-              to={"/login"}
-            >
-              {"Login"}
-            </Link>
+            <Link to={"/login"}>{"Đăng Nhập"}</Link>
           </Button>
         )}
       </div>

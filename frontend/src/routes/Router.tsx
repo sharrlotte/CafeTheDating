@@ -106,6 +106,7 @@ function BackgroundImage() {
 						}
 					/>
 				))}
+        
 				<Route
 					key={paths.admin}
 					path={paths.admin}

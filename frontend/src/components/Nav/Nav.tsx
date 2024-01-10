@@ -3,6 +3,7 @@ import Icons from '../../constants/icon';
 import React from 'react';
 import { Button } from '../ui/button';
 import { Link } from 'react-router-dom';
+import { UserRole } from '@/type/User';
 
 const paths = [
 	{
@@ -57,6 +58,18 @@ export default function Nav() {
 						</div>
 					</Link>
 				))}
+				{user && user.role === UserRole.Admin && (
+					<Link
+						key={-1}
+						className='group hover:text-[hsla(29,90%,58%,1)] relative flex justify-center items-center'
+						to={'/admin'}
+					>
+						Admin
+						<div className='opacity-0 group-hover:opacity-100 absolute translate-y-[20px] transition-opacity duration-500'>
+							<Icons.Arrow className='w-5' />
+						</div>
+					</Link>
+				)}
 			</div>
 			<div className='p-4 h-12'>
 				{user ? (

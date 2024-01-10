@@ -33,6 +33,7 @@ class Product {
   discount;
   created_at;
   updated_at;
+  deleted = false;
   constructor(product) {
     this._id = product._id;
     this.name = product.name;
@@ -50,3 +51,4 @@ class Product {
 0 && (module.exports = {
   productSorts
 });
+//# sourceMappingURL=Product.schema.js.map

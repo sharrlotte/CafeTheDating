@@ -39,3 +39,4 @@ const starController = {
   }
 };
 var star_controller_default = starController;
+//# sourceMappingURL=star.controller.js.map

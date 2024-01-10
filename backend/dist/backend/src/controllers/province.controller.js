@@ -43,3 +43,4 @@ const provinceController = {
   }
 };
 var province_controller_default = provinceController;
+//# sourceMappingURL=province.controller.js.map

@@ -1,0 +1,7 @@
+{
+  "version": 3,
+  "sources": ["../../../../../src/routes/v1/star.routes.ts"],
+  "sourcesContent": ["import { Router } from 'express'\r\nimport starController from '@/controllers/star.controller'\r\nimport { requireLoginMiddleware } from '@/middlewares/auth.middlewares'\r\nimport { createStarValidator } from '@/middlewares/star.middlewares'\r\nimport { wrapRequestHandler } from '@/utils/handler'\r\n\r\nconst startRouter = Router()\r\n\r\nstartRouter.post('/', requireLoginMiddleware, createStarValidator, wrapRequestHandler(starController.createStar))\r\n\r\nexport default startRouter\r\n"],
+  "mappings": ";;;;;;;;;;;;;;;;;;;;;;;;;;;AAAA;AAAA;AAAA;AAAA;AAAA;AAAA,qBAAuB;AACvB,kBAA2B;AAC3B,kBAAuC;AACvC,IAAAA,eAAoC;AACpC,qBAAmC;AAEnC,MAAM,kBAAc,uBAAO;AAE3B,YAAY,KAAK,KAAK,oCAAwB,sCAAqB,mCAAmB,YAAAC,QAAe,UAAU,CAAC;AAEhH,IAAO,sBAAQ;",
+  "names": ["import_star", "starController"]
+}

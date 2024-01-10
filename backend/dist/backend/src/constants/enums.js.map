@@ -1,0 +1,7 @@
+{
+  "version": 3,
+  "sources": ["../../../../src/constants/enums.ts"],
+  "sourcesContent": ["export enum TokenType {\r\n  AccessToken = 'AccessToken',\r\n  RefreshToken = 'RefreshToken',\r\n  ForgotPasswordToken = 'ForgotPasswordToken',\r\n  OTPVerify = 'OTPVerifyToken'\r\n}\r\n\r\nexport enum UserRole {\r\n  Admin = 'Admin',\r\n  Moderator = 'Moderator',\r\n  User = 'User'\r\n}\r\n"],
+  "mappings": ";;;;;;;;;;;;;;;;;AAAA;AAAA;AAAA;AAAA;AAAA;AAAA;AAAO,IAAK,YAAL,kBAAKA,eAAL;AACL,EAAAA,WAAA,iBAAc;AACd,EAAAA,WAAA,kBAAe;AACf,EAAAA,WAAA,yBAAsB;AACtB,EAAAA,WAAA,eAAY;AAJF,SAAAA;AAAA,GAAA;AAOL,IAAK,WAAL,kBAAKC,cAAL;AACL,EAAAA,UAAA,WAAQ;AACR,EAAAA,UAAA,eAAY;AACZ,EAAAA,UAAA,UAAO;AAHG,SAAAA;AAAA,GAAA;",
+  "names": ["TokenType", "UserRole"]
+}

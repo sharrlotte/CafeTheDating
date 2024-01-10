@@ -44,3 +44,4 @@ rootRouter.get("/health", (req, res) => {
   res.status(200).send("Healthy");
 });
 var routes_default = rootRouter;
+//# sourceMappingURL=index.js.map

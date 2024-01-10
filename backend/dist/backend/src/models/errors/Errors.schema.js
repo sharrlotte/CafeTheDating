@@ -59,3 +59,4 @@ class ErrorEnity extends ErrorWithStatus {
   ErrorEnity,
   ErrorWithStatus
 });
+//# sourceMappingURL=Errors.schema.js.map

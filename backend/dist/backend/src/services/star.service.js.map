@@ -1,0 +1,7 @@
+{
+  "version": 3,
+  "sources": ["../../../../src/services/star.service.ts"],
+  "sourcesContent": ["import { ObjectId } from 'mongodb'\r\nimport { CreateStarBody } from '@/@types/request.type'\r\nimport Star from '@/models/schemas/Star.schema'\r\nimport { databaseService } from '@/services/database.service'\r\n\r\nclass StarService {\r\n  async createStar(payload: CreateStarBody) {\r\n    await databaseService.stars.insertOne(new Star({ ...payload, user_id: new ObjectId(payload.user_id) }))\r\n  }\r\n}\r\n\r\nconst starService = new StarService()\r\nexport default starService\r\n"],
+  "mappings": ";;;;;;;;;;;;;;;;;;;;;;;;;;;AAAA;AAAA;AAAA;AAAA;AAAA;AAAA,qBAAyB;AAEzB,kBAAiB;AACjB,sBAAgC;AAEhC,MAAM,YAAY;AAAA,EAChB,MAAM,WAAW,SAAyB;AACxC,UAAM,gCAAgB,MAAM,UAAU,IAAI,YAAAA,QAAK,EAAE,GAAG,SAAS,SAAS,IAAI,wBAAS,QAAQ,OAAO,EAAE,CAAC,CAAC;AAAA,EACxG;AACF;AAEA,MAAM,cAAc,IAAI,YAAY;AACpC,IAAO,uBAAQ;",
+  "names": ["Star"]
+}

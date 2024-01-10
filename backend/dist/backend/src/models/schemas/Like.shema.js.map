@@ -1,0 +1,7 @@
+{
+  "version": 3,
+  "sources": ["../../../../../src/models/schemas/Like.shema.ts"],
+  "sourcesContent": ["import { ObjectId } from 'mongodb'\r\n\r\ninterface LikeType {\r\n  _id?: ObjectId\r\n  user_id: ObjectId\r\n  prod_id: ObjectId\r\n  created_at?: Date\r\n}\r\n\r\nexport default class Like {\r\n  _id?: ObjectId\r\n  user_id: ObjectId\r\n  prod_id: ObjectId\r\n  created_at: Date\r\n\r\n  constructor(item: LikeType) {\r\n    this._id = item._id\r\n    this.user_id = item.user_id\r\n    this.prod_id = item.prod_id\r\n    this.created_at = item.created_at || new Date()\r\n  }\r\n}\r\n"],
+  "mappings": ";;;;;;;;;;;;;;;;;AAAA;AAAA;AAAA;AAAA;AAAA;AASA,MAAO,KAAmB;AAAA,EACxB;AAAA,EACA;AAAA,EACA;AAAA,EACA;AAAA,EAEA,YAAY,MAAgB;AAC1B,SAAK,MAAM,KAAK;AAChB,SAAK,UAAU,KAAK;AACpB,SAAK,UAAU,KAAK;AACpB,SAAK,aAAa,KAAK,cAAc,oBAAI,KAAK;AAAA,EAChD;AACF;",
+  "names": []
+}

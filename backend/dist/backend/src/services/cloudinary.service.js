@@ -72,3 +72,4 @@ class CloudinaryService {
 }
 const cloudinaryService = new CloudinaryService();
 var cloudinary_service_default = cloudinaryService;
+//# sourceMappingURL=cloudinary.service.js.map

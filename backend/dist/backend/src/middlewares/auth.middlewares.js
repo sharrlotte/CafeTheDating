@@ -87,3 +87,4 @@ const requireRoleMiddleware = (...roles) => {
   requireLoginMiddleware,
   requireRoleMiddleware
 });
+//# sourceMappingURL=auth.middlewares.js.map

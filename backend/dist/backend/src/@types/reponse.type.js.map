@@ -1,0 +1,7 @@
+{
+  "version": 3,
+  "sources": ["../../../../src/@types/reponse.type.ts"],
+  "sourcesContent": ["import { ObjectId } from 'mongodb'\r\nimport { UserRole } from '@/constants/enums'\r\n\r\nexport type ResultRefreshTokenType = {\r\n  access_token: string\r\n  refresh_token: string\r\n}\r\n\r\nexport type ResultLoginType = {\r\n  _id: string\r\n  fullName: string\r\n  email: string\r\n  access_token: string\r\n  refresh_token: string\r\n}\r\n\r\nexport type UserResponseType = {\r\n  _id?: ObjectId\r\n  username: string\r\n  fullName?: string\r\n  email: string\r\n  phone?: string\r\n  date_of_birth: Date\r\n  age?: number\r\n  role?: UserRole\r\n  bio?: string\r\n  address?: string\r\n  website?: string\r\n  avatar?: string\r\n  cover_photo?: string\r\n  isOnline?: Boolean\r\n  created_at?: Date\r\n  updated_at?: Date\r\n}\r\n\r\nexport type PaginationType<T> = {\r\n  items: T[]\r\n  pageIndex: number\r\n  pageSize: number\r\n  totalRow: number\r\n}\r\n"],
+  "mappings": ";;;;;;;;;;;;;AAAA;AAAA;",
+  "names": []
+}

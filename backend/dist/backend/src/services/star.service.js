@@ -40,3 +40,4 @@ class StarService {
 }
 const starService = new StarService();
 var star_service_default = starService;
+//# sourceMappingURL=star.service.js.map

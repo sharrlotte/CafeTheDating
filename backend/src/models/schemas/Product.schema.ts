@@ -28,6 +28,7 @@ export default class Product {
   discount: number
   created_at?: Date
   updated_at?: Date
+  deleted: boolean = false
 
   constructor(product: ProductT) {
     this._id = product._id

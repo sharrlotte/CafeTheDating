@@ -1,9 +1,10 @@
-import Order from "@/components/Order/Order";
+import Order from "../components/Order/Order";
 
 interface Order {
   _id: string;
   price: number;
   discount: number;
+  product_name: string;
   product_id: string;
   amount: number;
   address: string;
@@ -20,8 +21,8 @@ export const orderStates = [
   "shipping",
   "completed",
   "canceled",
-    "refused",
-  undefined
+  "refused",
+  undefined,
 ] as const;
 
 export type OrderState = (typeof orderStates)[number];

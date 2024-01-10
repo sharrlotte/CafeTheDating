@@ -1,0 +1,7 @@
+{
+  "version": 3,
+  "sources": ["../../../../src/utils/handler.ts"],
+  "sourcesContent": ["import { RequestHandler, Request, Response, NextFunction } from 'express'\r\n\r\nexport const wrapRequestHandler = (func: RequestHandler) => {\r\n  return async (req: Request, res: Response, next: NextFunction) => {\r\n    try {\r\n      await func(req, res, next)\r\n    } catch (error) {\r\n      next(error)\r\n    }\r\n  }\r\n}\r\n"],
+  "mappings": ";;;;;;;;;;;;;;;;;AAAA;AAAA;AAAA;AAAA;AAAA;AAEO,MAAM,qBAAqB,CAAC,SAAyB;AAC1D,SAAO,OAAO,KAAc,KAAe,SAAuB;AAChE,QAAI;AACF,YAAM,KAAK,KAAK,KAAK,IAAI;AAAA,IAC3B,SAAS,OAAP;AACA,WAAK,KAAK;AAAA,IACZ;AAAA,EACF;AACF;",
+  "names": []
+}

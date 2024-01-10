@@ -1,0 +1,7 @@
+{
+  "version": 3,
+  "sources": ["../../../../src/controllers/province.controller.ts"],
+  "sourcesContent": ["import { sendResponse } from '@/config/response.config'\r\nimport provinceService from '@/services/province.service'\r\nimport { Request, Response, NextFunction } from 'express'\r\nimport { ParamsDictionary } from 'express-serve-static-core'\r\nimport { ParsedUrlQuery } from 'querystring'\r\n\r\nconst provinceController = {\r\n  getProvince: async (req: Request<ParamsDictionary, any, any, ParsedUrlQuery>, res: Response, next: NextFunction) => {\r\n    return await provinceService.getProvince()\r\n  },\r\n  getDistrict: async (req: Request<ParamsDictionary, any, any, ParsedUrlQuery>, res: Response, next: NextFunction) => {\r\n    return await provinceService.getDistrict(req.params.id)\r\n  },\r\n\r\n  getWard: async (req: Request<ParamsDictionary, any, any, ParsedUrlQuery>, res: Response, next: NextFunction) => {\r\n    return await provinceService.getWard(req.params.id, req.params.did)\r\n  }\r\n}\r\n\r\nexport default provinceController\r\n"],
+  "mappings": ";;;;;;;;;;;;;;;;;;;;;;;;;;;AAAA;AAAA;AAAA;AAAA;AAAA;AACA,sBAA4B;AAK5B,MAAM,qBAAqB;AAAA,EACzB,aAAa,OAAO,KAA0D,KAAe,SAAuB;AAClH,WAAO,MAAM,gBAAAA,QAAgB,YAAY;AAAA,EAC3C;AAAA,EACA,aAAa,OAAO,KAA0D,KAAe,SAAuB;AAClH,WAAO,MAAM,gBAAAA,QAAgB,YAAY,IAAI,OAAO,EAAE;AAAA,EACxD;AAAA,EAEA,SAAS,OAAO,KAA0D,KAAe,SAAuB;AAC9G,WAAO,MAAM,gBAAAA,QAAgB,QAAQ,IAAI,OAAO,IAAI,IAAI,OAAO,GAAG;AAAA,EACpE;AACF;AAEA,IAAO,8BAAQ;",
+  "names": ["provinceService"]
+}

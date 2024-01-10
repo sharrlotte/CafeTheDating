@@ -1,12 +1,11 @@
-import dotenv from 'dotenv'
 import Joi from 'joi'
+import dotenv from 'dotenv'
 
 dotenv.config()
 
 // Validation schema env
 const envSchema = Joi.object({
   APP_PORT: Joi.number().required(),
-  APP_HOST: Joi.string().required(),
   NODE_ENV: Joi.string().valid('development', 'production', 'test').default('development'),
   DB_NAME: Joi.string().required(),
   DB_REFRESH_TOKEN_COLLECTION: Joi.string().required(),
@@ -24,8 +23,6 @@ const envSchema = Joi.object({
   ACCESS_TOKEN_EXPIRESIN: Joi.string().required(),
   REFRESH_TOKEN_EXPIRESIN: Joi.string().required(),
   JWT_ALGORITHM: Joi.string().required(),
-  COOKIES_EXPIRESIN: Joi.number().required(),
-  SECRET_COOKIE_NAME: Joi.string().required(),
   CLOUDINARY_KEY: Joi.string().required(),
   CLOUDINARY_SECRET: Joi.string().required(),
   CLOUDINARY_NAME: Joi.string().required(),
@@ -84,11 +81,6 @@ export const env = {
     max_items: 20
   },
   auth: {
-    facebook: {
-      client_id: envVars.FACEBOOK_AUTH_CLIENT_ID,
-      client_secret: envVars.FACEBOOK_AUTH_CLIENT_SECRET,
-      callback_url: envVars.FACEBOOK_AUTH_CALLBACK_URL
-    },
     google: {
       client_id: envVars.GOOGLE_AUTH_CLIENT_ID,
       client_secret: envVars.GOOGLE_AUTH_CLIENT_SECRET,

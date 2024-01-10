@@ -1,6 +1,5 @@
 import { StatusCodes } from 'http-status-codes'
 import { ObjectId } from 'mongodb'
-import { Multer } from 'multer'
 import { ParsedUrlQuery } from 'querystring'
 import { AuthUser } from '@/@types/auth.type'
 import { CreateProductBody, UpdateProductBody } from '@/@types/request.type'
@@ -67,6 +66,7 @@ class ProductService {
         return await databaseService.products
           .find({
             product_type: product_type,
+            deleted: false,
             discount: {
               $gt: 0
             }
@@ -78,6 +78,7 @@ class ProductService {
         return await databaseService.products
           .find({
             product_type: product_type,
+            deleted: false,
             tags: {
               $in: ['best-choice']
             }
@@ -88,6 +89,7 @@ class ProductService {
         return await databaseService.products
           .find({
             product_type: product_type,
+            deleted: false,
             tags: {
               $in: ['new']
             }
@@ -97,7 +99,8 @@ class ProductService {
       default:
         return await databaseService.products
           .find({
-            product_type: product_type
+            product_type: product_type,
+            deleted: false
           })
           .toArray()
     }
@@ -108,7 +111,7 @@ class ProductService {
 
     await databaseService.products.insertOne(new Product({ ...payload, image: url }))
   }
-async updateProduct(id: string, payload: UpdateProductBody) {
+  async updateProduct(id: string, payload: UpdateProductBody) {
     await databaseService.products.updateOne(
       { _id: new ObjectId(id) },
       {
@@ -121,7 +124,15 @@ async updateProduct(id: string, payload: UpdateProductBody) {
   }
 
   async deleteProduct(id: string) {
-    await databaseService.products.deleteOne({ _id: new ObjectId(id) })
+    await databaseService.products.updateOne(
+      { _id: new ObjectId(id) },
+      {
+        $set: {
+          deleted: true
+        }
+      },
+      { upsert: false }
+    )
   }
 
   async uploadImage(id: string, image: Express.Multer.File) {

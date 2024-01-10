@@ -15,76 +15,76 @@ import useMe from "@/zustand/useMe";
 import api from "@/api/api";
 import MenuAdmin from "@/routes/admin/menuadmin/MenuAdmin";
 import Auth from "@/layouts/Auth";
-import Employee from "@/components/Employee/Employee";
 
 type RouteProps = {
-  path: string;
-  element: ReactNode;
+	path: string;
+	element: ReactNode;
 };
 
 const routes: RouteProps[] = [
-  {
-    path: "/",
-    element: <HomePage />,
-  },
-  {
-    path: paths.home,
-    element: <HomePage />,
-  },
-  {
-    path: paths.login,
-    element: <LoginPage />,
-  },
-  {
-    path: paths.menu,
-    element: <MenuPage />,
-  },
-  {
-    path: paths.news,
-    element: <MenuNew />,
-  },
-  {
-    path: paths.about,
-    element: <About />,
-  },
-  {
-    path: paths.order,
-    element: (
-      <Auth roles={[UserRole.User, UserRole.Admin]}>
-        <Order />
-      </Auth>
-    ),
-  },
+	{
+		path: '/',
+		element: <HomePage />,
+	},
+	{
+		path: paths.home,
+		element: <HomePage />,
+	},
+	{
+		path: paths.login,
+		element: <LoginPage />,
+	},
+	{
+		path: paths.menu,
+		element: <MenuPage />,
+	},
+	{
+		path: paths.news,
+		element: <MenuNew />,
+	},
+	{
+		path: paths.about,
+		element: <About />,
+	},
+	{
+		path: paths.order,
+		element: (
+			<Auth roles={[UserRole.User, UserRole.Admin]}>
+				<Order />
+			</Auth>
+		),
+	},
 ];
 
 export default function Router() {
-  return (
-    <BrowserRouter>
-      <BackgroundImage />
-    </BrowserRouter>
-  );
+	return (
+		<BrowserRouter>
+			<BackgroundImage />
+		</BrowserRouter>
+	);
 }
 
 function BackgroundImage() {
-  const { pathname } = useLocation();
-  const { setMe } = useMe();
+	const { pathname } = useLocation();
+	const { setMe } = useMe();
 
-  useEffect(() => {
-    const accessToken = localStorage.getItem("access_token");
+	useEffect(() => {
+		const accessToken = localStorage.getItem('access_token');
 
-    if (accessToken) {
-      api.defaults.headers["Authorization"] = "Bearer " + accessToken;
+		if (accessToken) {
+			api.defaults.headers['Authorization'] = 'Bearer ' + accessToken;
 
-      api
-        .get("/users/@me/profile")
-        .then((result) => {
-          const user: User = result.data;
-          setMe(user);
-        })
-        .catch(setMe)
-        .finally();
-    }
-  }, [setMe]);
+			api
+				.get('/users/@me/profile')
+				.then((result) => {
+					const user: User = result.data;
+					setMe(user);
+				})
+				.catch(() => setMe());
+		} else {
+			setMe();
+		}
+	}, [setMe]);
 
   return (
     <div
@@ -113,17 +113,6 @@ function BackgroundImage() {
           element={
             <Auth roles={[UserRole.Admin]}>
               <MenuAdmin />
-            </Auth>
-          }
-        />
-        <Route
-          key={paths.employee}
-          path={paths.employee}
-          element={
-            <Auth roles={[UserRole.Admin]}>
-              <div>
-                <Employee />
-              </div>
             </Auth>
           }
         />

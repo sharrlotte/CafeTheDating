@@ -13,8 +13,10 @@ function createAxiosResponseInterceptor() {
 				return Promise.reject(error);
 			}
 
-			lock.acquire();
 			await lock.await();
+			lock.acquire();
+
+			console.log('request');
 
 			api.interceptors.response.eject(interceptor);
 

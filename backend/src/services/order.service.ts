@@ -18,7 +18,7 @@ class OrderService {
     }
 
     return orders.map(async (item) => {
-      const product = await databaseService.products.findOne({ _id: new ObjectId(item._id) })
+      const product = await databaseService.products.findOne({ _id: new ObjectId(item.product_id) })
 
       if (!product) {
         throw new Error('Order product not found')

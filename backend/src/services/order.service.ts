@@ -17,7 +17,10 @@ class OrderService {
         .sort({ _id: -1 })
         .toArray()
     } else {
-      orders = await databaseService.orders.find({ user_id: new ObjectId(userId) }).toArray()
+      orders = await databaseService.orders
+        .find({ user_id: new ObjectId(userId) })
+        .sort({ _id: -1 })
+        .toArray()
     }
 
     const items = orders.map(async (item) => {

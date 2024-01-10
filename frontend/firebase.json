@@ -1,22 +1,28 @@
 {
-  "hosting": {
-    "site": "thedatingcoffee",
-    "public": "build",
-    "ignore": [
-      "firebase.json",
-      "database-rules.json",
-      "**/node_modules/**"
-    ],
-    "headers": [
-      {
-        "source": "**/*.@(js|html)",
+    "hosting": {
+        "rewrites": [
+            {
+                "source": "**",
+                "destination": "/index.html"
+            }
+        ],
+        "site": "thedatingcoffee",
+        "public": "build",
+        "ignore": [
+            "firebase.json",
+            "database-rules.json",
+            "**/node_modules/**"
+        ],
         "headers": [
-          {
-            "key": "Cache-Control",
-            "value": "max-age=0"
-          }
+            {
+                "source": "**/*.@(js|html)",
+                "headers": [
+                    {
+                        "key": "Cache-Control",
+                        "value": "max-age=0"
+                    }
+                ]
+            }
         ]
-      }
-    ]
-  }
+    }
 }

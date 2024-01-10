@@ -4,7 +4,9 @@ const routes = {
   menu: "/menu",
   news: "/news",
   about: "/about",
-  order:"/order"
+  order: "/order",
+  admin: "/admin",
+  employee: "/employee"
 } as const;
 
 export default routes;

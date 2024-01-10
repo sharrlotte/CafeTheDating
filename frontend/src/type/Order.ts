@@ -4,6 +4,7 @@ interface Order {
   _id: string;
   price: number;
   discount: number;
+  product_name: string;
   product_id: string;
   amount: number;
   address: string;

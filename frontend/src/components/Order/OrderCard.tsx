@@ -1,26 +1,53 @@
 import Order from "@/type/Order";
-import Product, { productTypes } from "@/type/Product";
+import { pricy } from "../../lib/util";
 import React from "react";
 type OrderCardProps = {
   order: Order;
 };
-type ProductCardProps = {
-  product: Product;
-};
+
 export default function OrderCard({ order }: OrderCardProps) {
   const calculateTotal = () => {
-    const totalPrice = (order.price - (order.discount || 0)) * order.amount;
-    return totalPrice.toLocaleString();
+    const totalPrice =
+      (order.price - ((order.discount || 0) * order.price) / 100) *
+      order.amount;
+    return pricy(totalPrice);
   };
   return (
-    <div className="h-20 w-full  bg-white  ">
-      <div className="w-full bg-white flex flex-row justify-between items-center overflow-auto max-h-[50%] divide-y ">
-        <div>{order._id}</div>
-        <div>Số lượng: {order.amount}</div>
-        <div>Giá: {order.price}</div>
-        <div>Sản phẩm : {}</div>
-        <p>Thành tiền: {calculateTotal()} VND</p>
+    <div className="min-h-[80px] w-full  bg-white  ">
+      <div className="w-full bg-white flex flex-row justify-between items-center overflow-auto gap-4 ">
+        <div className="w-full flex justify-center">
+          <div className="break-all md:break-keep w-32">{order._id}</div>
+        </div>
+
+        <div className="w-full flex justify-center items-center  flex-col">
+          <div className="w-60 flex justify-center items-start flex-col">
+            <span>Sản phẩm : {order.product_name}</span>
+            <span>Số lượng: {order.amount}</span>
+
+            <span>Giá: {pricy(order.price)}</span>
+            <span>
+              Giảm giá: {order.discount || 0}%{" - "}
+              {pricy(((order.price * order.discount) / 100) * order.amount)}
+            </span>
+            <span>Tình trạng: {translate(order.state)}</span>
+          </div>
+        </div>
+        <div className="w-full flex justify-center items-center">
+          <p> {calculateTotal()} </p>
+        </div>
       </div>
     </div>
   );
+}
+function translate(orderStates: string | undefined) {
+  switch (orderStates) {
+    case "all":
+      return "Tất cả";
+    case "pending":
+      return "Chờ thanh toán";
+    case "completed":
+      return "Hoàn thành";
+    case "cancelled":
+      return "Đã hủy";
+  }
 }

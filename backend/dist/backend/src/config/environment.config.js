@@ -30,12 +30,11 @@ __export(environment_config_exports, {
   env: () => env
 });
 module.exports = __toCommonJS(environment_config_exports);
-var import_dotenv = __toESM(require("dotenv"));
 var import_joi = __toESM(require("joi"));
+var import_dotenv = __toESM(require("dotenv"));
 import_dotenv.default.config();
 const envSchema = import_joi.default.object({
   APP_PORT: import_joi.default.number().required(),
-  APP_HOST: import_joi.default.string().required(),
   NODE_ENV: import_joi.default.string().valid("development", "production", "test").default("development"),
   DB_NAME: import_joi.default.string().required(),
   DB_REFRESH_TOKEN_COLLECTION: import_joi.default.string().required(),
@@ -53,8 +52,6 @@ const envSchema = import_joi.default.object({
   ACCESS_TOKEN_EXPIRESIN: import_joi.default.string().required(),
   REFRESH_TOKEN_EXPIRESIN: import_joi.default.string().required(),
   JWT_ALGORITHM: import_joi.default.string().required(),
-  COOKIES_EXPIRESIN: import_joi.default.number().required(),
-  SECRET_COOKIE_NAME: import_joi.default.string().required(),
   CLOUDINARY_KEY: import_joi.default.string().required(),
   CLOUDINARY_SECRET: import_joi.default.string().required(),
   CLOUDINARY_NAME: import_joi.default.string().required(),
@@ -108,11 +105,6 @@ const env = {
     max_items: 20
   },
   auth: {
-    facebook: {
-      client_id: envVars.FACEBOOK_AUTH_CLIENT_ID,
-      client_secret: envVars.FACEBOOK_AUTH_CLIENT_SECRET,
-      callback_url: envVars.FACEBOOK_AUTH_CALLBACK_URL
-    },
     google: {
       client_id: envVars.GOOGLE_AUTH_CLIENT_ID,
       client_secret: envVars.GOOGLE_AUTH_CLIENT_SECRET,

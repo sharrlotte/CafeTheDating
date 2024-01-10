@@ -6,7 +6,6 @@ import React from "react";
 import { useQuery } from "react-query";
 import OrtherCard from "./OrderCard";
 
-
 type Filter = {
   filter: OrderState;
 };
@@ -38,7 +37,7 @@ export default function OrderItem({ filter }: Filter) {
             <span>Tổng tiền</span>
           </div>
         </div>
-        <div className="flex flex-wrap gap-2">
+        <div className="flex flex-wrap gap-2 overflow-auto max-h-[90%] divide-y">
           {data.map((item) => (
             <OrtherCard order={item} key={item._id} />
           ))}

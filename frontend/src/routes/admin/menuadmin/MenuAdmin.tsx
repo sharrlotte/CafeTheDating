@@ -4,8 +4,8 @@ import { Link } from 'react-router-dom';
 import Search from '@/components/Search/Search';
 import AddItemsAdmin from '@/components/AddItemsAdmin/AddItemsAdmin';
 import { TabsList, TabsTrigger, TabsContent } from '@radix-ui/react-tabs';
-import MenuAdminItems from '../MenuAdminItems';
 import { Tabs } from '@/components/ui/tabs';
+import MenuAdminItems from '@/routes/admin/menuadmin/MenuAdminItems';
 
 const paths = [
 	{

@@ -73,7 +73,7 @@ class ProductService {
               $gt: 0
             }
           })
-          .sort({ discount: 'desc' })
+          .sort({ discount: 'desc', _id: 'desc' })
           .toArray()
 
       case 'best-choice':
@@ -85,6 +85,7 @@ class ProductService {
               $in: ['best-choice']
             }
           })
+          .sort({ _id: 'desc' })
           .toArray()
 
       case 'new':
@@ -96,6 +97,7 @@ class ProductService {
               $in: ['new']
             }
           })
+          .sort({ _id: 'desc' })
           .toArray()
 
       default:
@@ -104,6 +106,7 @@ class ProductService {
             ...q,
             deleted: false
           })
+          .sort({ _id: 'desc' })
           .toArray()
     }
   }
@@ -135,12 +138,6 @@ class ProductService {
       },
       { upsert: false }
     )
-  }
-
-  async uploadImage(id: string, image: Express.Multer.File) {
-    const result = await cloudinaryService.uploadImage('products', image.buffer)
-
-    return result.url
   }
 }
 

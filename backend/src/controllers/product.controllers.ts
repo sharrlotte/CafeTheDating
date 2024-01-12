@@ -21,10 +21,6 @@ const productController = {
   deleteProduct: async (req: Request<ParamsDictionary, any, any, ParsedUrlQuery>, res: Response, next: NextFunction) => {
     const result = await productService.deleteProduct(req.params.id)
     res.status(StatusCodes.OK).json(result)
-  },
-  uploadImage: async (req: Request<ParamsDictionary, any, any, ParsedUrlQuery>, res: Response, next: NextFunction) => {
-    const result = await productService.uploadImage(req.params.id, req.file)
-    res.status(StatusCodes.OK).json({ url: result })
   }
 }
 

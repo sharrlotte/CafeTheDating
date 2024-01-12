@@ -4,7 +4,7 @@ import Footer from '@/components/Footer/Footer';
 import Nav from '@/components/Nav/Nav';
 import Auth from '@/layouts/Auth';
 import { cn } from '@/lib/util';
-import Admin from '@/routes/admin/menuadmin/Admin';
+import Admin from '@/routes/admin/menu/Admin';
 import HomePage from '@/routes/home/HomePage';
 import LoginPage from '@/routes/login/LoginPage';
 import MenuNew from '@/routes/menu/MenuNew';

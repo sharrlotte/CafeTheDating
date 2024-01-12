@@ -21,13 +21,12 @@ __export(RefreshToken_schema_exports, {
 });
 module.exports = __toCommonJS(RefreshToken_schema_exports);
 class RefreshToken {
-  _id;
+  id;
   user_id;
   token;
   created_at;
   updated_at;
   constructor(refreshToken) {
-    this._id = refreshToken._id;
     this.user_id = refreshToken.user_id;
     this.token = refreshToken.token;
     this.created_at = refreshToken.created_at || /* @__PURE__ */ new Date();

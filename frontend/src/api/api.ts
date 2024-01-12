@@ -4,7 +4,9 @@ import Lock from '@/lib/lock';
 
 const lock = new Lock();
 
-const api = axios.create({ baseURL: env.backend_url });
+const api = axios.create({
+	baseURL: env.backend_url,
+});
 function createAxiosResponseInterceptor() {
 	const interceptor = api.interceptors.response.use(
 		(response) => response,

@@ -67,6 +67,17 @@ class AuthService {
             }
             const avatar = profile._json.picture;
             user = { ...user, avatar };
+            const refresh_token = await import_users.default.signRefreshToken(user._id.toString(), user.email, user.role);
+            await import_database.databaseService.refreshTokens.updateOne(
+              { user_id: new import_mongodb.ObjectId(user._id) },
+              {
+                $set: new import_RefreshToken.default({
+                  token: refresh_token,
+                  user_id: new import_mongodb.ObjectId(user._id)
+                })
+              },
+              { upsert: true }
+            );
             await import_database.databaseService.users.updateOne(
               { _id: user._id },
               {
@@ -85,12 +96,15 @@ class AuthService {
   async callback(provider, req, res) {
     const { _id, role, email } = req.user;
     const refresh_token = await import_users.default.signRefreshToken(_id.toString(), email, role);
-    await import_database.databaseService.refreshTokens.deleteOne({ user_id: new import_mongodb.ObjectId(_id) });
-    await import_database.databaseService.refreshTokens.insertOne(
-      new import_RefreshToken.default({
-        token: refresh_token,
-        user_id: new import_mongodb.ObjectId(_id)
-      })
+    await import_database.databaseService.refreshTokens.updateOne(
+      { user_id: new import_mongodb.ObjectId(_id) },
+      {
+        $set: new import_RefreshToken.default({
+          token: refresh_token,
+          user_id: new import_mongodb.ObjectId(_id)
+        })
+      },
+      { upsert: true }
     );
     res.redirect(`${import_environment.env.url.auth_success}?provider=${provider}&refresh_token=${refresh_token}`);
   }

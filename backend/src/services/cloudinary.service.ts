@@ -4,6 +4,7 @@ import { env } from '@/config/environment.config'
 import streamifier from 'streamifier'
 import { ErrorWithStatus } from '@/models/errors/Errors.schema'
 import _ from 'lodash'
+import { StatusCodes } from 'http-status-codes'
 
 cloudinary.config({
   api_secret: env.cloudinary.secret,
@@ -13,6 +14,10 @@ cloudinary.config({
 
 class CloudinaryService {
   async uploadImage(folder: string, imageBuffer: Buffer) {
+    if (!imageBuffer) {
+      throw new ErrorWithStatus({ message: 'Image is invalid', statusCode: StatusCodes.BAD_REQUEST })
+    }
+
     return await new Promise<UploadApiResponse>((resolve, reject) => {
       const stream = cloudinary.uploader.upload_stream({ folder, format: 'jpg' }, (error, result) => {
         if (result) {

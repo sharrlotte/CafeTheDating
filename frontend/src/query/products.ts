@@ -10,3 +10,7 @@ const getProducts = async (
     .then((result) => result.data);
 };
 export { getProducts };
+  
+export async function createProduct() {
+  
+}

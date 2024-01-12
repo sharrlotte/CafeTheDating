@@ -91,7 +91,7 @@ class ProductService {
           discount: {
             $gt: 0
           }
-        }).sort({ discount: "desc" }).toArray();
+        }).sort({ discount: "desc", _id: "desc" }).toArray();
       case "best-choice":
         return await import_database.databaseService.products.find({
           product_type,
@@ -99,7 +99,7 @@ class ProductService {
           tags: {
             $in: ["best-choice"]
           }
-        }).toArray();
+        }).sort({ _id: "desc" }).toArray();
       case "new":
         return await import_database.databaseService.products.find({
           product_type,
@@ -107,12 +107,12 @@ class ProductService {
           tags: {
             $in: ["new"]
           }
-        }).toArray();
+        }).sort({ _id: "desc" }).toArray();
       default:
         return await import_database.databaseService.products.find({
           product_type,
           deleted: false
-        }).toArray();
+        }).sort({ _id: "desc" }).toArray();
     }
   }
   async createProduct(payload, file) {
@@ -140,10 +140,6 @@ class ProductService {
       },
       { upsert: false }
     );
-  }
-  async uploadImage(id, image) {
-    const result = await import_cloudinary.default.uploadImage("products", image.buffer);
-    return result.url;
   }
 }
 const productService = new ProductService();

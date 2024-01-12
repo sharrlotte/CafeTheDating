@@ -85,7 +85,11 @@ const createProductValidator = (0, import_validate.default)(
     {
       name: {
         trim: true,
+<<<<<<< HEAD
         isEmpty: {
+=======
+        notEmpty: {
+>>>>>>> 93d82a8e4c94550cd17d67347d4cd1aa7b121353
           errorMessage: "Product name can not be empty"
         },
         isString: {
@@ -101,7 +105,11 @@ const createProductValidator = (0, import_validate.default)(
       },
       description: {
         trim: true,
+<<<<<<< HEAD
         isEmpty: {
+=======
+        notEmpty: {
+>>>>>>> 93d82a8e4c94550cd17d67347d4cd1aa7b121353
           errorMessage: "Product description can not be empty"
         },
         isString: {
@@ -117,7 +125,11 @@ const createProductValidator = (0, import_validate.default)(
       },
       price: {
         trim: true,
+<<<<<<< HEAD
         isEmpty: {
+=======
+        notEmpty: {
+>>>>>>> 93d82a8e4c94550cd17d67347d4cd1aa7b121353
           errorMessage: "Product price can not be empty"
         },
         isDecimal: {
@@ -137,7 +149,11 @@ const createProductValidator = (0, import_validate.default)(
       },
       tags: {
         trim: true,
+<<<<<<< HEAD
         isEmpty: {
+=======
+        notEmpty: {
+>>>>>>> 93d82a8e4c94550cd17d67347d4cd1aa7b121353
           errorMessage: "Product price can not be empty"
         },
         isArray: {
@@ -146,7 +162,11 @@ const createProductValidator = (0, import_validate.default)(
       },
       product_type: {
         trim: true,
+<<<<<<< HEAD
         isEmpty: {
+=======
+        notEmpty: {
+>>>>>>> 93d82a8e4c94550cd17d67347d4cd1aa7b121353
           errorMessage: "Product type can not be empty"
         },
         isString: {
@@ -173,7 +193,11 @@ const updateProductValidator = (0, import_validate.default)(
     {
       name: {
         trim: true,
+<<<<<<< HEAD
         isEmpty: {
+=======
+        notEmpty: {
+>>>>>>> 93d82a8e4c94550cd17d67347d4cd1aa7b121353
           errorMessage: "Product name can not be empty"
         },
         isString: {
@@ -189,7 +213,11 @@ const updateProductValidator = (0, import_validate.default)(
       },
       description: {
         trim: true,
+<<<<<<< HEAD
         isEmpty: {
+=======
+        notEmpty: {
+>>>>>>> 93d82a8e4c94550cd17d67347d4cd1aa7b121353
           errorMessage: "Product description can not be empty"
         },
         isString: {
@@ -205,7 +233,11 @@ const updateProductValidator = (0, import_validate.default)(
       },
       price: {
         trim: true,
+<<<<<<< HEAD
         isEmpty: {
+=======
+        notEmpty: {
+>>>>>>> 93d82a8e4c94550cd17d67347d4cd1aa7b121353
           errorMessage: "Product price can not be empty"
         },
         isDecimal: {
@@ -225,7 +257,11 @@ const updateProductValidator = (0, import_validate.default)(
       },
       tags: {
         trim: true,
+<<<<<<< HEAD
         isEmpty: {
+=======
+        notEmpty: {
+>>>>>>> 93d82a8e4c94550cd17d67347d4cd1aa7b121353
           errorMessage: "Product price can not be empty"
         },
         isArray: {
@@ -234,7 +270,11 @@ const updateProductValidator = (0, import_validate.default)(
       },
       product_type: {
         trim: true,
+<<<<<<< HEAD
         isEmpty: {
+=======
+        notEmpty: {
+>>>>>>> 93d82a8e4c94550cd17d67347d4cd1aa7b121353
           errorMessage: "Product type can not be empty"
         },
         isString: {

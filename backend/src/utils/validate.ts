@@ -11,7 +11,11 @@ const validate = (validations: RunnableValidationChains<ValidationChain>) => {
     // Đưa lỗi vào biến req -> gọi validation result để nhận lỗi
     const errors = validationResult(req)
     // Không có lỗi thì next tiếp tục request
+<<<<<<< HEAD
     if (errors.isEmpty()) {
+=======
+    if (errors.isEmpty ()) {
+>>>>>>> 93d82a8e4c94550cd17d67347d4cd1aa7b121353
       return next()
     }
     const errorObject = errors.mapped()

@@ -1,8 +1,5 @@
-<<<<<<< HEAD
 import Order from "../components/Order/Order";
 
-=======
->>>>>>> 93d82a8e4c94550cd17d67347d4cd1aa7b121353
 interface Order {
 	_id: string;
 	price: number;

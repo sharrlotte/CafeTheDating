@@ -1,6 +1,6 @@
 import Icons from "@/constants/icon";
 import { getOrders } from "@/query/orders";
-import { OrderState } from "@/type/Order";
+import { OrderState } from "@/type/OrderNew";
 import useMe from "@/zustand/useMe";
 import React from "react";
 import { useQuery } from "react-query";

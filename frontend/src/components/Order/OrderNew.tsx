@@ -9,7 +9,7 @@ import {
   SelectItem,
   SelectTrigger,
 } from "@radix-ui/react-select";
-import { OrderState } from "@/type/Order";
+import { OrderState } from "@/type/OrderNew";
 
 export default function Order() {
   const [filter, setFilter] = useState<OrderState>(undefined);

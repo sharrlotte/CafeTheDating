@@ -1,4 +1,4 @@
-import Order from "@/type/Order";
+import Order from "@/type/OrderNew";
 import { pricy } from "../../lib/util";
 import React from "react";
 type OrderCardProps = {

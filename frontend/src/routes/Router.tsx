@@ -1,4 +1,4 @@
-import paths from "../constants/routes";
+import routes from "../constants/routes";
 import HomePage from "./home/HomePage";
 import React, { ReactNode, useEffect } from "react";
 import { BrowserRouter, Routes, Route, useLocation } from "react-router-dom";
@@ -90,11 +90,11 @@ function BackgroundImage() {
     <div
       className={cn("p-4", {
         "md:bg-main h-full w-full bg-center bg-cover bg-mobile-main":
-          pathname === "/" || pathname === paths.admin,
+          pathname === "/" || pathname === routes.admin,
       })}
     >
       <Routes>
-        {routes.map((item) => (
+        {paths.map((item) => (
           <Route
             key={item.path}
             path={item.path}
@@ -108,8 +108,8 @@ function BackgroundImage() {
           />
         ))}
         <Route
-          key={paths.admin}
-          path={paths.admin}
+          key={routes.admin}
+          path={routes.admin}
           element={
             <Auth roles={[UserRole.Admin]}>
               <MenuAdmin />

@@ -3,10 +3,7 @@ import Icons from "@/constants/icon";
 import {
   Dialog,
   DialogContent,
-  DialogFooter,
-  DialogHeader,
-  DialogTitle,
-  DialogTrigger,
+  DialogTrigger
 } from "../ui/dialog";
 
 import { Input } from "../ui/input";

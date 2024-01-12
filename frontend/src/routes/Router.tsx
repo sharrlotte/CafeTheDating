@@ -9,12 +9,12 @@ import HomePage from '@/routes/home/HomePage';
 import LoginPage from '@/routes/login/LoginPage';
 import MenuNew from '@/routes/menu/MenuNew';
 import MenuPage from '@/routes/menu/MenuPage';
-import Order from '@/type/Order';
 import User, { UserRole } from '@/type/User';
 import useMe from '@/zustand/useMe';
 import { ReactNode, useEffect } from 'react';
 import { BrowserRouter, useLocation, Routes, Route } from 'react-router-dom';
 import routes from '@/constants/routes';
+import OrderNew from '@/components/Order/OrderNew';
 
 type RouteProps = {
 	path: string;
@@ -50,7 +50,7 @@ const paths: RouteProps[] = [
 		path: routes.order,
 		element: (
 			<Auth roles={[UserRole.User, UserRole.Admin]}>
-				<Order />
+				<OrderNew />
 			</Auth>
 		),
 	},
@@ -88,7 +88,7 @@ function BackgroundImage() {
 
 	return (
 		<div
-			className={cn('p-4 flex flex-col h-full w-full', {
+			className={cn('flex flex-col h-full w-full', {
 				'md:bg-main h-full w-full bg-center bg-cover bg-mobile-main': pathname === '/' || pathname === routes.home || pathname === routes.admin,
 			})}
 		>

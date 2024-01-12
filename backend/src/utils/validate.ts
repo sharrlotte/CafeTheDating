@@ -11,7 +11,7 @@ const validate = (validations: RunnableValidationChains<ValidationChain>) => {
     // Đưa lỗi vào biến req -> gọi validation result để nhận lỗi
     const errors = validationResult(req)
     // Không có lỗi thì next tiếp tục request
-    if (errors.notEmpty()) {
+    if (errors.isEmpty ()) {
       return next()
     }
     const errorObject = errors.mapped()

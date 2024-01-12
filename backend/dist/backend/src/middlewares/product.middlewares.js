@@ -86,7 +86,7 @@ const createProductValidator = (0, import_validate.default)(
     {
       name: {
         trim: true,
-        isEmpty: {
+        notEmpty: {
           errorMessage: "Product name can not be empty"
         },
         isString: {
@@ -102,7 +102,7 @@ const createProductValidator = (0, import_validate.default)(
       },
       description: {
         trim: true,
-        isEmpty: {
+        notEmpty: {
           errorMessage: "Product description can not be empty"
         },
         isString: {
@@ -118,7 +118,7 @@ const createProductValidator = (0, import_validate.default)(
       },
       price: {
         trim: true,
-        isEmpty: {
+        notEmpty: {
           errorMessage: "Product price can not be empty"
         },
         isDecimal: {
@@ -138,7 +138,7 @@ const createProductValidator = (0, import_validate.default)(
       },
       tags: {
         trim: true,
-        isEmpty: {
+        notEmpty: {
           errorMessage: "Product price can not be empty"
         },
         isArray: {
@@ -147,7 +147,7 @@ const createProductValidator = (0, import_validate.default)(
       },
       product_type: {
         trim: true,
-        isEmpty: {
+        notEmpty: {
           errorMessage: "Product type can not be empty"
         },
         isString: {
@@ -174,7 +174,7 @@ const updateProductValidator = (0, import_validate.default)(
     {
       name: {
         trim: true,
-        isEmpty: {
+        notEmpty: {
           errorMessage: "Product name can not be empty"
         },
         isString: {
@@ -190,7 +190,7 @@ const updateProductValidator = (0, import_validate.default)(
       },
       description: {
         trim: true,
-        isEmpty: {
+        notEmpty: {
           errorMessage: "Product description can not be empty"
         },
         isString: {
@@ -206,7 +206,7 @@ const updateProductValidator = (0, import_validate.default)(
       },
       price: {
         trim: true,
-        isEmpty: {
+        notEmpty: {
           errorMessage: "Product price can not be empty"
         },
         isDecimal: {
@@ -226,7 +226,7 @@ const updateProductValidator = (0, import_validate.default)(
       },
       tags: {
         trim: true,
-        isEmpty: {
+        notEmpty: {
           errorMessage: "Product price can not be empty"
         },
         isArray: {
@@ -235,7 +235,7 @@ const updateProductValidator = (0, import_validate.default)(
       },
       product_type: {
         trim: true,
-        isEmpty: {
+        notEmpty: {
           errorMessage: "Product type can not be empty"
         },
         isString: {

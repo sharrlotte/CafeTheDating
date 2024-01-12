@@ -1,6 +1,8 @@
 import { CreateProductRequest } from "@/components/AddItemsAdmin/AddItemsAdmin";
 import api from "../api/api";
 import Product, { ProductSort, ProductType } from "../type/Product";
+import api from '../api/api';
+import Product, { ProductSort, ProductType } from '../type/Product';
 
 const getProducts = async (
   type: ProductType | undefined,
@@ -14,4 +16,7 @@ export { getProducts };
 
 export async function createProduct(request: CreateProductRequest) {
   return api.post("/products", request);
+}
+export async function getProducts(type: ProductType | undefined, sort?: ProductSort): Promise<Product[]> {
+	return await api.get('/products', { params: { type, sort } }).then((result) => result.data);
 }

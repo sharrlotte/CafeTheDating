@@ -55,7 +55,7 @@ export const createProductValidator = validate(
     {
       name: {
         trim: true,
-        isEmpty: {
+        notEmpty: {
           errorMessage: 'Product name can not be empty'
         },
         isString: {
@@ -71,7 +71,7 @@ export const createProductValidator = validate(
       },
       description: {
         trim: true,
-        isEmpty: {
+        notEmpty: {
           errorMessage: 'Product description can not be empty'
         },
         isString: {
@@ -88,7 +88,7 @@ export const createProductValidator = validate(
 
       price: {
         trim: true,
-        isEmpty: {
+        notEmpty: {
           errorMessage: 'Product price can not be empty'
         },
         isDecimal: {
@@ -111,7 +111,7 @@ export const createProductValidator = validate(
 
       tags: {
         trim: true,
-        isEmpty: {
+        notEmpty: {
           errorMessage: 'Product price can not be empty'
         },
         isArray: {
@@ -121,7 +121,7 @@ export const createProductValidator = validate(
 
       product_type: {
         trim: true,
-        isEmpty: {
+        notEmpty: {
           errorMessage: 'Product type can not be empty'
         },
         isString: {
@@ -150,7 +150,7 @@ export const updateProductValidator = validate(
     {
       name: {
         trim: true,
-        isEmpty: {
+        notEmpty: {
           errorMessage: 'Product name can not be empty'
         },
         isString: {
@@ -166,7 +166,7 @@ export const updateProductValidator = validate(
       },
       description: {
         trim: true,
-        isEmpty: {
+        notEmpty: {
           errorMessage: 'Product description can not be empty'
         },
         isString: {
@@ -183,7 +183,7 @@ export const updateProductValidator = validate(
 
       price: {
         trim: true,
-        isEmpty: {
+        notEmpty: {
           errorMessage: 'Product price can not be empty'
         },
         isDecimal: {
@@ -206,7 +206,7 @@ export const updateProductValidator = validate(
 
       tags: {
         trim: true,
-        isEmpty: {
+        notEmpty: {
           errorMessage: 'Product price can not be empty'
         },
         isArray: {
@@ -216,7 +216,7 @@ export const updateProductValidator = validate(
 
       product_type: {
         trim: true,
-        isEmpty: {
+        notEmpty: {
           errorMessage: 'Product type can not be empty'
         },
         isString: {

@@ -27,7 +27,7 @@ export default function Admin() {
   const me = useMe((state) => state.user);
   return (
     <nav className="flex items-start justify-center md:justify-start w-full h-full">
-      <div className="font-[500] bg-blue-500 p-4 gap-4 text-xl flex flex-col justify-start items-start h-full">
+      <div className="font-[500] bg-blue-500 p-2 gap-2 text-xl flex flex-col justify-start items-start h-full min-w-[200px]">
         {paths.map((item, index) => (
           <Link
             key={index}

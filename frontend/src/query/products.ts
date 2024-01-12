@@ -1,3 +1,4 @@
+import { CreateProductRequest } from "@/components/AddItemsAdmin/AddItemsAdmin";
 import api from "../api/api";
 import Product, { ProductSort, ProductType } from "../type/Product";
 
@@ -10,7 +11,7 @@ const getProducts = async (
     .then((result) => result.data);
 };
 export { getProducts };
-  
-export async function createProduct() {
-  
+
+export async function createProduct(request: CreateProductRequest) {
+  return api.post("/products", request);
 }

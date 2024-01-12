@@ -49,26 +49,28 @@ const uploadFile = (0, import_multer.default)({
     callback(new Error("Error"));
   }
 });
-const singleImageUpload = (req, res, next) => {
-  uploadFile.single("image")(req, res, (err) => {
-    if (err instanceof import_multer.default.MulterError) {
-      next(
-        new import_Errors.ErrorWithStatus({
-          statusCode: import_http_status_codes.StatusCodes.BAD_REQUEST,
-          message: import_message.VALIDATION_MESSAGES.UPLOAD.IMAGE.INVALID_IMAGE_SIZE
-        })
-      );
-    }
-    if (err instanceof Error) {
-      next(
-        new import_Errors.ErrorWithStatus({
-          statusCode: import_http_status_codes.StatusCodes.BAD_REQUEST,
-          message: import_message.VALIDATION_MESSAGES.UPLOAD.IMAGE.INVALID_IMAGE_EXTENSION
-        })
-      );
-    }
-    next();
-  });
+const singleImageUpload = (name) => {
+  return (req, res, next) => {
+    uploadFile.single(name)(req, res, (err) => {
+      if (err instanceof import_multer.default.MulterError) {
+        next(
+          new import_Errors.ErrorWithStatus({
+            statusCode: import_http_status_codes.StatusCodes.BAD_REQUEST,
+            message: import_message.VALIDATION_MESSAGES.UPLOAD.IMAGE.INVALID_IMAGE_SIZE
+          })
+        );
+      }
+      if (err instanceof Error) {
+        next(
+          new import_Errors.ErrorWithStatus({
+            statusCode: import_http_status_codes.StatusCodes.BAD_REQUEST,
+            message: import_message.VALIDATION_MESSAGES.UPLOAD.IMAGE.INVALID_IMAGE_EXTENSION
+          })
+        );
+      }
+      next();
+    });
+  };
 };
 // Annotate the CommonJS export names for ESM import in node:
 0 && (module.exports = {

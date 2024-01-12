@@ -22,26 +22,28 @@ const uploadFile = multer({
   }
 })
 
-export const singleImageUpload = (req: Request, res: Response, next: NextFunction) => {
-  uploadFile.single('image')(req, res, (err) => {
-    if (err instanceof multer.MulterError) {
-      next(
-        new ErrorWithStatus({
-          statusCode: StatusCodes.BAD_REQUEST,
-          message: VALIDATION_MESSAGES.UPLOAD.IMAGE.INVALID_IMAGE_SIZE
-        })
-      )
-    }
+export const singleImageUpload = (name: string) => {
+  return (req: Request, res: Response, next: NextFunction) => {
+    uploadFile.single(name)(req, res, (err) => {
+      if (err instanceof multer.MulterError) {
+        next(
+          new ErrorWithStatus({
+            statusCode: StatusCodes.BAD_REQUEST,
+            message: VALIDATION_MESSAGES.UPLOAD.IMAGE.INVALID_IMAGE_SIZE
+          })
+        )
+      }
 
-    if (err instanceof Error) {
-      next(
-        new ErrorWithStatus({
-          statusCode: StatusCodes.BAD_REQUEST,
-          message: VALIDATION_MESSAGES.UPLOAD.IMAGE.INVALID_IMAGE_EXTENSION
-        })
-      )
-    }
+      if (err instanceof Error) {
+        next(
+          new ErrorWithStatus({
+            statusCode: StatusCodes.BAD_REQUEST,
+            message: VALIDATION_MESSAGES.UPLOAD.IMAGE.INVALID_IMAGE_EXTENSION
+          })
+        )
+      }
 
-    next()
-  })
+      next()
+    })
+  }
 }

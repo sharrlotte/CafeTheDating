@@ -1,4 +1,4 @@
-import Order from "../components/Order/Order";
+import Order from "../components/Order/OrderNew";
 
 interface Order {
   _id: string;

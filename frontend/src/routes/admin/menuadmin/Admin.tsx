@@ -18,16 +18,16 @@ const paths = [
   },
   {
     name: "Nhân viên",
-    icon: <Icons.Employer />,
-    path: "/employer",
+    icon: <Icons.Employee />,
+    path: "/employee",
   },
 ];
 
 export default function Admin() {
   const me = useMe((state) => state.user);
   return (
-    <nav className="flex items-start justify-center md:justify-start min-h-screen  w-full h-full">
-      <div className="font-[500] w-full/2 bg-[#5041BC] p-9  md:gap-9 text-xl flex flex-col border-2 justify-start items-start min-h-screen ">
+    <nav className="flex items-start justify-center md:justify-start w-full h-full">
+      <div className="font-[500] bg-blue-500 p-4 gap-4 text-xl flex flex-col justify-start items-start h-full">
         {paths.map((item, index) => (
           <Link
             key={index}
@@ -40,20 +40,20 @@ export default function Admin() {
           </Link>
         ))}
       </div>
-      <div className=" bg-white/30 h-full w-full backdrop-blur-sm">
-        <div>
+      <div className="flex flex-col bg-white/30 h-full w-full backdrop-blur-sm overflow-auto">
+        <div className="w-full flex items-center justify-between p-2">
           {me ? (
             <img
               src={me.avatar}
               alt="User Avatar"
-              className="w-12 h-12 rounded-full absolute top-12 right-14"
+              className="w-12 h-12 rounded-full"
             />
           ) : (
             <></>
           )}
+          <Search />
+          <AddItemsAdmin />
         </div>
-        <Search />
-        <AddItemsAdmin />
         <MenuAdmin />
       </div>
     </nav>

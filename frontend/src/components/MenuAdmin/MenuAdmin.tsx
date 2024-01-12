@@ -4,11 +4,11 @@ import { Tabs } from "../ui/tabs";
 
 export default function MenuAdmin() {
   return (
-    <div className="grid grid-cols-1 md:grid-cols-[1fr_auto]">
-      <div className="w-full h-full flex p-2 md:flex-row flex-col gap-2">
+    <div className="h-full w-full flex flex-col max-w-full">
+      <div className="w-full h-full flex p-2 flex-col gap-2">
         <div className="w-full h-full">
           <Tabs defaultValue="all" className="w-full h-full">
-            <TabsList className="w-full  flex justify-around bg-[hsla(50,200%,35%,1)] rounded-md p-8 font-bold text-2xl">
+            <TabsList className="w-full flex justify-around bg-yellow-400 rounded-md p-8 font-bold text-2xl">
               <TabsTrigger
                 className="data-[state=active]:bg-white p-4 rounded-xl "
                 value="all"
@@ -40,11 +40,8 @@ export default function MenuAdmin() {
                 Kem
               </TabsTrigger>
             </TabsList>
-            <TabsContent value="all">
-              <MenuAdminItems type="cafe" />
-              <MenuAdminItems type="milk" />
-              <MenuAdminItems type="cake" />
-              <MenuAdminItems type="cream" />
+            <TabsContent className="h-full" value="all">
+              <MenuAdminItems type={undefined} />
             </TabsContent>
             <TabsContent value="coffe">
               <MenuAdminItems type="cafe" />

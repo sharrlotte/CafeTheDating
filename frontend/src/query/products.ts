@@ -2,7 +2,7 @@ import api from "../api/api";
 import Product, { ProductSort, ProductType } from "../type/Product";
 
 const getProducts = async (
-  type: ProductType,
+  type: ProductType | undefined,
   sort?: ProductSort
 ): Promise<Product[]> => {
   return api

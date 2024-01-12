@@ -83,10 +83,11 @@ class ProductService {
   async getAllProduct(query) {
     const product_type = query.type;
     const sort = query.sort;
+    const q = product_type ? { product_type } : {};
     switch (sort) {
       case "discount":
         return await import_database.databaseService.products.find({
-          product_type,
+          ...q,
           deleted: false,
           discount: {
             $gt: 0
@@ -94,7 +95,7 @@ class ProductService {
         }).sort({ discount: "desc" }).toArray();
       case "best-choice":
         return await import_database.databaseService.products.find({
-          product_type,
+          ...q,
           deleted: false,
           tags: {
             $in: ["best-choice"]
@@ -102,7 +103,7 @@ class ProductService {
         }).toArray();
       case "new":
         return await import_database.databaseService.products.find({
-          product_type,
+          ...q,
           deleted: false,
           tags: {
             $in: ["new"]
@@ -110,7 +111,7 @@ class ProductService {
         }).toArray();
       default:
         return await import_database.databaseService.products.find({
-          product_type,
+          ...q,
           deleted: false
         }).toArray();
     }

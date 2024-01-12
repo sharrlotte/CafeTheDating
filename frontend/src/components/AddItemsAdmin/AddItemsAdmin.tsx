@@ -1,13 +1,46 @@
-import Icons from '@/constants/icon';
+import Icons from "@/constants/icon";
 
-import { Dialog, DialogContent, DialogFooter, DialogHeader, DialogTitle, DialogTrigger } from '../ui/dialog';
+import {
+  Dialog,
+  DialogContent,
+  DialogFooter,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+} from "../ui/dialog";
 
-import { Input } from '../ui/input';
-import { Label } from '../ui/label';
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '../ui/select';
-import { Button } from '../ui/button';
+import { Input } from "../ui/input";
+import { Button } from "../ui/button";
+import { z } from "zod";
+import { Form, useForm } from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod";
+import {
+  FormField,
+  FormItem,
+  FormLabel,
+  FormControl,
+  FormDescription,
+  FormMessage,
+} from "../ui/form";
+
+const formSchema = z.object({
+  username: z.string().min(2, {
+    message: "Username must be at least 2 characters.",
+  }),
+});
 
 export default function AddItemsAdmin() {
+  const form = useForm<z.infer<typeof formSchema>>({
+    resolver: zodResolver(formSchema),
+    defaultValues: {
+      username: "",
+    },
+  });
+
+  function onSubmit(values: z.infer<typeof formSchema>) {
+    console.log(values);
+  }
+
   return (
     <div className=" p-4 items-center">
       <Dialog>
@@ -18,82 +51,27 @@ export default function AddItemsAdmin() {
           </Button>
         </DialogTrigger>
         <DialogContent className="sm:max-w-[425px]">
-          <DialogHeader>
-            <DialogTitle>Nhập thông tin sản phẩm</DialogTitle>
-          </DialogHeader>
-          <div className="grid gap-4 py-4">
-            <div className="grid grid-cols-4 items-center gap-4">
-              <Label
-                htmlFor="Tên sản phẩm"
-                className="text-right whitespace-nowrap"
-              >
-                Tên sản phẩm
-              </Label>
-              <Input id="name" type="text" className="col-span-3" />
-            </div>
-            <div className="grid grid-cols-4 items-center gap-4">
-              <Label htmlFor="Giá" className="text-right whitespace-nowrap">
-                Giá
-              </Label>
-              <Input id="price" type="number" className="col-span-3 " />
-            </div>
-            <div className="grid grid-cols-4 items-center gap-4">
-              <Label htmlFor="ảnh" className="text-right whitespace-nowrap">
-                Ảnh minh họa
-              </Label>
-              <Input id="image" type="image" className="col-span-3 " />
-            </div>
-            <div className="grid grid-cols-4 items-center gap-4">
-              <Label htmlFor="Mô tả" className="text-right whitespace-nowrap">
-                Mô tả
-              </Label>
-              <Input id="description" type="text" className="col-span-3 " />
-            </div>
-            <div className="grid grid-cols-4 items-center gap-4">
-              <Label
-                htmlFor="Giảm giá"
-                className="text-right whitespace-nowrap"
-              >
-                Giảm giá
-              </Label>
-              <Input id="discount" type="number" className="col-span-3 " />
-            </div>
-            <div className="grid grid-cols-4 items-center gap-4">
-              <Label
-                htmlFor="loại"
-                className="text-right whitespace-nowrap"
-              ></Label>
-              <Select>
-                <SelectTrigger className="w-[180px]">
-                  <SelectValue placeholder="Loại" />
-                </SelectTrigger>
-                <SelectContent>
-                  <SelectItem value="cafe">Cà phê</SelectItem>
-                  <SelectItem value="cake">Bánh</SelectItem>
-                  <SelectItem value="milk">Trà sữa</SelectItem>
-                  <SelectItem value="cream">Kem</SelectItem>
-                </SelectContent>
-              </Select>
-            </div>
-            <div className="grid grid-cols-4 items-center gap-4">
-              <Label
-                htmlFor="Ưu tiên"
-                className="text-right whitespace-nowrap"
-              ></Label>
-              <Select>
-                <SelectTrigger className="w-[180px]">
-                  <SelectValue placeholder="Loại ưu tiên" />
-                </SelectTrigger>
-                <SelectContent>
-                  <SelectItem value="best-choice">Best choice</SelectItem>
-                  <SelectItem value="new">New</SelectItem>
-                </SelectContent>
-              </Select>
-            </div>
-          </div>
-          <DialogFooter>
-            <Button type="submit">Lưu</Button>
-          </DialogFooter>
+          <Form {...form}>
+            <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
+              <FormField
+                control={form.control}
+                name="username"
+                render={({ field }: { field: any }) => (
+                  <FormItem>
+                    <FormLabel>Username</FormLabel>
+                    <FormControl>
+                      <Input placeholder="shadcn" {...field} />
+                    </FormControl>
+                    <FormDescription>
+                      This is your public display name.
+                    </FormDescription>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+              <Button type="submit">Submit</Button>
+            </form>
+          </Form>
         </DialogContent>
       </Dialog>
     </div>

@@ -61,11 +61,13 @@ class ProductService {
     const product_type: ProductType = query.type as ProductType
     const sort = query.sort as ProductSort
 
+    const q = product_type ? { product_type: product_type } : {}
+
     switch (sort) {
       case 'discount':
         return await databaseService.products
           .find({
-            product_type: product_type,
+            ...q,
             deleted: false,
             discount: {
               $gt: 0
@@ -77,7 +79,7 @@ class ProductService {
       case 'best-choice':
         return await databaseService.products
           .find({
-            product_type: product_type,
+            ...q,
             deleted: false,
             tags: {
               $in: ['best-choice']
@@ -88,7 +90,7 @@ class ProductService {
       case 'new':
         return await databaseService.products
           .find({
-            product_type: product_type,
+            ...q,
             deleted: false,
             tags: {
               $in: ['new']
@@ -99,7 +101,7 @@ class ProductService {
       default:
         return await databaseService.products
           .find({
-            product_type: product_type,
+            ...q,
             deleted: false
           })
           .toArray()

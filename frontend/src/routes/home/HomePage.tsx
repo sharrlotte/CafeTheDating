@@ -1,7 +1,7 @@
 import User from '../../type/User';
 import api from '../../api/api';
 import React, { useEffect } from 'react';
-import { Link, useSearchParams } from 'react-router-dom';
+import { Link, useSearchParams } from "react-router-dom";
 import useMe from '../../zustand/useMe';
 import { Button } from '@/components/ui/button';
 import routes from '@/constants/routes';

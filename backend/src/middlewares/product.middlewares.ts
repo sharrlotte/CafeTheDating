@@ -13,6 +13,7 @@ export const getAllProductValidator = validate(
         isString: {
           errorMessage: 'Product type must be a string'
         },
+        optional: true,
         custom: {
           options: (value) => {
             if (!productTypes.includes(value)) {

@@ -6,7 +6,7 @@ import { ProductSort, ProductType } from "@/type/Product";
 import ProductAdminCard from "@/components/ProductAdmin/ProductAdminCard";
 
 type MenuAdminItemProps = {
-  type: ProductType;
+  type: ProductType | undefined;
   sort?: ProductSort;
 };
 
@@ -26,10 +26,8 @@ export default function MenuAdminItems({ type, sort }: MenuAdminItemProps) {
   if (isError || !data) return <span>Error</span>;
 
   return (
-    <div className="flex flex-wrap gap-2">
-      {data.map((item) => (
-        <ProductAdminCard key={item._id} productadmins={data} />
-      ))}
+    <div className="flex flex-wrap gap-2 h-full">
+      <ProductAdminCard productadmins={data} />
     </div>
   );
 }

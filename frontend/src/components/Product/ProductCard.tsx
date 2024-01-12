@@ -1,4 +1,4 @@
-import { cn, pricy } from '../../lib/util';
+import { cn, pricy, translate } from '../../lib/util';
 import Product from '../../type/Product';
 import useCart from '../../zustand/useCart';
 import React from 'react';
@@ -26,20 +26,4 @@ export default function ProductCard({ product }: ProductCardProps) {
 			</div>
 		</div>
 	);
-}
-function translate(product_type: string) {
-	switch (product_type) {
-		case 'cafe':
-			return 'Cà phê';
-		case 'milk':
-			return 'Trà sữa';
-		case 'cake':
-			return 'Bánh';
-		case 'cream':
-			return 'Kem';
-		case 'best-choice':
-			return 'Đề cử';
-		case 'new':
-			return 'Mới';
-	}
 }

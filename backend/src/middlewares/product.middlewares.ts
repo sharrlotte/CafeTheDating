@@ -111,11 +111,9 @@ export const createProductValidator = validate(
 
       tags: {
         trim: true,
-        notEmpty: {
-          errorMessage: 'Product price can not be empty'
-        },
+        optional: true,
         isArray: {
-          errorMessage: 'Product price must be a decimal'
+          errorMessage: 'Product tags must be a array'
         }
       },
 
@@ -162,7 +160,8 @@ export const updateProductValidator = validate(
             max: 40
           },
           errorMessage: 'Product name must have 4-40 characters'
-        }
+        },
+        optional: true
       },
       description: {
         trim: true,
@@ -178,7 +177,8 @@ export const updateProductValidator = validate(
             max: 200
           },
           errorMessage: 'Product description must have 4-200 characters'
-        }
+        },
+        optional: true
       },
 
       price: {
@@ -201,16 +201,14 @@ export const updateProductValidator = validate(
 
             return true
           }
-        }
-      },
-
-      tags: {
-        trim: true,
-        notEmpty: {
-          errorMessage: 'Product price can not be empty'
         },
+        optional: true
+      },
+      tags: {
+        optional: true,
+        trim: true,
         isArray: {
-          errorMessage: 'Product price must be a decimal'
+          errorMessage: 'Tags must be an array'
         }
       },
 
@@ -233,7 +231,8 @@ export const updateProductValidator = validate(
 
             return true
           }
-        }
+        },
+        optional: true
       }
     },
     ['body']

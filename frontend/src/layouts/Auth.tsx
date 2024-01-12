@@ -1,3 +1,4 @@
+import Icons from '@/constants/icon';
 import { UserRole } from '@/type/User';
 import useMe from '@/zustand/useMe';
 import { Navigate } from 'react-router-dom';
@@ -11,7 +12,11 @@ export default function Auth({ roles, children }: AuthProps) {
 	const { user, state } = useMe();
 
 	if (state === 'loading') {
-		return <div>Loading</div>;
+		return (
+			<div className='flex justify-center w-full h-full'>
+				<Icons.Loading />
+			</div>
+		);
 	}
 
 	if (!user || !user.role) {

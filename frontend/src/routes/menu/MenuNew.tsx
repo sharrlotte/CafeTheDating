@@ -11,13 +11,13 @@ export default function MenuNew() {
 			<div className='grid grid-cols-1 md:grid-cols-[1fr_auto] p-4'>
 				<div>
 					<div className='font-bold text-black text-2xl'>Đề cử !!</div>
-					<Tabs defaultValue='coffe'>
+					<Tabs defaultValue='cafe'>
 						<TabsList className='w-full  flex justify-around bg-white '>
 							<div className='w-full h-full flex justify-between'>
 								<div>
 									<TabsTrigger
 										className='text-lg'
-										value='coffe'
+										value='cafe'
 									>
 										Cà Phê
 									</TabsTrigger>
@@ -42,7 +42,7 @@ export default function MenuNew() {
 								</div>
 							</div>
 						</TabsList>
-						<TabsContent value='coffe'>
+						<TabsContent value='cafe'>
 							<MenuItems
 								type='cafe'
 								sort='best-choice'
@@ -78,7 +78,7 @@ export default function MenuNew() {
 								<div>
 									<TabsTrigger
 										className='text-lg'
-										value='coffe'
+										value='cafe'
 									>
 										Cà Phê
 									</TabsTrigger>
@@ -103,7 +103,7 @@ export default function MenuNew() {
 								</div>
 							</div>
 						</TabsList>
-						<TabsContent value='coffe'>
+						<TabsContent value='cafe'>
 							<MenuItems
 								type='cafe'
 								sort='discount'

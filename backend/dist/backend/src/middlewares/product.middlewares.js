@@ -138,11 +138,9 @@ const createProductValidator = (0, import_validate.default)(
       },
       tags: {
         trim: true,
-        notEmpty: {
-          errorMessage: "Product price can not be empty"
-        },
+        optional: true,
         isArray: {
-          errorMessage: "Product price must be a decimal"
+          errorMessage: "Product tags must be a array"
         }
       },
       product_type: {
@@ -186,7 +184,8 @@ const updateProductValidator = (0, import_validate.default)(
             max: 40
           },
           errorMessage: "Product name must have 4-40 characters"
-        }
+        },
+        optional: true
       },
       description: {
         trim: true,
@@ -202,7 +201,8 @@ const updateProductValidator = (0, import_validate.default)(
             max: 200
           },
           errorMessage: "Product description must have 4-200 characters"
-        }
+        },
+        optional: true
       },
       price: {
         trim: true,
@@ -222,15 +222,14 @@ const updateProductValidator = (0, import_validate.default)(
             }
             return true;
           }
-        }
+        },
+        optional: true
       },
       tags: {
+        optional: true,
         trim: true,
-        notEmpty: {
-          errorMessage: "Product price can not be empty"
-        },
         isArray: {
-          errorMessage: "Product price must be a decimal"
+          errorMessage: "Tags must be an array"
         }
       },
       product_type: {
@@ -251,7 +250,8 @@ const updateProductValidator = (0, import_validate.default)(
             }
             return true;
           }
-        }
+        },
+        optional: true
       }
     },
     ["body"]

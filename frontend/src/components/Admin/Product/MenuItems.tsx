@@ -18,7 +18,7 @@ export default function MenuAdminItems({ type, sort }: MenuAdminItemProps) {
 
 	if (isLoading)
 		return (
-			<div className='flex justify-center w-full '>
+			<div className='flex justify-center w-full h-full'>
 				<Icons.Loading />
 			</div>
 		);

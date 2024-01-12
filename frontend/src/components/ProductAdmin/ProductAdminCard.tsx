@@ -42,18 +42,18 @@ export default function ProductAdminCard({
   );
 }
 function translate(product_type: string) {
-  switch (product_type) {
-    case "cafe":
-      return "Cà phê";
-    case "milk":
-      return "Trà sữa";
-    case "cake":
-      return "Bánh";
-    case "cream":
-      return "Kem";
-    case "best-choice":
-      return "Đề cử";
-    case "new":
-      return "Mới";
-  }
+	switch (product_type) {
+		case 'cafe':
+			return 'Cà phê';
+		case 'milk':
+			return 'Trà sữa';
+		case 'cake':
+			return 'Bánh';
+		case 'cream':
+			return 'Kem';
+		case 'best-choice':
+			return 'Đề cử';
+		case 'new':
+			return 'Mới';
+	}
 }

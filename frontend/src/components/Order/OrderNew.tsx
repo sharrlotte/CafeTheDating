@@ -10,6 +10,7 @@ import {
   SelectTrigger,
 } from "@radix-ui/react-select";
 import { OrderState } from "@/type/Order";
+import { translate } from "@/lib/util";
 
 export default function Order() {
   const [filter, setFilter] = useState<OrderState>(undefined);
@@ -106,16 +107,4 @@ export default function Order() {
       </div>
     </>
   );
-}
-function translate(orderStates: string | undefined) {
-  switch (orderStates) {
-    case "all":
-      return "Tất cả";
-    case "pending":
-      return "Chờ thanh toán";
-    case "completed":
-      return "Hoàn thành";
-    case "cancelled":
-      return "Đã hủy";
-  }
 }

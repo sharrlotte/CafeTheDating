@@ -4,6 +4,7 @@ import { ErrorWithStatus } from '@/models/errors/Errors.schema'
 import { productSorts } from '@/models/schemas/Product.schema'
 import { productTypes } from '@/models/schemas/ProductType.schema'
 import validate from '@/utils/validate'
+import { databaseService } from '@/services/database.service'
 
 export const getAllProductValidator = validate(
   checkSchema(
@@ -13,6 +14,7 @@ export const getAllProductValidator = validate(
         isString: {
           errorMessage: 'Product type must be a string'
         },
+        optional: true,
         custom: {
           options: (value) => {
             if (!productTypes.includes(value)) {
@@ -54,7 +56,7 @@ export const createProductValidator = validate(
     {
       name: {
         trim: true,
-        isEmpty: {
+        notEmpty: {
           errorMessage: 'Product name can not be empty'
         },
         isString: {
@@ -66,11 +68,25 @@ export const createProductValidator = validate(
             max: 40
           },
           errorMessage: 'Product name must have 4-40 characters'
+        },
+        custom: {
+          options: async (value) => {
+            const result = await databaseService.products.findOne({ name: value, deleted: false })
+
+            if (!!result) {
+              throw new ErrorWithStatus({
+                message: 'Product name exists',
+                statusCode: StatusCodes.BAD_REQUEST
+              })
+            }
+
+            return true
+          }
         }
       },
       description: {
         trim: true,
-        isEmpty: {
+        notEmpty: {
           errorMessage: 'Product description can not be empty'
         },
         isString: {
@@ -87,7 +103,7 @@ export const createProductValidator = validate(
 
       price: {
         trim: true,
-        isEmpty: {
+        notEmpty: {
           errorMessage: 'Product price can not be empty'
         },
         isDecimal: {
@@ -110,17 +126,15 @@ export const createProductValidator = validate(
 
       tags: {
         trim: true,
-        isEmpty: {
-          errorMessage: 'Product price can not be empty'
-        },
+        optional: true,
         isArray: {
-          errorMessage: 'Product price must be a decimal'
+          errorMessage: 'Product tags must be a array'
         }
       },
 
       product_type: {
         trim: true,
-        isEmpty: {
+        notEmpty: {
           errorMessage: 'Product type can not be empty'
         },
         isString: {
@@ -149,7 +163,7 @@ export const updateProductValidator = validate(
     {
       name: {
         trim: true,
-        isEmpty: {
+        notEmpty: {
           errorMessage: 'Product name can not be empty'
         },
         isString: {
@@ -161,11 +175,12 @@ export const updateProductValidator = validate(
             max: 40
           },
           errorMessage: 'Product name must have 4-40 characters'
-        }
+        },
+        optional: true
       },
       description: {
         trim: true,
-        isEmpty: {
+        notEmpty: {
           errorMessage: 'Product description can not be empty'
         },
         isString: {
@@ -177,12 +192,13 @@ export const updateProductValidator = validate(
             max: 200
           },
           errorMessage: 'Product description must have 4-200 characters'
-        }
+        },
+        optional: true
       },
 
       price: {
         trim: true,
-        isEmpty: {
+        notEmpty: {
           errorMessage: 'Product price can not be empty'
         },
         isDecimal: {
@@ -200,22 +216,20 @@ export const updateProductValidator = validate(
 
             return true
           }
-        }
-      },
-
-      tags: {
-        trim: true,
-        isEmpty: {
-          errorMessage: 'Product price can not be empty'
         },
+        optional: true
+      },
+      tags: {
+        optional: true,
+        trim: true,
         isArray: {
-          errorMessage: 'Product price must be a decimal'
+          errorMessage: 'Tags must be an array'
         }
       },
 
       product_type: {
         trim: true,
-        isEmpty: {
+        notEmpty: {
           errorMessage: 'Product type can not be empty'
         },
         isString: {
@@ -232,7 +246,8 @@ export const updateProductValidator = validate(
 
             return true
           }
-        }
+        },
+        optional: true
       }
     },
     ['body']

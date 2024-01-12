@@ -14,10 +14,13 @@ class OrderService {
     if (state && state !== 'all') {
       orders = await databaseService.orders
         .find({ state: state, user_id: new ObjectId(userId) })
-        .sort('created_at', 'desc')
+        .sort({ _id: -1 })
         .toArray()
     } else {
-      orders = await databaseService.orders.find({ user_id: new ObjectId(userId) }).toArray()
+      orders = await databaseService.orders
+        .find({ user_id: new ObjectId(userId) })
+        .sort({ _id: -1 })
+        .toArray()
     }
 
     const items = orders.map(async (item) => {

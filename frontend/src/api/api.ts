@@ -4,7 +4,9 @@ import Lock from '@/lib/lock';
 
 const lock = new Lock();
 
-const api = axios.create({ baseURL: env.backend_url });
+const api = axios.create({
+	baseURL: env.backend_url,
+});
 function createAxiosResponseInterceptor() {
 	const interceptor = api.interceptors.response.use(
 		(response) => response,
@@ -13,14 +15,26 @@ function createAxiosResponseInterceptor() {
 				return Promise.reject(error);
 			}
 
-			lock.acquire();
 			await lock.await();
+			lock.acquire();
+
+			console.log('request');
 
 			api.interceptors.response.eject(interceptor);
 
+			const requestToken = localStorage.getItem('refresh_token');
+
+			if (!requestToken) {
+				localStorage.removeItem('access_token');
+				localStorage.removeItem('refresh_token');
+
+				lock.release();
+				return Promise.reject(error);
+			}
+
 			return api
-				.post('/users/refresh_token', {
-					refresh_token: localStorage.getItem('refresh_token'),
+				.post('/users/refresh-token', {
+					refresh_token: requestToken,
 				})
 				.then((response) => {
 					localStorage.setItem('access_token', response.data.access_token);

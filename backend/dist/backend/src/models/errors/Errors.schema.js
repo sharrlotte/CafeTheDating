@@ -33,13 +33,14 @@ __export(Errors_schema_exports, {
 module.exports = __toCommonJS(Errors_schema_exports);
 var import_moment = __toESM(require("moment"));
 var import_http_status_codes = require("http-status-codes");
-class ErrorWithStatus {
+class ErrorWithStatus extends Error {
   statusCode;
   message;
   created_at;
   updated_at;
   messageConstants;
   constructor({ statusCode, message, created_at, updated_at, messageConstants }) {
+    super(message);
     this.statusCode = statusCode;
     this.message = message;
     this.created_at = created_at || (0, import_moment.default)(/* @__PURE__ */ new Date()).format("DD-MM-YYYY\\tHH:mm:ssSSS");

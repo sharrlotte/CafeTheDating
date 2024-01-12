@@ -19,10 +19,10 @@ export default function OrderItem({ filter }: Filter) {
   });
   if (isLoading)
     return (
-      <div className="flex justify-center w-full ">
-        <Icons.Loading />
-      </div>
-    );
+			<div className='flex justify-center w-full h-full'>
+				<Icons.Loading />
+			</div>
+		);
 
   if (isError || !data) return <span>Error</span>;
 

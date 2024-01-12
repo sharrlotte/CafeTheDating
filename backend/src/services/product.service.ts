@@ -61,47 +61,52 @@ class ProductService {
     const product_type: ProductType = query.type as ProductType
     const sort = query.sort as ProductSort
 
+    const q = product_type ? { product_type: product_type } : {}
+
     switch (sort) {
       case 'discount':
         return await databaseService.products
           .find({
-            product_type: product_type,
+            ...q,
             deleted: false,
             discount: {
               $gt: 0
             }
           })
-          .sort({ discount: 'desc' })
+          .sort({ discount: 'desc', _id: 'desc' })
           .toArray()
 
       case 'best-choice':
         return await databaseService.products
           .find({
-            product_type: product_type,
+            ...q,
             deleted: false,
             tags: {
               $in: ['best-choice']
             }
           })
+          .sort({ _id: 'desc' })
           .toArray()
 
       case 'new':
         return await databaseService.products
           .find({
-            product_type: product_type,
+            ...q,
             deleted: false,
             tags: {
               $in: ['new']
             }
           })
+          .sort({ _id: 'desc' })
           .toArray()
 
       default:
         return await databaseService.products
           .find({
-            product_type: product_type,
+            ...q,
             deleted: false
           })
+          .sort({ _id: 'desc' })
           .toArray()
     }
   }
@@ -112,7 +117,7 @@ class ProductService {
     await databaseService.products.insertOne(new Product({ ...payload, image: url }))
   }
   async updateProduct(id: string, payload: UpdateProductBody) {
-    await databaseService.products.updateOne(
+    const result = await databaseService.products.findOneAndUpdate(
       { _id: new ObjectId(id) },
       {
         $set: payload
@@ -121,6 +126,7 @@ class ProductService {
         upsert: false
       }
     )
+    cloudinaryService.deleteImage(result.image)
   }
 
   async deleteProduct(id: string) {
@@ -133,12 +139,6 @@ class ProductService {
       },
       { upsert: false }
     )
-  }
-
-  async uploadImage(id: string, image: Express.Multer.File) {
-    const result = await cloudinaryService.uploadImage('products', image.buffer)
-
-    return result.url
   }
 }
 

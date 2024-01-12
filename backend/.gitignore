@@ -350,3 +350,5 @@ pyrightconfig.json
 reqLog.log
 
 .nx/cache
+
+yarn.lock

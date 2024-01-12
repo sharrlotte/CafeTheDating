@@ -12,7 +12,7 @@ function CardItems() {
   }
   return (
     <>
-      <div className="p-4 flex w-full flex-row">
+      <div className="flex w-full flex-row">
         <div className="w-full h-full flex p-2 md:flex-row flex-col gap-2">
           <div className="min-w-[300px]">
             <div

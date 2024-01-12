@@ -83,36 +83,37 @@ class ProductService {
   async getAllProduct(query) {
     const product_type = query.type;
     const sort = query.sort;
+    const q = product_type ? { product_type } : {};
     switch (sort) {
       case "discount":
         return await import_database.databaseService.products.find({
-          product_type,
+          ...q,
           deleted: false,
           discount: {
             $gt: 0
           }
-        }).sort({ discount: "desc" }).toArray();
+        }).sort({ discount: "desc", _id: "desc" }).toArray();
       case "best-choice":
         return await import_database.databaseService.products.find({
-          product_type,
+          ...q,
           deleted: false,
           tags: {
             $in: ["best-choice"]
           }
-        }).toArray();
+        }).sort({ _id: "desc" }).toArray();
       case "new":
         return await import_database.databaseService.products.find({
-          product_type,
+          ...q,
           deleted: false,
           tags: {
             $in: ["new"]
           }
-        }).toArray();
+        }).sort({ _id: "desc" }).toArray();
       default:
         return await import_database.databaseService.products.find({
-          product_type,
+          ...q,
           deleted: false
-        }).toArray();
+        }).sort({ _id: "desc" }).toArray();
     }
   }
   async createProduct(payload, file) {
@@ -120,7 +121,7 @@ class ProductService {
     await import_database.databaseService.products.insertOne(new import_Product.default({ ...payload, image: url }));
   }
   async updateProduct(id, payload) {
-    await import_database.databaseService.products.updateOne(
+    const result = await import_database.databaseService.products.findOneAndUpdate(
       { _id: new import_mongodb.ObjectId(id) },
       {
         $set: payload
@@ -129,6 +130,7 @@ class ProductService {
         upsert: false
       }
     );
+    import_cloudinary.default.deleteImage(result.image);
   }
   async deleteProduct(id) {
     await import_database.databaseService.products.updateOne(
@@ -140,10 +142,6 @@ class ProductService {
       },
       { upsert: false }
     );
-  }
-  async uploadImage(id, image) {
-    const result = await import_cloudinary.default.uploadImage("products", image.buffer);
-    return result.url;
   }
 }
 const productService = new ProductService();

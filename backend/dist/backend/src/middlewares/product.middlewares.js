@@ -47,6 +47,7 @@ const getAllProductValidator = (0, import_validate.default)(
         isString: {
           errorMessage: 'Product type must be a string'
         },
+        optional: true,
         custom: {
           options: (value) => {
             if (!import_ProductType.productTypes.includes(value)) {

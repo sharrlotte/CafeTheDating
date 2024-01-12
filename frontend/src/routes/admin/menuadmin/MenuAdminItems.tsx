@@ -28,7 +28,7 @@ export default function MenuAdminItems({ type, sort }: MenuAdminItemProps) {
   return (
     <div className="flex flex-wrap gap-2">
       {data.map((item) => (
-        <ProductAdminCard productadmin={item} key={item._id} />
+        <ProductAdminCard key={item._id} productadmins={data} />
       ))}
     </div>
   );

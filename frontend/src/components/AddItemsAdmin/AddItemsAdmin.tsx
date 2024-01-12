@@ -89,6 +89,21 @@ export default function AddItemsAdmin() {
                 </SelectContent>
               </Select>
             </div>
+            <div className="grid grid-cols-4 items-center gap-4">
+              <Label
+                htmlFor="Ưu tiên"
+                className="text-right whitespace-nowrap"
+              ></Label>
+              <Select>
+                <SelectTrigger className="w-[180px]">
+                  <SelectValue placeholder="Loại ưu tiên" />
+                </SelectTrigger>
+                <SelectContent>
+                  <SelectItem value="best-choice">Best choice</SelectItem>
+                  <SelectItem value="new">New</SelectItem>
+                </SelectContent>
+              </Select>
+            </div>
           </div>
           <DialogFooter>
             <Button type="submit">Lưu</Button>

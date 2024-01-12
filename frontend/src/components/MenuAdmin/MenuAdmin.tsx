@@ -10,19 +10,19 @@ export default function MenuAdmin() {
           <Tabs defaultValue="all" className="w-full h-full">
             <TabsList className="w-full  flex justify-around bg-[hsla(50,200%,35%,1)] rounded-md p-8 font-bold text-2xl">
               <TabsTrigger
-                className="hover:bg-white p-4 rounded-xl "
+                className="data-[state=active]:bg-white p-4 rounded-xl "
                 value="all"
               >
                 Tất Cả
               </TabsTrigger>
               <TabsTrigger
-                className="hover:bg-white p-4 rounded-xl "
+                className="data-[state=active]:bg-white p-4 rounded-xl "
                 value="coffe"
               >
                 Cà Phê
               </TabsTrigger>
               <TabsTrigger
-                className="hover:bg-white p-4 rounded-xl "
+                className="data-[state=active]:bg-white p-4 rounded-xl "
                 value="milk"
               >
                 Trà Sữa
@@ -34,7 +34,7 @@ export default function MenuAdmin() {
                 Bánh
               </TabsTrigger>
               <TabsTrigger
-                className="hover:bg-white p-4 rounded-xl "
+                className="data-[state=active]:bg-white p-4 rounded-xl "
                 value="cream"
               >
                 Kem

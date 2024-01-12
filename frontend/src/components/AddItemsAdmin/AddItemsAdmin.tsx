@@ -135,7 +135,7 @@ export default function AddItemsAdmin() {
                   <FormItem>
                     <FormLabel>Mức ưu tiên sản phẩm</FormLabel>
                     <FormControl>
-                      <Select onValueChange={field.onChange}>
+                      <Select onValueChange={value => field.onChange([value])}>
                         <SelectTrigger className="w-full">
                           <SelectValue placeholder="Mức ưu tiên" />
                         </SelectTrigger>

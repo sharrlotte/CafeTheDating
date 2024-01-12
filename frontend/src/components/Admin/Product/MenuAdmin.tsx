@@ -8,7 +8,7 @@ export default function MenuAdmin() {
 	return (
 		<div className='h-full w-full flex flex-col max-w-full'>
 			<div className='w-full h-full flex p-2 flex-col gap-2'>
-				<div className='w-full h-full'>
+				<div className='w-full h-full flex'>
 					<Tabs
 						defaultValue='all'
 						className='w-full h-full'
@@ -16,6 +16,7 @@ export default function MenuAdmin() {
 						<TabsList className='w-full flex justify-around bg-blue-500/90 p-2 text-white font-bold text-lg'>
 							{['all', ...productTypes].map((item) => (
 								<TabsTrigger
+									key={item}
 									className='data-[state=active]:bg-green-500 p-4 rounded-xl '
 									value={item}
 								>

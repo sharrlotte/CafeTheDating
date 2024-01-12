@@ -13,3 +13,7 @@ export async function createProduct(request: CreateProductRequest) {
 export async function getProducts(type: ProductType | undefined, sort?: ProductSort): Promise<Product[]> {
 	return await api.get('/products', { params: { type, sort } }).then((result) => result.data);
 }
+
+export async function deleteProduct(id: string) {
+	return await api.delete(`/products/${id}`);
+}

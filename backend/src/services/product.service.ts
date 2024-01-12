@@ -117,7 +117,7 @@ class ProductService {
     await databaseService.products.insertOne(new Product({ ...payload, image: url }))
   }
   async updateProduct(id: string, payload: UpdateProductBody) {
-    await databaseService.products.updateOne(
+    const result = await databaseService.products.findOneAndUpdate(
       { _id: new ObjectId(id) },
       {
         $set: payload
@@ -126,6 +126,7 @@ class ProductService {
         upsert: false
       }
     )
+    cloudinaryService.deleteImage(result.image)
   }
 
   async deleteProduct(id: string) {

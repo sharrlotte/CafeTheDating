@@ -40,7 +40,7 @@ export default function Admin() {
 					</Link>
 				))}
 			</div>
-			<div className='flex flex-col bg-white/30 h-full w-full backdrop-blur-sm overflow-auto'>
+			<div className='flex flex-col bg-white/30 h-full w-full backdrop-blur-sm overflow-y-auto overflow-x-hidden'>
 				<div className='w-full flex items-center justify-between p-2'>
 					{me ? (
 						<img

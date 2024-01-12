@@ -4,6 +4,7 @@ import { ErrorWithStatus } from '@/models/errors/Errors.schema'
 import { productSorts } from '@/models/schemas/Product.schema'
 import { productTypes } from '@/models/schemas/ProductType.schema'
 import validate from '@/utils/validate'
+import { databaseService } from '@/services/database.service'
 
 export const getAllProductValidator = validate(
   checkSchema(
@@ -67,6 +68,20 @@ export const createProductValidator = validate(
             max: 40
           },
           errorMessage: 'Product name must have 4-40 characters'
+        },
+        custom: {
+          options: async (value) => {
+            const result = await databaseService.products.findOne({ name: value, deleted: false })
+
+            if (!!result) {
+              throw new ErrorWithStatus({
+                message: 'Product name exists',
+                statusCode: StatusCodes.BAD_REQUEST
+              })
+            }
+
+            return true
+          }
         }
       },
       description: {

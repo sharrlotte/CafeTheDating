@@ -50,13 +50,13 @@ const formSchema = z.object({
 		.custom<File>()
 		.refine(
 			(file) => {
-				return file && file instanceof File;
+				return file instanceof File;
 			},
 			{
 				message: 'Nhập file ảnh',
 			}
 		)
-		.refine((file) => ['png', 'jpg', 'jpeg'].some((ext) => file.type.includes(ext)), {
+		.refine((file) => file && ['png', 'jpg', 'jpeg'].some((ext) => file.type.includes(ext)), {
 			message: 'File ảnh không hợp lệ',
 		}),
 });
@@ -74,30 +74,38 @@ export default function AddProduct() {
 			name: '',
 			description: '',
 			price: 0,
-			product_type: '',
+			product_type: 'cafe',
 			tags: [],
 			image: undefined,
 		},
 	});
 
-	const { mutate } = useMutation({
+	const { mutate, isLoading } = useMutation({
 		mutationFn: async (value: CreateProductRequest) => createProduct(value),
-		onSuccess: () => {
-			queryClient.removeQueries({ queryKey: ['products'] });
+		onMutate: () => {
+			setOpen(false);
 		},
-		onError: () => {
+		onSuccess: () => {
+			queryClient.invalidateQueries();
+		},
+
+		onError: (error: any) => {
 			toast({
 				title: 'Lỗi',
-				description: 'Có lỗi đã xảy ra, vui lòng thử lại sau',
+				description: 'Có lỗi đã xảy ra, vui lòng thử lại sau: ' + error.response.data.message,
 			});
-		},
-		onSettled: () => {
-			setOpen(false);
+
+			console.log(error);
 		},
 	});
 
 	return (
-		<div className='p-4 items-center'>
+		<div>
+			{isLoading && (
+				<div className='fixed h-full w-full top-0 left-0 justify-center flex items-center backdrop-brightness-50 overflow-hidden'>
+					<Icons.Loading />
+				</div>
+			)}
 			<Dialog
 				open={open}
 				onOpenChange={setOpen}
@@ -184,12 +192,12 @@ export default function AddProduct() {
 										<FormControl>
 											<Select
 												onValueChange={field.onChange}
-												defaultValue='cafe'
+												defaultValue={field.value}
 											>
 												<SelectTrigger className='w-full'>
 													<SelectValue
 														placeholder='Loại'
-														defaultValue='cafe'
+														defaultValue={field.value}
 													/>
 												</SelectTrigger>
 												<SelectContent>

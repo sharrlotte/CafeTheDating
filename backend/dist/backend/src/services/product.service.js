@@ -121,7 +121,7 @@ class ProductService {
     await import_database.databaseService.products.insertOne(new import_Product.default({ ...payload, image: url }));
   }
   async updateProduct(id, payload) {
-    await import_database.databaseService.products.updateOne(
+    const result = await import_database.databaseService.products.findOneAndUpdate(
       { _id: new import_mongodb.ObjectId(id) },
       {
         $set: payload
@@ -130,6 +130,7 @@ class ProductService {
         upsert: false
       }
     );
+    import_cloudinary.default.deleteImage(result.image);
   }
   async deleteProduct(id) {
     await import_database.databaseService.products.updateOne(

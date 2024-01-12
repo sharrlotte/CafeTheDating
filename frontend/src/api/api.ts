@@ -22,13 +22,27 @@ function createAxiosResponseInterceptor() {
 
 			api.interceptors.response.eject(interceptor);
 
+			const requestToken = localStorage.getItem('refresh_token');
+
+			if (!requestToken) {
+				localStorage.removeItem('access_token');
+				localStorage.removeItem('refresh_token');
+
+				lock.release();
+				return Promise.reject(error);
+			}
+
 			return api
 <<<<<<< HEAD
 				.post('/users/refresh_token', {
 =======
 				.post('/users/refresh-token', {
+<<<<<<< HEAD
 >>>>>>> 93d82a8e4c94550cd17d67347d4cd1aa7b121353
 					refresh_token: localStorage.getItem('refresh_token'),
+=======
+					refresh_token: requestToken,
+>>>>>>> 7faa6950625d3b4d0809f61ce1490665f65754db
 				})
 				.then((response) => {
 					localStorage.setItem('access_token', response.data.access_token);

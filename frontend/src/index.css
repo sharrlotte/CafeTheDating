@@ -85,4 +85,26 @@
 	html {
 		@apply overflow-y-auto scroll-smooth;
 	}
+<<<<<<< HEAD
+=======
+	*::-webkit-scrollbar-track {
+		width: 10px;
+		@apply bg-slate-400 bg-opacity-20;
+	}
+
+	*::-webkit-scrollbar {
+		width: 8px;
+		height: 8px;
+	}
+
+	*::-webkit-scrollbar-thumb {
+		border-radius: 10px;
+
+		background: white;
+	}
+
+	*::-webkit-scrollbar-button {
+		display: none;
+	}
+>>>>>>> 7faa6950625d3b4d0809f61ce1490665f65754db
 }

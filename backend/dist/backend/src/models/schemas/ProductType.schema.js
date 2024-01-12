@@ -20,7 +20,7 @@ __export(ProductType_schema_exports, {
   productTypes: () => productTypes
 });
 module.exports = __toCommonJS(ProductType_schema_exports);
-const productTypes = ["drink", "icescream", "food", "cafe", "milk", "cake", "cream"];
+const productTypes = ["cafe", "milk", "cake", "cream"];
 // Annotate the CommonJS export names for ESM import in node:
 0 && (module.exports = {
   productTypes

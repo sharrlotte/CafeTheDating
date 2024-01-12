@@ -1,5 +1,10 @@
+<<<<<<< HEAD
 import Order from "@/type/OrderNew";
 import { pricy } from "../../lib/util";
+=======
+import Order from "@/type/Order";
+import { pricy, translate } from "../../lib/util";
+>>>>>>> 7faa6950625d3b4d0809f61ce1490665f65754db
 import React from "react";
 type OrderCardProps = {
   order: Order;
@@ -38,16 +43,4 @@ export default function OrderCard({ order }: OrderCardProps) {
       </div>
     </div>
   );
-}
-function translate(orderStates: string | undefined) {
-  switch (orderStates) {
-    case "all":
-      return "Tất cả";
-    case "pending":
-      return "Chờ thanh toán";
-    case "completed":
-      return "Hoàn thành";
-    case "cancelled":
-      return "Đã hủy";
-  }
 }

@@ -7,9 +7,12 @@ import { Button } from '../../ui/button';
 import { z } from 'zod';
 import { FormProvider, useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
-import { FormField, FormItem, FormLabel, FormControl, FormDescription, FormMessage } from '../../ui/form';
+import { FormField, FormItem, FormLabel, FormControl, FormMessage } from '../../ui/form';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '../../ui/select';
 import { createProduct } from '@/query/products';
+import { useMutation, useQueryClient } from 'react-query';
+import { useState } from 'react';
+import { useToast } from '@/components/ui/use-toast';
 
 const formSchema = z.object({
 	name: z
@@ -27,11 +30,11 @@ const formSchema = z.object({
 		.max(200, { message: 'Tên sản phẩm phải ít hơn 200 kí tự' }),
 
 	price: z
-		.string()
-		.min(4, {
+		.number()
+		.min(1, {
 			message: 'Tên sản phẩm phải nhiều hơn 4 kí tự',
 		})
-		.max(100, { message: 'Tên sản phẩm phải ít hơn 100 kí tự' }),
+		.max(10000000000, { message: 'Tên sản phẩm phải ít hơn 100 kí tự' }),
 
 	product_type: z.string().min(1, {
 		message: 'Loại không được bỏ trống',
@@ -47,13 +50,13 @@ const formSchema = z.object({
 		.custom<File>()
 		.refine(
 			(file) => {
-				return file && file instanceof File;
+				return file instanceof File;
 			},
 			{
 				message: 'Nhập file ảnh',
 			}
 		)
-		.refine((file) => ['png', 'jpg', 'jpeg'].some((ext) => file.type.includes(ext)), {
+		.refine((file) => file && ['png', 'jpg', 'jpeg'].some((ext) => file.type.includes(ext)), {
 			message: 'File ảnh không hợp lệ',
 		}),
 });
@@ -61,36 +64,66 @@ const formSchema = z.object({
 export type CreateProductRequest = z.infer<typeof formSchema>;
 
 export default function AddProduct() {
+	const queryClient = useQueryClient();
+	const { toast } = useToast();
+	const [open, setOpen] = useState(false);
+
 	const form = useForm<CreateProductRequest>({
 		resolver: zodResolver(formSchema),
 		defaultValues: {
 			name: '',
 			description: '',
-			price: '',
-			product_type: '',
+			price: 0,
+			product_type: 'cafe',
 			tags: [],
 			image: undefined,
 		},
 	});
 
-	function onSubmit(values: z.infer<typeof formSchema>) {
-		console.log(values);
-		createProduct(values);
-	}
+	const { mutate, isLoading } = useMutation({
+		mutationFn: async (value: CreateProductRequest) => createProduct(value),
+		onMutate: () => {
+			setOpen(false);
+		},
+		onSuccess: () => {
+			queryClient.invalidateQueries();
+		},
+
+		onError: (error: any) => {
+			toast({
+				title: 'Lỗi',
+				description: 'Có lỗi đã xảy ra, vui lòng thử lại sau: ' + error.response.data.message,
+			});
+
+			console.log(error);
+		},
+	});
 
 	return (
-		<div className=' p-4 items-center'>
-			<Dialog>
+		<div>
+			{isLoading && (
+				<div className='fixed h-full w-full top-0 left-0 justify-center flex items-center backdrop-brightness-50 overflow-hidden'>
+					<Icons.Loading />
+				</div>
+			)}
+			<Dialog
+				open={open}
+				onOpenChange={setOpen}
+			>
 				<DialogTrigger asChild>
-					<Button variant='outline'>
+					<Button
+						className='flex justify-between w-full items-center'
+						variant='outline'
+					>
 						<Icons.Plus />
-						Thêm món
+						<span>Thêm món</span>
 					</Button>
 				</DialogTrigger>
-				<DialogContent>
+				<DialogContent className='overflow-auto h-full'>
 					<FormProvider {...form}>
+						<h3 className='text-xl font-semibold'>Thêm món</h3>
 						<form
-							onSubmit={form.handleSubmit(onSubmit)}
+							onSubmit={form.handleSubmit((data) => mutate(data))}
 							className='space-y-8'
 						>
 							<FormField
@@ -105,7 +138,6 @@ export default function AddProduct() {
 												{...field}
 											/>
 										</FormControl>
-										<FormDescription>Tên sản phẩm sẽ hiển thị</FormDescription>
 										<FormMessage />
 									</FormItem>
 								)}
@@ -120,6 +152,8 @@ export default function AddProduct() {
 											<Input
 												placeholder='Giá'
 												{...field}
+												type='number'
+												onChange={(event) => field.onChange(event.target.valueAsNumber || 0)}
 											/>
 										</FormControl>
 										<FormMessage />
@@ -158,12 +192,12 @@ export default function AddProduct() {
 										<FormControl>
 											<Select
 												onValueChange={field.onChange}
-												defaultValue='cafe'
+												defaultValue={field.value}
 											>
 												<SelectTrigger className='w-full'>
 													<SelectValue
 														placeholder='Loại'
-														defaultValue='cafe'
+														defaultValue={field.value}
 													/>
 												</SelectTrigger>
 												<SelectContent>
@@ -201,10 +235,26 @@ export default function AddProduct() {
 								render={({ field }) => (
 									<FormItem>
 										<FormLabel>Hình minh họa</FormLabel>
+										<br />
+										<Button
+											className='min-w-[100px]'
+											variant='outline'
+											asChild
+										>
+											<FormLabel htmlFor='image'>Tải</FormLabel>
+										</Button>
+										{field.value && (
+											<img
+												className='w-full'
+												src={URL.createObjectURL(field.value)}
+												alt='Ảnh minh họa'
+											></img>
+										)}
 										<FormControl>
 											<Input
+												id='image'
+												className='hidden'
 												type='file'
-												placeholder='Ảnh'
 												onChange={(event) => {
 													if (event.target.files) {
 														console.log(event.target.files);

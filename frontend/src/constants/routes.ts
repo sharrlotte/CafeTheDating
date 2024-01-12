@@ -6,6 +6,7 @@ const routes = {
   about: "/about",
   order: "/order",
   admin: "/admin",
+  employee: "/employee"
 } as const;
 
 export default routes;

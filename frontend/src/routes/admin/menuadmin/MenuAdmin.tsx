@@ -8,21 +8,21 @@ import { Tabs } from '@/components/ui/tabs';
 import MenuAdminItems from '@/routes/admin/menuadmin/MenuAdminItems';
 
 const paths = [
-	{
-		name: 'Menu',
-		icon: <Icons.MenuAdmin />,
-		path: '/admin',
-	},
-	{
-		name: 'Số liệu',
-		icon: <Icons.Statistic />,
-		path: '/statistic',
-	},
-	{
-		name: 'Nhân viên',
-		icon: <Icons.Employer />,
-		path: '/employer',
-	},
+  {
+    name: "Menu",
+    icon: <Icons.MenuAdmin />,
+    path: "/admin",
+  },
+  {
+    name: "Số liệu",
+    icon: <Icons.Statistic />,
+    path: "/statistic",
+  },
+  {
+    name: "Nhân viên",
+    icon: <Icons.Employee />,
+    path: "/employee",
+  },
 ];
 
 export default function MenuAdmin() {

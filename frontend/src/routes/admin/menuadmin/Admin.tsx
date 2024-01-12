@@ -18,8 +18,8 @@ const paths = [
   },
   {
     name: "Nhân viên",
-    icon: <Icons.Employer />,
-    path: "/employer",
+    icon: <Icons.Employee />,
+    path: "/employee",
   },
 ];
 

@@ -6,7 +6,7 @@ import MenuItems from './MenuItems';
 import CardItems from '@/components/Cart/CardItems';
 export default function MenuNew() {
 	return (
-		<>
+		<div className='p-2'>
 			<Search />
 			<div className='grid grid-cols-1 md:grid-cols-[1fr_auto] p-4'>
 				<div>
@@ -131,6 +131,6 @@ export default function MenuNew() {
 				</div>
 				<CardItems />
 			</div>
-		</>
+		</div>
 	);
 }

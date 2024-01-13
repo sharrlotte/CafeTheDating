@@ -4,7 +4,7 @@ import { Button } from '../ui/button';
 
 export default function Search() {
 	return (
-		<div className='flex m-auto md:w-1/2 gap-4 justify-center items-center flex-wrap md:flex-nowrap '>
+		<div className='flex m-auto md:w-1/2 gap-4 justify-center items-center md:flex-nowrap '>
 			<div className='flex border border-border p-0.5 gap-2 rounded-full bg-white/70 shadow-md w-full items-center'>
 				<Icons.Search />
 				<input

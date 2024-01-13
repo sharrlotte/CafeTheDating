@@ -15,11 +15,11 @@ export default function MenuPage() {
 				<div className='w-full h-full flex p-2 md:flex-row flex-col gap-2'>
 					<div className='w-full h-full'>
 						<Tabs
-							defaultValue='coffe'
+							defaultValue='cafe'
 							className='w-full h-full'
 						>
 							<TabsList className='w-full  flex justify-around'>
-								<TabsTrigger value='coffe'>Cà Phê</TabsTrigger>
+								<TabsTrigger value='cafe'>Cà Phê</TabsTrigger>
 								<TabsTrigger value='milk'>Trà Sữa</TabsTrigger>
 								<TabsTrigger value='cake'>Bánh</TabsTrigger>
 								<TabsTrigger value='cream'>Kem</TabsTrigger>

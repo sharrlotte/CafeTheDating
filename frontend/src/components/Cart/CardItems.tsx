@@ -1,4 +1,4 @@
-import { pricy } from '../../lib/util';
+import { cn, pricy } from '../../lib/util';
 import Icons from '../../constants/icon';
 import useCart from '../../zustand/useCart';
 import { Button } from '../ui/button';
@@ -17,8 +17,8 @@ function CardItems() {
 	return (
 		<>
 			<div className='flex w-full flex-row'>
-				<div className='w-full h-full flex p-2 md:flex-row flex-col gap-2'>
-					<div className='min-w-[300px]'>
+				<div className='w-full h-full flex p-2 md:flex-row flex-col'>
+					<div className='min-w-[300px] flex flex-col gap-1'>
 						<div
 							id='cart'
 							className=' bg-[hsla(26,87%,51%,1)] text-center h-24 justify-center items-center flex text-white text-3xl '
@@ -26,16 +26,26 @@ function CardItems() {
 							<Icons.Cart />
 							Giỏ Hàng
 						</div>
-						<div className='rounded-sm border-2  divide-y text-center max-h-[50%] overflow-auto'>
-							<div className='flex flex-col gap-4'>
+						<div className='rounded-sm border-2 divide-y text-center max-h-[50%] overflow-auto grid gap-1'>
+							<div className='flex flex-col gap-1 p-1'>
 								{products.map((product) => (
 									<div
 										key={product._id}
 										className='relative group overflow-hidden border rounded-lg shadow-md'
 									>
-										<div className='p-4 bg-white flex flex-col relative'>
-											{product.amount > 1 && <span className='absolute top-4 left-1 bg-orange-400 text-white rounded-full aspect-square  p-2'>{`${product.amount}x`}</span>}
-											<span className='text-green-700 font-bold mb-2 text-xl	'>{pricy(product.discount > 0 ? product.price - (product.price * (product.discount ?? 0)) / 100 : product.price)}</span>
+										<div className='p-2 bg-white flex flex-col relative'>
+											{product.amount > 1 && (
+												<span
+													className={cn('flex absolute top-4 left-1 bg-orange-400 text-white rounded-full aspect-square p-2 text-center leading-4', {
+														'leading-6': product.amount >= 10,
+														'leading-8': product.amount >= 100,
+													})}
+												>
+													{' '}
+													{product.amount}x
+												</span>
+											)}
+											<span className='text-green-700 font-bold mb-2 text-xl'>{pricy(product.discount > 0 ? product.price - (product.price * (product.discount ?? 0)) / 100 : product.price)}</span>
 
 											<span className='text-2xl font-bold mb-2'>{product.name}</span>
 											<button

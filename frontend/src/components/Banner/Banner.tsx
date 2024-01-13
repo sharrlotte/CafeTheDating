@@ -1,25 +1,21 @@
 import React, { useEffect, useState } from 'react';
 import { Button } from '../ui/button';
+import moment from 'moment';
 
-const endTime = new Date('2023-12-28 21:47:00');
+const diffTime = new Date('2024-1-17 21:47:00').getTime() - Date.now();
+let duration = moment.duration(diffTime, 'milliseconds');
+const interval = 1000;
 
 export default function Banner() {
 	const [time, setTime] = useState('');
 	useEffect(() => {
-		const interval = setInterval(() => {
-			const currentTime = new Date();
+		const intervalId = setInterval(() => {
+			duration = moment.duration(duration.asMilliseconds() - interval, 'milliseconds');
 
-			const secLeft = endTime.getSeconds() - currentTime.getSeconds();
-			const minuteLeft = endTime.getMinutes() - currentTime.getMinutes();
-			const hourLeft = endTime.getHours() - currentTime.getHours();
-			const dateLeft = endTime.getDate() - currentTime.getDate();
-
-			const timeLeft = `${dateLeft ? dateLeft : ''}${hourLeft ? hourLeft : ''}:${minuteLeft > 0 ? minuteLeft : 60 + minuteLeft}:${secLeft > 0 ? secLeft : 60 + secLeft}`;
-
-			setTime(timeLeft);
+			setTime('Còn ' + duration.days() + ' ngày ' + duration.hours() + ' tiếng ' + duration.minutes() + ' phút ' + duration.seconds() + ' giây');
 		}, 1000);
 
-		return () => clearInterval(interval);
+		return () => clearInterval(intervalId);
 	}, []);
 
 	return (

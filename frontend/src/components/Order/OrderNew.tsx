@@ -26,20 +26,32 @@ export default function Order() {
 							</TabsTrigger>
 							<TabsTrigger
 								className='font-bold text-black text-2xl hover:bg-white'
-								value='wait'
+								value='pending'
 							>
 								Chờ xử lý
+							</TabsTrigger>
+							<TabsTrigger
+								className='font-bold text-black text-2xl hover:bg-white'
+								value='accept'
+							>
+								Đã chấp nhận
 							</TabsTrigger>
 
 							<TabsTrigger
 								className='font-bold text-black text-2xl hover:bg-white'
-								value='complete'
+								value='completed'
 							>
 								Hoàn thành
 							</TabsTrigger>
 							<TabsTrigger
 								className='font-bold text-black text-2xl hover:bg-white'
-								value='cancelled'
+								value='refused'
+							>
+								Bị từ chối
+							</TabsTrigger>
+							<TabsTrigger
+								className='font-bold text-black text-2xl hover:bg-white'
+								value='canceled'
 							>
 								Đã hủy
 							</TabsTrigger>
@@ -47,14 +59,20 @@ export default function Order() {
 						<TabsContent value='all'>
 							<OrderItem filter={undefined} />
 						</TabsContent>
-						<TabsContent value='wait'>
+						<TabsContent value='pending'>
 							<OrderItem filter='pending' />
 						</TabsContent>
-						<TabsContent value='complete'>
+						<TabsContent value='completed'>
 							<OrderItem filter='completed' />
 						</TabsContent>
 						<TabsContent value='cancelled'>
 							<OrderItem filter='canceled' />
+						</TabsContent>
+						<TabsContent value='accept'>
+							<OrderItem filter='accept' />
+						</TabsContent>
+						<TabsContent value='refused'>
+							<OrderItem filter='refused' />
 						</TabsContent>
 					</Tabs>
 				</div>

@@ -33,7 +33,7 @@ export default function Nav() {
 	const { user, logout } = useMe();
 
 	return (
-		<nav className='flex items-center justify-between   w-full  flex-wrap '>
+		<nav className='flex items-center justify-between w-full flex-wrap gap-2 p-2'>
 			<div className='flex justify-start '>
 				<a
 					className='w-24 z-50 '
@@ -45,8 +45,7 @@ export default function Nav() {
 					></img>
 				</a>
 			</div>
-
-			<div className='font-[600] bg-white p-5 gap-3 md:gap-8 text-xl flex border-2 rounded-full shadow-gray-200 shadow-md'>
+			<div className='font-[600] bg-white p-5 gap-3 md:gap-8 text-xl flex border-2 rounded-full shadow-gray-200 shadow-md flex-wrap'>
 				{paths.map((item, index) => (
 					<Link
 						key={index}

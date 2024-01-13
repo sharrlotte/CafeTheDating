@@ -9,7 +9,7 @@ import { translate } from '@/lib/util';
 export default function Order() {
 	const [filter, setFilter] = useState<OrderState>(undefined);
 	return (
-		<>
+		<div className='p-2'>
 			<div className='w-full hidden md:block'>
 				<Search></Search>
 				<div className='p-4 flex'>
@@ -114,6 +114,6 @@ export default function Order() {
 			<div className='md:hidden'>
 				<OrderItem filter={filter} />
 			</div>
-		</>
+		</div>
 	);
 }

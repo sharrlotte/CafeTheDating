@@ -4,7 +4,7 @@ import { OrderState } from '@/type/Order';
 import useMe from '@/zustand/useMe';
 import React from 'react';
 import { useQuery } from 'react-query';
-import OrtherCard from './OrderCard';
+import OrderCard from './OrderCard';
 
 type Filter = {
 	filter: OrderState;
@@ -39,7 +39,7 @@ export default function OrderItem({ filter }: Filter) {
 				</div>
 				<div className='flex flex-wrap gap-2 overflow-auto max-h-[90%] divide-y'>
 					{data.map((item) => (
-						<OrtherCard
+						<OrderCard
 							order={item}
 							key={item._id}
 						/>

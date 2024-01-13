@@ -18,7 +18,6 @@ function createAxiosResponseInterceptor() {
 			await lock.await();
 			lock.acquire();
 
-			console.log('request');
 
 			api.interceptors.response.eject(interceptor);
 

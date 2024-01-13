@@ -4,6 +4,7 @@ import React from 'react';
 import { Button } from '../ui/button';
 import { Link } from 'react-router-dom';
 import { UserRole } from '@/type/User';
+import UserAvatar from '@/components/User/UserAvatar';
 
 const paths = [
 	{
@@ -74,12 +75,7 @@ export default function Nav() {
 			<div className='p-4 h-12'>
 				{user ? (
 					<div className='h-full w-full flex items-center justify-end gap-2 '>
-						<img
-							className='rounded-full h-12'
-							src={user.avatar}
-							alt='User Avatar'
-						/>
-
+						<UserAvatar />
 						<Button
 							className='bg-[hsla(126,100%,24%,0.69)] hover:bg-orange-500 rounded-full w-24 h-12 p-2 z-50'
 							onClick={() => logout()}

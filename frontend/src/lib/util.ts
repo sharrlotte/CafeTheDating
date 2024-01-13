@@ -37,12 +37,19 @@ export function translate(string: string | undefined) {
 		case 'all':
 			return 'Tất cả';
 		case 'pending':
-			return 'Chờ thanh toán';
+			return 'Chờ xử lý';
 		case 'completed':
 			return 'Hoàn thành';
 		case 'cancelled':
 			return 'Đã hủy';
+		case 'accept':
+			return 'Đã xác nhận';
+		case 'refused':
+			return 'Đã từ chối';
 		case undefined:
 			return 'Tất cả';
+
+		default:
+			return string;
 	}
 }

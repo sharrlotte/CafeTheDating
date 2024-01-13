@@ -41,7 +41,7 @@ var import_uploadFile = __toESM(require("@/middlewares/uploadFile.middleware"));
 const productRouter = (0, import_express.Router)();
 productRouter.get("/", import_product2.getAllProductValidator, (0, import_handler.wrapRequestHandler)(import_product.default.getAllProduct));
 productRouter.post("/", import_uploadFile.default.single("image"), (0, import_auth.requireRoleMiddleware)(import_enums.UserRole.Admin), import_product2.createProductValidator, (0, import_handler.wrapRequestHandler)(import_product.default.createProduct));
-productRouter.put("/:id", (0, import_auth.requireRoleMiddleware)(import_enums.UserRole.Admin), import_commons.objectIdValidator, (0, import_handler.wrapRequestHandler)(import_product.default.updateProduct));
+productRouter.put("/:id", import_uploadFile.default.single("image"), (0, import_auth.requireRoleMiddleware)(import_enums.UserRole.Admin), import_commons.objectIdValidator, import_product2.updateProductValidator, (0, import_handler.wrapRequestHandler)(import_product.default.updateProduct));
 productRouter.delete("/:id", (0, import_auth.requireRoleMiddleware)(import_enums.UserRole.Admin), import_commons.objectIdValidator, (0, import_handler.wrapRequestHandler)(import_product.default.deleteProduct));
 var product_routes_default = productRouter;
 //# sourceMappingURL=product.routes.js.map

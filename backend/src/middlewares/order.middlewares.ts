@@ -94,7 +94,6 @@ export const createOrderValidator = validate(
         isString: true,
         custom: {
           options: async (value) => {
-            console.log(value)
             validateObjectId(value)
 
             var product = await databaseService.products.findOne({ _id: new ObjectId(value) })

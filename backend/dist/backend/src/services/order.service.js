@@ -52,6 +52,36 @@ class OrderService {
     });
     return Promise.all(items);
   }
+  async getAll(query) {
+    const state = query.state;
+    const pageIndex = Number(query.pageIndex);
+    const pageSize = Number(query.pageSize);
+    let orders;
+    let totalPage = 0;
+    if (state && state !== "all") {
+      orders = await import_database.databaseService.orders.find({ state }).limit(pageSize).skip((pageIndex - 1) * pageSize).sort({ _id: -1 }).toArray();
+      totalPage = Math.ceil(await import_database.databaseService.orders.countDocuments({ state }) / pageSize);
+    } else {
+      orders = await import_database.databaseService.orders.find().limit(pageSize).skip((pageIndex - 1) * pageSize).sort({ _id: -1 }).toArray();
+      totalPage = Math.ceil(await import_database.databaseService.orders.countDocuments() / pageSize);
+    }
+    const items = orders.map(async (item) => {
+      const product = await import_database.databaseService.products.findOne({ _id: new import_mongodb.ObjectId(item.product_id) });
+      if (!product) {
+        throw new Error("Order product not found");
+      }
+      item.product_name = product.name;
+      return item;
+    });
+    const result = {
+      items: await Promise.all(items),
+      pageIndex,
+      pageSize,
+      totalRow: orders.length,
+      totalPage
+    };
+    return result;
+  }
   async updateOrder(id, state) {
     return await import_database.databaseService.orders.findOneAndUpdate(
       { _id: new import_mongodb.ObjectId(id) },
@@ -65,7 +95,6 @@ class OrderService {
     );
   }
   async createOrder(user, payload) {
-    console.log(payload);
     const orders = payload.orders.map(async ({ amount, product_id }) => {
       const { price, discount } = await import_database.databaseService.products.findOne({ _id: new import_mongodb.ObjectId(product_id) });
       return new import_Order.default({

@@ -42,7 +42,7 @@ const productController = {
     res.status(import_http_status_codes.StatusCodes.OK).json(result);
   },
   updateProduct: async (req, res, next) => {
-    const result = await import_product.default.updateProduct(req.params.id, req.body);
+    const result = await import_product.default.updateProduct(req.params.id, req.body, req.file);
     res.status(import_http_status_codes.StatusCodes.OK).json(result);
   },
   deleteProduct: async (req, res, next) => {

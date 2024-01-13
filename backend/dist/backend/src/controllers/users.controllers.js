@@ -33,6 +33,7 @@ module.exports = __toCommonJS(users_controllers_exports);
 var import_users = __toESM(require("@/services/users.service"));
 var import_mongodb = require("mongodb");
 var import_http_status_codes = require("http-status-codes");
+var import_order = __toESM(require("@/services/order.service"));
 const userController = {
   refreshToken: async (req, res, next) => {
     const result = await import_users.default.refreshToken(req.body);
@@ -48,6 +49,14 @@ const userController = {
   },
   getMe: async (req, res, next) => {
     const result = await import_users.default.getUserByID(new import_mongodb.ObjectId(req.user._id));
+    return res.status(import_http_status_codes.StatusCodes.OK).json(result);
+  },
+  changeRole: async (req, res, next) => {
+    const result = await import_users.default.changeRole(req.params.id, req.body.role);
+    return res.status(import_http_status_codes.StatusCodes.OK).json(result);
+  },
+  getMeAllOrder: async (req, res, next) => {
+    const result = await import_order.default.getAllOrderByUser(req.query, req.user._id);
     return res.status(import_http_status_codes.StatusCodes.OK).json(result);
   }
 };

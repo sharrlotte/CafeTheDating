@@ -89,13 +89,16 @@ class UserService {
     const pageIndex = Number(payload.pageIndex)
     const pageSize = Number(payload.pageSize)
     const query = String(payload.query ?? ' ')
+    const role = String(payload.role) as UserRole
 
     // TODO: Use text search index
     const users = await databaseService.users
-      .find({ username: { $regex: query } })
+      .find({ username: { $regex: query }, role })
       .limit(pageSize)
       .skip((pageIndex - 1) * pageSize)
       .toArray()
+
+    const totalPage = Math.ceil((await databaseService.users.countDocuments({ username: { $regex: query }, role })) / pageSize)
 
     // TODO: Make something like private attributes const in UserType
     const filteredUsers = _.map(users, (v) => _.omit(v, ['password', 'created_at', 'updated_at', 'email', 'phone', 'forgot_password_token', 'verify', '_destroy', 'password_change_at']))
@@ -104,7 +107,8 @@ class UserService {
       items: filteredUsers,
       pageIndex: pageIndex,
       pageSize: pageSize,
-      totalRow: filteredUsers.length
+      totalRow: filteredUsers.length,
+      totalPage: totalPage
     }
 
     return result
@@ -120,6 +124,18 @@ class UserService {
     }
 
     return _.omit(user, ['updated_at', 'created_at'])
+  }
+
+  async changeRole(id: string, role: UserRole) {
+    return await databaseService.users.updateOne(
+      { _id: new ObjectId(id) },
+      {
+        $set: {
+          role: role
+        }
+      },
+      { upsert: false }
+    )
   }
 }
 

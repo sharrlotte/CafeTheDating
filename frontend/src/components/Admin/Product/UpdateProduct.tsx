@@ -1,38 +1,46 @@
-import Icons from '@/constants/icon';
-
-import { Dialog, DialogContent, DialogTrigger } from '../../ui/dialog';
-import { Input } from '../../ui/input';
-import { Button } from '../../ui/button';
-import { FormProvider, useForm } from 'react-hook-form';
-import { zodResolver } from '@hookform/resolvers/zod';
-import { FormField, FormItem, FormLabel, FormControl, FormMessage } from '../../ui/form';
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '../../ui/select';
-import { createProduct } from '@/query/products';
-import { useMutation, useQueryClient } from 'react-query';
-import { useState } from 'react';
+import { FormField, FormItem, FormLabel, FormControl, FormMessage } from '@/components/ui/form';
 import { useToast } from '@/components/ui/use-toast';
+import Icons from '@/constants/icon';
+import Product from '@/type/Product';
+import { UpdateProductRequest, updateProduct } from '@/query/products';
 import { CreateProductRequest, formSchema } from '@/schema/products';
+import { zodResolver } from '@hookform/resolvers/zod';
+import React, { useState } from 'react';
+import { FormProvider, useForm } from 'react-hook-form';
+import { Dialog, DialogContent, DialogTrigger } from '@/components/ui/dialog';
+import { Button } from '@/components/ui/button';
+import { Input } from '@/components/ui/input';
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
+import { useMutation, useQueryClient } from 'react-query';
 import LoadingFilter from '@/components/Common/LoadingFilter';
 
-export default function AddProduct() {
+type UpdateProductProps = {
+	product: Product;
+};
+
+export default function UpdateProduct({ product }: UpdateProductProps) {
 	const queryClient = useQueryClient();
-	const [open, setOpen] = useState(false);
 	const { toast } = useToast();
+	const [open, setOpen] = useState(false);
+
+	const { name, description, price, product_type, tags } = product;
 
 	const form = useForm<CreateProductRequest>({
 		resolver: zodResolver(formSchema),
 		defaultValues: {
-			name: '',
-			description: '',
-			price: 0,
-			product_type: 'cafe',
-			tags: [],
+			name,
+			description,
+			price: Number(price),
+			product_type,
+			tags: tags ?? [],
 			image: undefined,
 		},
 	});
 
+	console.log(product);
+
 	const { mutate, isLoading } = useMutation({
-		mutationFn: async (value: CreateProductRequest) => createProduct(value),
+		mutationFn: async (value: UpdateProductRequest) => updateProduct(product._id, value),
 		onMutate: () => {
 			setOpen(false);
 		},
@@ -57,16 +65,15 @@ export default function AddProduct() {
 			>
 				<DialogTrigger asChild>
 					<Button
-						className='flex justify-between w-full items-center'
-						variant='outline'
+						className='p-1 aspect-square'
+						variant='ghost'
 					>
-						<Icons.Plus />
-						<span>Thêm món</span>
+						<Icons.Edit />
 					</Button>
 				</DialogTrigger>
 				<DialogContent className='overflow-auto h-full'>
 					<FormProvider {...form}>
-						<h3 className='text-xl font-semibold'>Thêm món</h3>
+						<h3 className='text-xl font-semibold'>Sửa thông tin</h3>
 						<form
 							onSubmit={form.handleSubmit((data) => mutate(data))}
 							className='space-y-8'
@@ -98,7 +105,7 @@ export default function AddProduct() {
 												placeholder='Giá'
 												{...field}
 												type='number'
-												onChange={(event) => field.onChange(event.target.valueAsNumber || 0)}
+												onChange={(event) => field.onChange(Number(event.target.valueAsNumber) || 0)}
 											/>
 										</FormControl>
 										<FormMessage />

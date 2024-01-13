@@ -3,21 +3,27 @@ import { TabsList, TabsTrigger, TabsContent } from '@radix-ui/react-tabs';
 import { Tabs } from '../../ui/tabs';
 import { productTypes } from '@/type/Product';
 import { translate } from '@/lib/util';
+import AddProduct from '@/components/Admin/Product/AddProduct';
+import Search from '@/components/Search/Search';
 
 export default function MenuAdmin() {
 	return (
-		<div className='h-full w-full flex flex-col max-w-full'>
-			<div className='w-full h-full flex p-2 flex-col gap-2'>
+		<div className='h-full w-full flex flex-col p-2 gap-2 max-w-full'>
+			<div className='flex gap-2'>
+				<Search />
+				<AddProduct />
+			</div>
+			<div className='w-full h-full flex flex-col gap-2'>
 				<div className='w-full h-full flex'>
 					<Tabs
-						defaultValue='all'
 						className='w-full h-full'
+						defaultValue='all'
 					>
 						<TabsList className='w-full flex justify-around bg-blue-500/90 p-2 text-white font-bold text-lg'>
 							{['all', ...productTypes].map((item) => (
 								<TabsTrigger
+									className='data-[state=active]:bg-green-400 p-2 rounded-sm'
 									key={item}
-									className='data-[state=active]:bg-green-500 p-4 rounded-xl '
 									value={item}
 								>
 									{translate(item)}

@@ -117,20 +117,30 @@ class ProductService {
     }
   }
   async createProduct(payload, file) {
-    const { url } = await import_cloudinary.default.uploadImage("product", file.buffer);
+    let url;
+    if (file) {
+      url = (await import_cloudinary.default.uploadImage("product", file.buffer)).url;
+    }
     await import_database.databaseService.products.insertOne(new import_Product.default({ ...payload, image: url }));
   }
-  async updateProduct(id, payload) {
+  async updateProduct(id, payload, file) {
+    console.log(payload);
+    let url;
+    if (file) {
+      url = (await import_cloudinary.default.uploadImage("product", file.buffer)).url;
+    }
     const result = await import_database.databaseService.products.findOneAndUpdate(
       { _id: new import_mongodb.ObjectId(id) },
       {
-        $set: payload
+        $set: { ...payload, image: url }
       },
       {
         upsert: false
       }
     );
-    import_cloudinary.default.deleteImage(result.image);
+    if (url) {
+      import_cloudinary.default.deleteImage(result.image);
+    }
   }
   async deleteProduct(id) {
     await import_database.databaseService.products.updateOne(

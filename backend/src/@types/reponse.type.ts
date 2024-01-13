@@ -38,4 +38,5 @@ export type PaginationType<T> = {
   pageIndex: number
   pageSize: number
   totalRow: number
+  totalPage: number
 }

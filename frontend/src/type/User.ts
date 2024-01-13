@@ -1,10 +1,10 @@
 interface User {
-	_id?: string;
-	username?: string;
+	_id: string;
+	username: string;
 	email: string;
-	providerId?: string;
-	provider?: AuthProvider;
-	role?: UserRole;
+	providerId: string;
+	provider: AuthProvider;
+	role: UserRole;
 	address?: string;
 	avatar?: string;
 	_destroy?: Boolean;

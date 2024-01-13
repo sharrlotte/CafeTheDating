@@ -43,15 +43,12 @@ class AuthService {
 
             const refresh_token = await userServices.signRefreshToken(user._id.toString(), user.email, user.role)
             // if user is logged in but still login again
-            await databaseService.refreshTokens.updateOne(
-              { user_id: new ObjectId(user._id) },
-              {
-                $set: new RefreshToken({
-                  token: refresh_token,
-                  user_id: new ObjectId(user._id)
-                })
-              },
-              { upsert: true }
+            await databaseService.refreshTokens.deleteMany({ user_id: user._id })
+            await databaseService.refreshTokens.insertOne(
+              new RefreshToken({
+                token: refresh_token,
+                user_id: new ObjectId(user._id)
+              })
             )
 
             await databaseService.users.updateOne(
@@ -73,15 +70,12 @@ class AuthService {
     const { _id, role, email } = req.user
     const refresh_token = await userServices.signRefreshToken(_id.toString(), email, role)
     // if user is logged in but still login again
-    await databaseService.refreshTokens.updateOne(
-      { user_id: new ObjectId(_id) },
-      {
-        $set: new RefreshToken({
-          token: refresh_token,
-          user_id: new ObjectId(_id)
-        })
-      },
-      { upsert: true }
+    await databaseService.refreshTokens.deleteMany({ user_id: new ObjectId(_id) })
+    await databaseService.refreshTokens.insertOne(
+      new RefreshToken({
+        token: refresh_token,
+        user_id: new ObjectId(_id)
+      })
     )
 
     res.redirect(`${env.url.auth_success}?provider=${provider}&refresh_token=${refresh_token}`)

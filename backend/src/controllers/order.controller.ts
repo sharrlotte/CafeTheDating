@@ -6,8 +6,8 @@ import { CreateOrderBody, UpdateOrderBody } from '@/@types/request.type'
 import { StatusCodes } from 'http-status-codes'
 
 const orderController = {
-  getAllOrderByUser: async (req: Request<ParamsDictionary, any, any, ParsedUrlQuery>, res: Response, next: NextFunction) => {
-    const result = await orderService.getAllOrderByUser(req.query, req.user._id)
+  getAllOrder: async (req: Request<ParamsDictionary, any, any, ParsedUrlQuery>, res: Response, next: NextFunction) => {
+    const result = await orderService.getAll(req.query)
     return res.status(StatusCodes.OK).json(result)
   },
 

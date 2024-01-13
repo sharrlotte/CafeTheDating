@@ -112,21 +112,32 @@ class ProductService {
   }
 
   async createProduct(payload: CreateProductBody, file: Express.Multer.File) {
-    const { url } = await cloudinaryService.uploadImage('product', file.buffer)
+    let url
+    if (file) {
+      url = (await cloudinaryService.uploadImage('product', file.buffer)).url
+    }
 
     await databaseService.products.insertOne(new Product({ ...payload, image: url }))
   }
-  async updateProduct(id: string, payload: UpdateProductBody) {
+  async updateProduct(id: string, payload: UpdateProductBody, file: Express.Multer.File) {
+    console.log(payload)
+    let url
+    if (file) {
+      url = (await cloudinaryService.uploadImage('product', file.buffer)).url
+    }
+
     const result = await databaseService.products.findOneAndUpdate(
       { _id: new ObjectId(id) },
       {
-        $set: payload
+        $set: { ...payload, image: url }
       },
       {
         upsert: false
       }
     )
-    cloudinaryService.deleteImage(result.image)
+    if (url) {
+      cloudinaryService.deleteImage(result.image)
+    }
   }
 
   async deleteProduct(id: string) {

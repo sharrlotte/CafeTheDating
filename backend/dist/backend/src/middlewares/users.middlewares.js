@@ -36,9 +36,6 @@ var import_express_validator = require("express-validator");
 var import_validate = __toESM(require("@/utils/validate"));
 var import_Errors = require("@/models/errors/Errors.schema");
 var import_http_status_codes = require("http-status-codes");
-var import_database = require("@/services/database.service");
-var import_jsonwebtoken = require("jsonwebtoken");
-var import_lodash = require("lodash");
 const refreshTokenValidator = (0, import_validate.default)(
   (0, import_express_validator.checkSchema)(
     {
@@ -51,23 +48,6 @@ const refreshTokenValidator = (0, import_validate.default)(
                 statusCode: import_http_status_codes.StatusCodes.UNAUTHORIZED,
                 message: import_message.VALIDATION_MESSAGES.USER.REFRESH_TOKEN.REFRESH_TOKEN_IS_REQUIRED
               });
-            }
-            try {
-              const result = await import_database.databaseService.refreshTokens.findOne({ token: value });
-              if (!result) {
-                throw new import_Errors.ErrorWithStatus({
-                  message: import_message.VALIDATION_MESSAGES.USER.REFRESH_TOKEN.REFRESH_TOKEN_IS_NOT_EXIST,
-                  statusCode: import_http_status_codes.StatusCodes.UNAUTHORIZED
-                });
-              }
-            } catch (error) {
-              if (error instanceof import_jsonwebtoken.JsonWebTokenError) {
-                throw new import_Errors.ErrorWithStatus({
-                  message: (0, import_lodash.capitalize)(error.message),
-                  statusCode: import_http_status_codes.StatusCodes.UNAUTHORIZED
-                });
-              }
-              throw error;
             }
             return true;
           }
@@ -84,6 +64,16 @@ const getAllUserValidator = (0, import_validate.default)(
         trim: true,
         isString: {
           errorMessage: import_message.VALIDATION_MESSAGES.USER.COMMONS.USERNAME_MUST_BE_STRING
+        },
+        optional: true
+      },
+      role: {
+        trim: true,
+        isString: {
+          errorMessage: "Role must be a string"
+        },
+        notEmpty: {
+          errorMessage: "Role is required"
         }
       }
     },

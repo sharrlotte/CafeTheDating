@@ -92,7 +92,7 @@ class ProductService {
           discount: {
             $gt: 0
           }
-        }).sort({ discount: "desc" }).toArray();
+        }).sort({ discount: "desc", _id: "desc" }).toArray();
       case "best-choice":
         return await import_database.databaseService.products.find({
           ...q,
@@ -100,7 +100,7 @@ class ProductService {
           tags: {
             $in: ["best-choice"]
           }
-        }).toArray();
+        }).sort({ _id: "desc" }).toArray();
       case "new":
         return await import_database.databaseService.products.find({
           ...q,
@@ -108,28 +108,39 @@ class ProductService {
           tags: {
             $in: ["new"]
           }
-        }).toArray();
+        }).sort({ _id: "desc" }).toArray();
       default:
         return await import_database.databaseService.products.find({
           ...q,
           deleted: false
-        }).toArray();
+        }).sort({ _id: "desc" }).toArray();
     }
   }
   async createProduct(payload, file) {
-    const { url } = await import_cloudinary.default.uploadImage("product", file.buffer);
+    let url;
+    if (file) {
+      url = (await import_cloudinary.default.uploadImage("product", file.buffer)).url;
+    }
     await import_database.databaseService.products.insertOne(new import_Product.default({ ...payload, image: url }));
   }
-  async updateProduct(id, payload) {
-    await import_database.databaseService.products.updateOne(
+  async updateProduct(id, payload, file) {
+    console.log(payload);
+    let url;
+    if (file) {
+      url = (await import_cloudinary.default.uploadImage("product", file.buffer)).url;
+    }
+    const result = await import_database.databaseService.products.findOneAndUpdate(
       { _id: new import_mongodb.ObjectId(id) },
       {
-        $set: payload
+        $set: { ...payload, image: url }
       },
       {
         upsert: false
       }
     );
+    if (url) {
+      import_cloudinary.default.deleteImage(result.image);
+    }
   }
   async deleteProduct(id) {
     await import_database.databaseService.products.updateOne(
@@ -141,10 +152,6 @@ class ProductService {
       },
       { upsert: false }
     );
-  }
-  async uploadImage(id, image) {
-    const result = await import_cloudinary.default.uploadImage("products", image.buffer);
-    return result.url;
   }
 }
 const productService = new ProductService();

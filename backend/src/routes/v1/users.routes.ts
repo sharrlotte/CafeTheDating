@@ -35,4 +35,8 @@ userRouter.get('/', requireRoleMiddleware(UserRole.Admin), paginationValidator, 
 
 userRouter.get('/@me/profile', requireLoginMiddleware, wrapRequestHandler(userController.getMe))
 
+userRouter.put('/:id', requireRoleMiddleware(UserRole.Admin), wrapRequestHandler(userController.changeRole))
+
+userRouter.get('/@me/orders', requireLoginMiddleware, wrapRequestHandler(userController.getMeAllOrder))
+
 export default userRouter

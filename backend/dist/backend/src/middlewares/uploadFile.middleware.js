@@ -27,7 +27,7 @@ var __toESM = (mod, isNodeMode, target) => (target = mod != null ? __create(__ge
 var __toCommonJS = (mod) => __copyProps(__defProp({}, "__esModule", { value: true }), mod);
 var uploadFile_middleware_exports = {};
 __export(uploadFile_middleware_exports, {
-  singleImageUpload: () => singleImageUpload
+  default: () => uploadFile_middleware_default
 });
 module.exports = __toCommonJS(uploadFile_middleware_exports);
 var import_http_status_codes = require("http-status-codes");
@@ -35,43 +35,27 @@ var import_multer = __toESM(require("multer"));
 var import_path = __toESM(require("path"));
 var import_message = require("@/constants/message");
 var import_Errors = require("@/models/errors/Errors.schema");
-const uploadFile = (0, import_multer.default)({
+const multerMiddleware = (0, import_multer.default)({
   limits: {
     fieldSize: 50 * 1024 * 1024
   },
   fileFilter: (req, file, callback) => {
+    if (!file) {
+      return callback(new Error("File not found"));
+    }
     const filetypes = /jpeg|jpg|png|gif/;
     const extname = filetypes.test(import_path.default.extname(file.originalname).toLowerCase());
     const mimetype = filetypes.test(file.mimetype);
     if (extname && mimetype) {
       return callback(null, true);
     }
-    callback(new Error("Error"));
+    callback(
+      new import_Errors.ErrorWithStatus({
+        statusCode: import_http_status_codes.StatusCodes.BAD_REQUEST,
+        message: import_message.VALIDATION_MESSAGES.UPLOAD.IMAGE.INVALID_IMAGE_EXTENSION
+      })
+    );
   }
 });
-const singleImageUpload = (req, res, next) => {
-  uploadFile.single("image")(req, res, (err) => {
-    if (err instanceof import_multer.default.MulterError) {
-      next(
-        new import_Errors.ErrorWithStatus({
-          statusCode: import_http_status_codes.StatusCodes.BAD_REQUEST,
-          message: import_message.VALIDATION_MESSAGES.UPLOAD.IMAGE.INVALID_IMAGE_SIZE
-        })
-      );
-    }
-    if (err instanceof Error) {
-      next(
-        new import_Errors.ErrorWithStatus({
-          statusCode: import_http_status_codes.StatusCodes.BAD_REQUEST,
-          message: import_message.VALIDATION_MESSAGES.UPLOAD.IMAGE.INVALID_IMAGE_EXTENSION
-        })
-      );
-    }
-    next();
-  });
-};
-// Annotate the CommonJS export names for ESM import in node:
-0 && (module.exports = {
-  singleImageUpload
-});
+var uploadFile_middleware_default = multerMiddleware;
 //# sourceMappingURL=uploadFile.middleware.js.map

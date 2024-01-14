@@ -36,6 +36,7 @@ var import_environment = require("@/config/environment.config");
 var import_streamifier = __toESM(require("streamifier"));
 var import_Errors = require("@/models/errors/Errors.schema");
 var import_lodash = __toESM(require("lodash"));
+var import_http_status_codes = require("http-status-codes");
 import_cloudinary.v2.config({
   api_secret: import_environment.env.cloudinary.secret,
   api_key: import_environment.env.cloudinary.key,
@@ -43,6 +44,9 @@ import_cloudinary.v2.config({
 });
 class CloudinaryService {
   async uploadImage(folder, imageBuffer) {
+    if (!imageBuffer) {
+      throw new import_Errors.ErrorWithStatus({ message: "Image is invalid", statusCode: import_http_status_codes.StatusCodes.BAD_REQUEST });
+    }
     return await new Promise((resolve, reject) => {
       const stream = import_cloudinary.v2.uploader.upload_stream({ folder, format: "jpg" }, (error, result) => {
         if (result) {

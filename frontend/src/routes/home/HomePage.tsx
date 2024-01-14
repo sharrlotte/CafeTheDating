@@ -1,7 +1,7 @@
 import User from '../../type/User';
 import api from '../../api/api';
 import React, { useEffect } from 'react';
-import { Link, useSearchParams } from "react-router-dom";
+import { Link, useSearchParams } from 'react-router-dom';
 import useMe from '../../zustand/useMe';
 import { Button } from '@/components/ui/button';
 import routes from '@/constants/routes';
@@ -34,7 +34,7 @@ export default function HomePage() {
 		}
 	}, [searchParams, setMe, setSearchParams]);
 	return (
-		<div className='h-full md:p-20 p-4 md:text-white md:drop-shadow-[0_1.2px_1.2px_rgba(0,0,0,0.8)] flex flex-col gap-4 justify-end items-start text-black'>
+		<div className='h-full md:p-20 p-4 md:text-white md:drop-shadow-[0_1.2px_1.2px_rgba(0,0,0,0.8)] flex flex-col gap-4 justify-end items-start text-white'>
 			<p className='text-5xl font-bold'>
 				<span>Dating</span>
 				<br />

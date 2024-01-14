@@ -4,6 +4,7 @@ import React from 'react';
 import { Button } from '../ui/button';
 import { Link } from 'react-router-dom';
 import { UserRole } from '@/type/User';
+import UserAvatar from '@/components/User/UserAvatar';
 
 const paths = [
 	{
@@ -32,7 +33,7 @@ export default function Nav() {
 	const { user, logout } = useMe();
 
 	return (
-		<nav className='flex items-center justify-between   w-full  flex-wrap '>
+		<nav className='flex items-center justify-between w-full flex-wrap gap-2 p-2'>
 			<div className='flex justify-start '>
 				<a
 					className='w-24 z-50 '
@@ -44,8 +45,7 @@ export default function Nav() {
 					></img>
 				</a>
 			</div>
-
-			<div className='font-[600] bg-white p-5 gap-3 md:gap-8 text-xl flex border-2 rounded-full shadow-gray-200 shadow-md'>
+			<div className='font-[600] bg-white p-5 gap-3 md:gap-8 text-xl flex border-2 rounded-full shadow-gray-200 shadow-md flex-wrap'>
 				{paths.map((item, index) => (
 					<Link
 						key={index}
@@ -74,12 +74,7 @@ export default function Nav() {
 			<div className='p-4 h-12'>
 				{user ? (
 					<div className='h-full w-full flex items-center justify-end gap-2 '>
-						<img
-							className='rounded-full h-12'
-							src={user.avatar}
-							alt='User Avatar'
-						/>
-
+						<UserAvatar />
 						<Button
 							className='bg-[hsla(126,100%,24%,0.69)] hover:bg-orange-500 rounded-full w-24 h-12 p-2 z-50'
 							onClick={() => logout()}

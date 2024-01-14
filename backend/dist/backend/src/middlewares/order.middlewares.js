@@ -126,7 +126,6 @@ const createOrderValidator = (0, import_validate.default)(
         isString: true,
         custom: {
           options: async (value) => {
-            console.log(value);
             (0, import_commons.validateObjectId)(value);
             var product = await import_database.databaseService.products.findOne({ _id: new import_mongodb.ObjectId(value) });
             if (!product) {

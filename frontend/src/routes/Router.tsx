@@ -4,7 +4,7 @@ import Footer from '@/components/Footer/Footer';
 import Nav from '@/components/Nav/Nav';
 import Auth from '@/layouts/Auth';
 import { cn } from '@/lib/util';
-import Admin from '@/routes/admin/menuadmin/Admin';
+import Admin from '@/routes/admin/menu/Admin';
 import HomePage from '@/routes/home/HomePage';
 import LoginPage from '@/routes/login/LoginPage';
 import MenuNew from '@/routes/menu/MenuNew';
@@ -15,6 +15,9 @@ import { ReactNode, useEffect } from 'react';
 import { BrowserRouter, useLocation, Routes, Route } from 'react-router-dom';
 import routes from '@/constants/routes';
 import OrderNew from '@/components/Order/OrderNew';
+import MenuAdmin from '@/components/Admin/Product/MenuAdmin';
+import AdminEmployee from '@/routes/admin/employee/AdminEmployee';
+import AdminOrder from '@/components/Admin/Order/AdminOrder';
 
 type RouteProps = {
 	path: string;
@@ -53,6 +56,21 @@ const paths: RouteProps[] = [
 				<OrderNew />
 			</Auth>
 		),
+	},
+];
+
+const adminPaths: RouteProps[] = [
+	{
+		path: routes.admin,
+		element: <MenuAdmin />,
+	},
+	{
+		path: routes.employee,
+		element: <AdminEmployee />,
+	},
+	{
+		path: routes.adminOrder,
+		element: <AdminOrder />,
 	},
 ];
 
@@ -107,15 +125,17 @@ function BackgroundImage() {
 					/>
 				))}
 
-				<Route
-					key={routes.admin}
-					path={routes.admin}
-					element={
-						<Auth roles={[UserRole.Admin]}>
-							<Admin />
-						</Auth>
-					}
-				/>
+				{adminPaths.map((item) => (
+					<Route
+						key={item.path}
+						path={item.path}
+						element={
+							<Auth roles={[UserRole.Admin]}>
+								<Admin>{item.element}</Admin>
+							</Auth>
+						}
+					/>
+				))}
 			</Routes>
 		</div>
 	);

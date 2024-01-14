@@ -4,7 +4,7 @@ import { ErrorEntityType, ErrorType } from '@/@types/errors.type'
 
 type ErrorsType = Record<string, ErrorEntityType>
 
-export class ErrorWithStatus {
+export class ErrorWithStatus extends Error{
   statusCode: number
   message: string
   created_at: string
@@ -12,6 +12,7 @@ export class ErrorWithStatus {
   messageConstants: string
 
   constructor({ statusCode, message, created_at, updated_at, messageConstants }: ErrorType) {
+    super(message)
     this.statusCode = statusCode
     this.message = message
     this.created_at = created_at || moment(new Date()).format('DD-MM-YYYY\\tHH:mm:ssSSS')

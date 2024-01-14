@@ -1,4 +1,4 @@
-import { cn, pricy } from '../../lib/util';
+import { cn, pricy, translate } from '../../lib/util';
 import Product from '../../type/Product';
 import useCart from '../../zustand/useCart';
 import React from 'react';
@@ -10,12 +10,12 @@ export default function ProductCard({ product }: ProductCardProps) {
 	return (
 		<div className='relative'>
 			<img
-				className='w-[400px]'
+				className='w-[400px] object-cover overflow-hidden'
 				onClick={() => addToCart(product)}
 				src={product.image}
 				alt={product.name}
 			></img>
-			<span className='right-5 top-2 absolute text-2xl text-red-500 bg-white p-2 rounded-lg drop-shadow-[0_1.2px_1.2px_rgba(0,0,0,0.8)] '>{product.tags.map((tag) => translate(tag))}</span>
+			<span className='right-5 top-2 absolute text-2xl text-white bg-green-400 p-2 rounded-lg drop-shadow-[0_1.2px_1.2px_rgba(0,0,0,0.8)] '>{product.tags.map((tag) => translate(tag))}</span>
 			<div className='grid absolute left-4 bottom-4'>
 				<span className='text-white text-2xl font-bold drop-shadow-[0_1.2px_1.2px_rgba(0,0,0,0.8)]  flex gap-2	'>
 					<span className={cn('text-white text-2xl font-bold drop-shadow-[0_1.2px_1.2px_rgba(0,0,0,0.8)] 	', { 'line-through ': product.discount > 0 })}>{pricy(product.price)}</span>
@@ -26,20 +26,4 @@ export default function ProductCard({ product }: ProductCardProps) {
 			</div>
 		</div>
 	);
-}
-function translate(product_type: string) {
-	switch (product_type) {
-		case 'cafe':
-			return 'Cà phê';
-		case 'milk':
-			return 'Trà sữa';
-		case 'cake':
-			return 'Bánh';
-		case 'cream':
-			return 'Kem';
-		case 'best-choice':
-			return 'Đề cử';
-		case 'new':
-			return 'Mới';
-	}
 }

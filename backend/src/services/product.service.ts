@@ -73,7 +73,7 @@ class ProductService {
               $gt: 0
             }
           })
-          .sort({ discount: 'desc' })
+          .sort({ discount: 'desc', _id: 'desc' })
           .toArray()
 
       case 'best-choice':
@@ -85,6 +85,7 @@ class ProductService {
               $in: ['best-choice']
             }
           })
+          .sort({ _id: 'desc' })
           .toArray()
 
       case 'new':
@@ -96,6 +97,7 @@ class ProductService {
               $in: ['new']
             }
           })
+          .sort({ _id: 'desc' })
           .toArray()
 
       default:
@@ -104,25 +106,38 @@ class ProductService {
             ...q,
             deleted: false
           })
+          .sort({ _id: 'desc' })
           .toArray()
     }
   }
 
   async createProduct(payload: CreateProductBody, file: Express.Multer.File) {
-    const { url } = await cloudinaryService.uploadImage('product', file.buffer)
+    let url
+    if (file) {
+      url = (await cloudinaryService.uploadImage('product', file.buffer)).url
+    }
 
     await databaseService.products.insertOne(new Product({ ...payload, image: url }))
   }
-  async updateProduct(id: string, payload: UpdateProductBody) {
-    await databaseService.products.updateOne(
+  async updateProduct(id: string, payload: UpdateProductBody, file: Express.Multer.File) {
+    console.log(payload)
+    let url
+    if (file) {
+      url = (await cloudinaryService.uploadImage('product', file.buffer)).url
+    }
+
+    const result = await databaseService.products.findOneAndUpdate(
       { _id: new ObjectId(id) },
       {
-        $set: payload
+        $set: { ...payload, image: url }
       },
       {
         upsert: false
       }
     )
+    if (url) {
+      cloudinaryService.deleteImage(result.image)
+    }
   }
 
   async deleteProduct(id: string) {
@@ -135,12 +150,6 @@ class ProductService {
       },
       { upsert: false }
     )
-  }
-
-  async uploadImage(id: string, image: Express.Multer.File) {
-    const result = await cloudinaryService.uploadImage('products', image.buffer)
-
-    return result.url
   }
 }
 

@@ -42,16 +42,12 @@ const productController = {
     res.status(import_http_status_codes.StatusCodes.OK).json(result);
   },
   updateProduct: async (req, res, next) => {
-    const result = await import_product.default.updateProduct(req.params.id, req.body);
+    const result = await import_product.default.updateProduct(req.params.id, req.body, req.file);
     res.status(import_http_status_codes.StatusCodes.OK).json(result);
   },
   deleteProduct: async (req, res, next) => {
     const result = await import_product.default.deleteProduct(req.params.id);
     res.status(import_http_status_codes.StatusCodes.OK).json(result);
-  },
-  uploadImage: async (req, res, next) => {
-    const result = await import_product.default.uploadImage(req.params.id, req.file);
-    res.status(import_http_status_codes.StatusCodes.OK).json({ url: result });
   }
 };
 var product_controllers_default = productController;

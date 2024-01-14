@@ -106,13 +106,16 @@ class UserService {
     const pageIndex = Number(payload.pageIndex);
     const pageSize = Number(payload.pageSize);
     const query = String(payload.query ?? " ");
-    const users = await import_database.databaseService.users.find({ username: { $regex: query } }).limit(pageSize).skip((pageIndex - 1) * pageSize).toArray();
+    const role = String(payload.role);
+    const users = await import_database.databaseService.users.find({ username: { $regex: query }, role }).limit(pageSize).skip((pageIndex - 1) * pageSize).toArray();
+    const totalPage = Math.ceil(await import_database.databaseService.users.countDocuments({ username: { $regex: query }, role }) / pageSize);
     const filteredUsers = import_lodash.default.map(users, (v) => import_lodash.default.omit(v, ["password", "created_at", "updated_at", "email", "phone", "forgot_password_token", "verify", "_destroy", "password_change_at"]));
     const result = {
       items: filteredUsers,
       pageIndex,
       pageSize,
-      totalRow: filteredUsers.length
+      totalRow: filteredUsers.length,
+      totalPage
     };
     return result;
   }
@@ -125,6 +128,17 @@ class UserService {
       });
     }
     return import_lodash.default.omit(user, ["updated_at", "created_at"]);
+  }
+  async changeRole(id, role) {
+    return await import_database.databaseService.users.updateOne(
+      { _id: new import_mongodb.ObjectId(id) },
+      {
+        $set: {
+          role
+        }
+      },
+      { upsert: false }
+    );
   }
 }
 const userServices = new UserService();

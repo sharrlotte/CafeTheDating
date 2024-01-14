@@ -3,19 +3,17 @@ import { UserRole } from '@/constants/enums'
 import productController from '@/controllers/product.controllers'
 import { requireRoleMiddleware } from '@/middlewares/auth.middlewares'
 import { objectIdValidator } from '@/middlewares/commons.middleware'
-import { createProductValidator, getAllProductValidator } from '@/middlewares/product.middlewares'
-import { singleImageUpload } from '@/middlewares/uploadFile.middleware'
+import { createProductValidator, getAllProductValidator, updateProductValidator } from '@/middlewares/product.middlewares'
 import { wrapRequestHandler } from '@/utils/handler'
+import multerMiddleware from '@/middlewares/uploadFile.middleware'
 
 const productRouter = Router()
 
 productRouter.get('/', getAllProductValidator, wrapRequestHandler(productController.getAllProduct))
 
-productRouter.post('/:id/image', requireRoleMiddleware(UserRole.Admin), singleImageUpload, wrapRequestHandler(productController.uploadImage))
+productRouter.post('/', multerMiddleware.single('image'), requireRoleMiddleware(UserRole.Admin), createProductValidator, wrapRequestHandler(productController.createProduct))
 
-productRouter.post('/', requireRoleMiddleware(UserRole.Admin), createProductValidator, singleImageUpload, wrapRequestHandler(productController.createProduct))
-
-productRouter.put('/:id', requireRoleMiddleware(UserRole.Admin), objectIdValidator, wrapRequestHandler(productController.updateProduct))
+productRouter.put('/:id', multerMiddleware.single('image'), requireRoleMiddleware(UserRole.Admin), objectIdValidator, updateProductValidator, wrapRequestHandler(productController.updateProduct))
 
 productRouter.delete('/:id', requireRoleMiddleware(UserRole.Admin), objectIdValidator, wrapRequestHandler(productController.deleteProduct))
 

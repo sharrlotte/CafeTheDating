@@ -38,7 +38,7 @@ var import_order2 = require("@/middlewares/order.middlewares");
 var import_handler = require("@/utils/handler");
 var import_express = require("express");
 const orderRouter = (0, import_express.Router)();
-orderRouter.get("/", import_auth.requireLoginMiddleware, (0, import_handler.wrapRequestHandler)(import_order.default.getAllOrderByUser));
+orderRouter.get("/", (0, import_auth.requireRoleMiddleware)(import_enums.UserRole.Admin), import_commons.paginationValidator, (0, import_handler.wrapRequestHandler)(import_order.default.getAllOrder));
 orderRouter.post("/", import_auth.requireLoginMiddleware, import_order2.createOrderValidator, (0, import_handler.wrapRequestHandler)(import_order.default.createOrder));
 orderRouter.put("/:id", (0, import_auth.requireRoleMiddleware)(import_enums.UserRole.Admin), import_commons.objectIdValidator, (0, import_handler.wrapRequestHandler)(import_order.default.updateOrder));
 orderRouter.put("/:id/cancel", import_auth.requireLoginMiddleware, import_commons.objectIdValidator, (0, import_handler.wrapRequestHandler)(import_order.default.cancelOrder));
